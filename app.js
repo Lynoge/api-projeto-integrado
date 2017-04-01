@@ -1,34 +1,24 @@
-var express = require('express'),
-    load = require('express-load'),
-    session = require('express-session'),
-    cookieParser = require('cookie-parser'),
-    methodOverride = require('express-method-override'),
-    bodyParser = require('body-parser'),
-    app = express(),
-    server = require('http').createServer(app),
-    io = require('socket.io').listen(server),
-    path = require('path');
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-app.set('port', (process.env.PORT || 5000));
+var index = require('./routes/index');
+var users = require('./routes/users');
 
-app.use(cookieParser("apirentservice"));
-app.use(session({ resave: true, saveUninitialized: true, secret: "denied" }));
+var app = express();
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(path.resolve(__dirname, 'build')));
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-});
+app.use('/', index);
+app.use('/users', users);
 
-load('models')
-    .then('controllers')
-    .then('routes')
-    .into(app);
-    
-load('sockets').into(io);
-
-server.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
+module.exports = app;
