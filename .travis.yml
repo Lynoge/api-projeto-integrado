@@ -7,5 +7,7 @@ deploy:
   app: rentserviceweb
   api_key:
     secure: "OVAABIrnIeqwSw872/RjZKvQs0Yt/vU7VeBINg+iZoJRDuW+PNS2cIJQEGqnqtsU2U2GNSv3ELOKNrOLxQcbyI+/CndzxOtfpSRg7OLtDuOySZJGTVbgDZf0feycG/RCUbSvBs3lPkwhwSsnOV9e70tS7vTO0+TIDLmysOhVV6vqGUwIHvPdFzbouww3mC6aCanTFt7PJE9IKn3o8f+58cspig+KZsATn7qyWWLdUzKWXthNRrYCEyikzZ/1KgxEW3w6hzCLdNAJmE9mX3u/f47+85IhWH/LksU/oRsAl5WyDw25i6R1hvFtY/aG2wvgC60tZgzY5njsOlh+4jzBq52k95LScZVvdkMUKgpwMdSslRZH2PqMW98gEWo+zGb2RuSyw9fxrXxKOxbv4tDJbNvEskVlzGjPp2CG68Gcy7fKE/MUKzPyVnY7sh443WiI8QAbd8upSfQgHvqDvCWHnzyFTXdzYSGcZTbedefsHP8xHMgAYRe17OmPGWbIHG7pP2qiMcLSbokuFHYwaYRi/Wh4kWNnvWbZ6mP6h9f9FZNzIXM+zqlIz4ki2KTbzuXZB7Vk/W8AWnre4ptS8IT3pM4slJk9+bvISI/xyN1Dgx+OtiVGDsXT+h3y1LgDWzCQWcpDprkVSI99c2cKnuLGLWhbBXwEks7MhKXUttKGPhs="
+  script:
+    - npm t
   run:
     - npm run migrate
