@@ -1,5 +1,15 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 
-script: npm run echo
+env:
+  global:
+    - secure: {{API_KEY}}
+
+deploy:
+  provider: heroku
+  app: rentserviceweb
+  api_key:
+    secure: #{process.env.API_KEY}
+  run:
+    - npm run migrate
