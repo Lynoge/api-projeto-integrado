@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "sequelize": "node_modules/.bin/sequelize",
     "migrate": "npm run sequelize db:migrate",
-    "test": "jest"
+    "test": "node_modules/.bin/jest --coverage && cat ./coverage/lcov.info | nyc report --temp-directory=coverage --reporter=text-lcov"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -25,6 +25,8 @@
     "node": "6.9.4"
   },
   "devDependencies": {
-    "jest": "^19.0.2"
+    "coveralls": "^2.13.0",
+    "jest": "^19.0.2",
+    "nyc": "^10.2.0"
   }
 }
