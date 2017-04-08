@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start2": "node ./bin/www",
+    "start": "babel-node ./bin/www --presets es2015,stage-2",
     "sequelize": "node_modules/.bin/sequelize",
     "migrate": "sequelize db:migrate --options-path=dao/config/options.json",
     "test": "jest"
@@ -33,6 +34,9 @@
     ]
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "coveralls": "^2.13.0",
     "jest": "^19.0.2",
     "nyc": "^10.2.0"
