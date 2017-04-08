@@ -1,6 +1,6 @@
 module.exports = function (req, res, next) {
-    if (!req.session.user)
-        return res.redirect('/');
-    else
-        return next();
+    // Pesquisar por Passport JS
+    // Implementar validações de autenticação aqui!
+    console.log('Middleware Authentication');
+    return next();
 }
