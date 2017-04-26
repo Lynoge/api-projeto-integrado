@@ -18,11 +18,16 @@ module.exports = function (sequelize, DataTypes) {
         password: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        profissionId: {
+            type: DataTypes.INTEGER
+        },        
     }, {
             classMethods: {
                 associate: function (models) {
-                    // associations can be defined here
+                    Professional.belongsTo(models.Profission,{
+                        foreignKey: 'profissionId'
+                    });
                 }
             },
             tableName: 'Professional',

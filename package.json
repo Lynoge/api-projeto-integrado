@@ -24,7 +24,8 @@
     "pg": "^6.1.5",
     "sequelize": "^3.30.4",
     "sequelize-cli": "^2.7.0",
-    "serve-favicon": "^2.4.2"
+    "serve-favicon": "^2.4.2",
+    "sha1": "^1.1.1"
   },
   "engines": {
     "npm": "3.10.0",
