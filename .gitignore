@@ -1,3 +1,5 @@
 /node_modules/
 /coverage/
 /.vscode
+/config/config.json
+/dao/config/config.json
