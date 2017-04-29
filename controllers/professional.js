@@ -1,4 +1,5 @@
 import Repository from '../dao/repository/professionalRepository'
+
 module.exports = function (app) {
   var repository = new Repository()
 
@@ -19,8 +20,22 @@ module.exports = function (app) {
       }
     },
     getById: function (req, res) {
-      res.setHeader('Content-Type', 'application/json')
-      res.send(JSON.stringify(professionals[req.params.id - 1]))
+      const id = req.params.id
+
+      if (id) {
+        repository.findById(id)
+          .then(users => {
+            res.setHeader('Content-Type', 'application/json')
+            res.send(JSON.stringify(users))
+          })
+          .catch(() => {
+            res.setHeader('Content-Type', 'application/json')
+            res.send(JSON.stringify({error: 'User not found'}))
+          })
+      } else {
+        res.setHeader('Content-Type', 'application/json')
+        res.send(JSON.stringify({error: 'User not found'}))
+      }
     },
     create: function (req, res) {
 
