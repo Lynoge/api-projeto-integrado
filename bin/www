@@ -4,22 +4,19 @@
  * Module dependencies.
  */
 
-import app from '../app';
+import server from '../app';
 var debug = require('debug')('api-projeto-integrado:server');
-import http from 'http';
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+//app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
-var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
