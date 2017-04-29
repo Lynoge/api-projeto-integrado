@@ -1,7 +1,7 @@
 import { Professional, Profission } from '../models'
 
 export default class professionalRepository {
-  getAll () {
+  getAll() {
     var toDomain = this.toDomain
     var p = new Promise(function (resolve, reject) {
       Professional.findAll({ include: [Profission] }).then((result) => {
@@ -11,7 +11,7 @@ export default class professionalRepository {
     return p
   }
 
-  findByNameAndProfission (name, profission) {
+  findByNameAndProfission(name, profission) {
     var toDomain = this.toDomain
     name = name || ''
     profission = profission || ''
@@ -26,7 +26,7 @@ export default class professionalRepository {
     return p
   }
 
-  findByProfission () {
+  findByProfission() {
     var toDomain = this.toDomain
     var p = new Promise(function (resolve, reject) {
       Professional.findAll({ where: { name: { $iLike: '%' + name + '%' } } }).then((result) => {
@@ -47,19 +47,38 @@ export default class professionalRepository {
     })
   }
 
-  add (professional) {
+  findByCredentials(name, password) {
+    const that = this
+    console.log('repository')
+    return new Promise((resolve, reject) => {
+      console.log('start promise')
+      Professional.findOne({
+        where: { name: name, password: password }
+      })
+        .then(result => {
+          console.log('repository result promise')
+          resolve(that.toDomain(result))
+        },
+        result => {
+          console.log(result)
+          throw result
+        })
+    })
+  }
+
+  add(professional) {
 
   }
 
-  update (professional) {
+  update(professional) {
 
   }
 
-  remove (professional) {
+  remove(professional) {
 
   }
 
-  toDomain (entity) {
+  toDomain(entity) {
     if (Array.isArray(entity)) {
       var users = []
       var i = 0

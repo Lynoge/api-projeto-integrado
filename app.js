@@ -15,6 +15,8 @@ var app = express()
 //var server = require('http').createServer(app),
 //var io = require('socket.io').listen(server);
 
+app.use(express.static('public'));
+
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST')
