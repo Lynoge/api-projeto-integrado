@@ -30,11 +30,11 @@ module.exports = function (app) {
           })
           .catch(() => {
             res.setHeader('Content-Type', 'application/json')
-            res.send(JSON.stringify({error: 'User not found'}))
+            res.send(JSON.stringify({ error: 'User not found' }))
           })
       } else {
         res.setHeader('Content-Type', 'application/json')
-        res.send(JSON.stringify({error: 'User not found'}))
+        res.send(JSON.stringify({ error: 'User not found' }))
       }
     },
     create: function (req, res) {
