@@ -35,7 +35,7 @@ module.exports = function (app) {
             }
           }).catch((ex) => {
             res.send(JSON.stringify({ error: 'Invalid credentials' }))
-          });
+          })
       } else {
         res.send(JSON.stringify({ error: 'Invalid credentials' }))
       }

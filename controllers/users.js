@@ -2,7 +2,7 @@ import models from '../models'
 
 module.exports = function (app) {
   const userController = {
-    create(req, res) {
+    create (req, res) {
       models.User.create({
         username: req.body.username
       }).then(function () {
@@ -11,7 +11,7 @@ module.exports = function (app) {
         res.end()
       })
     },
-    destroy(req, res) {
+    destroy (req, res) {
       models.User.destroy({
         where: {
           id: req.params.user_id

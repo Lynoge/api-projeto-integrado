@@ -1,11 +1,10 @@
 import {
   Professional,
-  Profission,
+  Profission
 } from '../../models'
 
 export default class professionalRepository {
-
-  getAll() {
+  getAll () {
     const that = this
 
     return new Promise((resolve, reject) => {
@@ -13,10 +12,10 @@ export default class professionalRepository {
     })
   }
 
-  findByNameAndProfission(name, profission) {
+  findByNameAndProfission (name, profission) {
     const that = this
-    var name = name || ''
-    var profission = profission || ''
+    name = name || ''
+    profission = profission || ''
 
     return new Promise((resolve, reject) => {
       Professional.findAll({
@@ -26,7 +25,7 @@ export default class professionalRepository {
     })
   }
 
-  findByProfission() {
+  findByProfission () {
     const that = this
 
     return new Promise((resolve, reject) => {
@@ -42,7 +41,7 @@ export default class professionalRepository {
     })
   }
 
-  findById(id) {
+  findById (id) {
     const that = this
 
     return new Promise((resolve, reject) => {
@@ -50,7 +49,7 @@ export default class professionalRepository {
     })
   }
 
-  findByCredentials(name, password) {
+  findByCredentials (name, password) {
     const that = this
 
     return new Promise((resolve, reject) => {
@@ -64,9 +63,8 @@ export default class professionalRepository {
     })
   }
 
-  toDomain(entity) {
-    if (!entity)
-      return null;
+  toDomain (entity) {
+    if (!entity) { return null }
     if (Array.isArray(entity)) {
       let users = []
       for (let i = 0; i < entity.length; i++) {
@@ -74,7 +72,9 @@ export default class professionalRepository {
           professionalId: entity[i].professionalId,
           name: entity[i].name,
           email: entity[i].email,
-          profission: entity[i].Profission
+          profission: entity[i].Profission,
+          description: entity[i].description,
+          image: '/public/images/professional/' + entity[i].professionalId.toString() + '.jpg'
         })
       }
       return users
@@ -83,7 +83,9 @@ export default class professionalRepository {
         professionalId: entity.professionalId,
         name: entity.name,
         email: entity.email,
-        profission: entity.Profission
+        profission: entity.Profission,
+        description: entity.description,
+        image: '/public/images/professional/' + entity.professionalId.toString() + '.jpg'
       }
     }
   }

@@ -1,6 +1,6 @@
-module.exports = function(app) {
+module.exports = function (app) {
   const ProfessionalController = {
-    getAll(req, res) {
+    getAll (req, res) {
       const professionals = [
                 {id: 1, name: 'John Lennon', profission: 'Mecânico', location: {x: 40, y: 50}},
                 {id: 2, name: 'James Clóvis', profission: 'Eletricista', location: {x: 200, y: 900}},
