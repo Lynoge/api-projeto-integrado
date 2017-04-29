@@ -5,10 +5,15 @@ import favicon from 'serve-favicon'
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
+import socketIo from 'socket.io'
+import http from 'http'
 
 var authentication = require('./middleware/authentication')
 
 var app = express()
+
+//var server = require('http').createServer(app),
+//var io = require('socket.io').listen(server);
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -27,8 +32,15 @@ app.use(cookieParser())
 app.use(authentication)
 
 load('models')
-    .then('controllers')
-    .then('routes')
-    .into(app)
+  .then('controllers')
+  .then('routes')
+  .into(app)
 
-module.exports = app
+var server = http.createServer(app)
+var io = socketIo.listen(server)
+
+
+load('sockets')
+  .into(io)
+
+module.exports = server
