@@ -39,6 +39,14 @@ export default class professionalRepository {
     return p
   }
 
+  findById(id) {
+    const that = this
+
+    return new Promise((resolve, reject) => {
+      Professional.findById(id).then(result => resolve(that.toDomain(result)))
+    })
+  }
+
   add (professional) {
 
   }
