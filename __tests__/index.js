@@ -5,37 +5,34 @@ describe('Models: Index', () => {
   })
 })
 
-
 // Teste Assíncronos
 // Com callback
 var fetchData = function (callback) {
   setTimeout(function () {
-    callback(87);
-  }, 1000);
-};
+    callback(87)
+  }, 1000)
+}
 
 test('the data is peanut butter', done => {
-  function callback(data) {
-    expect(data).toBe(87);
-    done();
+  function callback (data) {
+    expect(data).toBe(87)
+    done()
   }
 
-  fetchData(callback);
-});
-
+  fetchData(callback)
+})
 
 // Teste Assíncrono
 // Com promise
 var p = (new Promise(function (resolve, reject) {
-  console.log("Promiss started!");
+  console.log('Promiss started!')
   setTimeout(function () {
-    resolve(87);
-  }, 3000);
-}));
-
+    resolve(87)
+  }, 3000)
+}))
 
 test('the data is peanut butter', () => {
   return p.then(result => {
-    expect(result).toBe(87);
-  });
-});
+    expect(result).toBe(87)
+  })
+})
