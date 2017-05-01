@@ -1,9 +1,19 @@
 module.exports = function (io) {
+
+  var hashs = {};
+  var sockets = io.sockets.sockets;
   io.sockets.on('connection', function (client) {
-    client.on('enviarMensagem', function (data) {
-      const msg = "<b>" + data.name + ":</b> " + data.message + "<br>"
-      client.emit("receberMensagem", "<b>Você:</b> " + data.message + "<br>")
-      client.broadcast.emit("receberMensagem", "<b>" + data.name + ":</b> " + data.message + "<br>")
+
+    client.on('updateHash', function (hash) {
+      hashs[hash] = client.id;
     });
+
+    client.on('sendMessage', function (data) {
+
+      const destinyId = hashs[data.destiny]
+      if (destinyId)
+        sockets[destinyId].emit('receiveMessage', data)
+    });
+
   });
 }

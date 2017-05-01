@@ -9,7 +9,7 @@ export default class professionalRepository {
     const that = this
 
     return new Promise((resolve, reject) => {
-      Professional.findAll({include: [Profission]}).then(result => resolve(that.toDomain(result)))
+      Professional.findAll({ include: [Profission] }).then(result => resolve(that.toDomain(result)))
     })
   }
 
@@ -54,7 +54,7 @@ export default class professionalRepository {
     const that = this
 
     return new Promise((resolve, reject) => {
-      Professional.findOne({where: { name: name, password: password }})
+      Professional.findOne({ where: { name: name, password: password } })
         .then(result => {
           resolve(that.toDomain(result))
         },
@@ -65,6 +65,8 @@ export default class professionalRepository {
   }
 
   toDomain(entity) {
+    if (!entity)
+      return null;
     if (Array.isArray(entity)) {
       let users = []
       for (let i = 0; i < entity.length; i++) {
