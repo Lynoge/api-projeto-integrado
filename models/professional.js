@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
   const Professional = sequelize.define('Professional', {
-    professionalId: {
+    id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,

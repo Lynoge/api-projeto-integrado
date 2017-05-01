@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "babel-node ./bin/www --presets es2015",
-    "sequelize": "node_modules/.bin/sequelize",
+    "sequelize": "node_modules/.bin/sequelize --config=config/index.js --options-path=config/options.json",
     "migrate": "sequelize db:migrate --config=config/index.js --options-path=config/options.json",
     "test": "NODE_ENV=test jest",
     "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",
@@ -22,6 +22,7 @@
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "express-load": "1.1.15",
+    "http-status": "^1.0.1",
     "morgan": "^1.8.1",
     "pg": "^6.1.5",
     "sequelize": "^3.30.4",
