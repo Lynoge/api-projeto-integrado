@@ -6,7 +6,7 @@
     "start": "babel-node ./bin/www --presets es2015",
     "sequelize": "node_modules/.bin/sequelize",
     "migrate": "sequelize db:migrate --options-path=dao/config/options.json",
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
     "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",
     "lint:fix": "eslint -c .eslintrc . --ignore-path .eslintignore --fix"
   },
@@ -47,6 +47,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "coveralls": "^2.13.0",
+    "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.0",
     "eslint-plugin-import": "^2.2.0",
@@ -54,6 +55,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^19.0.2",
-    "nyc": "^10.2.0"
+    "nyc": "^10.2.0",
+    "sqlite3": "^3.1.8"
   }
 }

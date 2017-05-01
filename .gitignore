@@ -3,3 +3,4 @@
 /.vscode
 /config/config.json
 /dao/config/config.json
+.env
