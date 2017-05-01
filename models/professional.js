@@ -1,15 +1,39 @@
-var userCache = {
-  'jeffmo': {fname: 'Jeff', lname: 'Morrison'}
-}
+export default (sequelize, DataTypes) => {
+  const Professional = sequelize.define('Professional', {
+    professionalId: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    profissionId: {
+      type: DataTypes.INTEGER
+    }
+  }, {
+    classMethods: {
+      associate: function (models) {
+        Professional.belongsTo(models.Profission, {
+          foreignKey: 'profissionId'
+        })
+      }
+    },
+    tableName: 'Professional',
+    undercored: false,
+    updatedAt: false,
+    createdAt: false
+  })
 
-function getUser (username, cb) {
-  if (userCache[username]) {
-    setTimeout(function () {
-      cb(null, userCache[username])
-    }, 0)
-  } else {
-    return null
-  }
+  return Professional
 }
-
-exports.getUser = getUser

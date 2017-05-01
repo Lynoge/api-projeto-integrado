@@ -1,7 +1,8 @@
-var models = require('../dao/models')
+import models from '../models'
+
 module.exports = function (app) {
-  var userController = {
-    create: function (req, res) {
+  const userController = {
+    create(req, res) {
       models.User.create({
         username: req.body.username
       }).then(function () {
@@ -10,7 +11,7 @@ module.exports = function (app) {
         res.end()
       })
     },
-    destroy: function (req, res) {
+    destroy(req, res) {
       models.User.destroy({
         where: {
           id: req.params.user_id
@@ -22,5 +23,6 @@ module.exports = function (app) {
       })
     }
   }
+
   return userController
 }

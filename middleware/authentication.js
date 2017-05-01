@@ -1,6 +1,3 @@
-module.exports = function (req, res, next) {
-    // Pesquisar por Passport JS
-    // Implementar validações de autenticação aqui!
-  //console.log('Middleware Authentication')
+module.exports = function(req, res, next) {
   return next()
 }
