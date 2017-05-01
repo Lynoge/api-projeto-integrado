@@ -1,12 +1,13 @@
-import Repository from '../dao/repository/professionalRepository'
+import Repository from '../repository/professional'
 
 module.exports = function (app) {
-  var repository = new Repository()
+  const repository = new Repository()
 
-  var ProfessionalController = {
-    getAll: function (req, res) {
-      var name = req.query.name
-      var profission = req.query.profission
+  const ProfessionalController = {
+    getAll(req, res) {
+      const name = req.query.name
+      const profission = req.query.profission
+
       if (name || profission) {
         repository.findByNameAndProfission(name, profission).then(users => {
           res.setHeader('Content-Type', 'application/json')
@@ -19,7 +20,7 @@ module.exports = function (app) {
         })
       }
     },
-    getById: function (req, res) {
+    getById(req, res) {
       const id = req.params.id
 
       if (id) {
@@ -37,12 +38,7 @@ module.exports = function (app) {
         res.send(JSON.stringify({ error: 'User not found' }))
       }
     },
-    create: function (req, res) {
-
-    },
-    remove: function (req, res) {
-
-    }
   }
+
   return ProfessionalController
 }

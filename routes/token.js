@@ -1,5 +1,4 @@
-module.exports = function (app) {
-  console.log('token')
-  var controller = app.controllers.account
+module.exports = function(app) {
+  const controller = app.controllers.account
   app.post('/token', controller.professionalToken)
 }

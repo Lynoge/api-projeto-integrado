@@ -1,6 +1,5 @@
-'use strict'
-module.exports = function (sequelize, DataTypes) {
-  var Profission = sequelize.define('Profission', {
+export default (sequelize, DataTypes) => {
+  const Profission = sequelize.define('Profission', {
     profissionId: {
       allowNull: false,
       autoIncrement: true,
@@ -21,5 +20,6 @@ module.exports = function (sequelize, DataTypes) {
     updatedAt: false,
     createdAt: false
   })
+
   return Profission
 }

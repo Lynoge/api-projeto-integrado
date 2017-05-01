@@ -1,5 +1,3 @@
-module.exports = function (app) {
-  app.get('/', function (req, res) {
-    res.end('Welcome!')
-  })
+module.exports = function(app) {
+  app.get('/', (req, res) => res.end('Welcome!'))
 }

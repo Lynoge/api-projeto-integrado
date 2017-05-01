@@ -1,5 +1,0 @@
-{
-    "migrations-path": "dao/migrations",
-    "seeders-path": "dao/seeders",
-    "models-path": "dao/models"
-}

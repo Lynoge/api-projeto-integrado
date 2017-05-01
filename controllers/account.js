@@ -1,5 +1,5 @@
 import sha1 from 'sha1'
-import Repository from '../dao/repository/professionalRepository'
+import Repository from '../repository/professional'
 
 module.exports = function (app) {
   var repository = new Repository()

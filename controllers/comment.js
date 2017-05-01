@@ -1,8 +1,7 @@
-module.exports = function (app) {
-  var ProfessionalController = {
-    getAll: function (req, res) {
-      console.log('getAll')
-      var professionals = [
+module.exports = function(app) {
+  const ProfessionalController = {
+    getAll(req, res) {
+      const professionals = [
                 {id: 1, name: 'John Lennon', profission: 'Mecânico', location: {x: 40, y: 50}},
                 {id: 2, name: 'James Clóvis', profission: 'Eletricista', location: {x: 200, y: 900}},
                 {id: 3, name: 'Arthur Machado', profission: 'Eletricista', location: {x: 500, y: 500}},
@@ -12,5 +11,6 @@ module.exports = function (app) {
       res.send(JSON.stringify(professionals))
     }
   }
+
   return ProfessionalController
 }
