@@ -28,11 +28,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-try {
-  const dotenv = require('dotenv')
-  dotenv.load()
-} catch(e) {}
-
 app.use(authentication)
 
 load('models')

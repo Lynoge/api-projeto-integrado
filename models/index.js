@@ -1,31 +1,15 @@
 import fs from 'fs'
 import Sequelize from 'sequelize'
 import path from 'path'
+import config from '../config'
 
 const basename = path.basename(module.filename)
-const env = process.env.NODE_ENV || 'development'
-const config = require(__dirname + '/../config/config.json')[env]
+const DBconfig = config[process.env.NODE_ENV]
 let db = {}
-let sequelize = {}
 
-switch(process.env.NODE_ENV) {
-  case 'development':
-    sequelize = new Sequelize(
-      process.env[config.database],
-      process.env[config.username],
-      process.env[config.password],
-      config)
-    break
-  case 'test':
-    sequelize = new Sequelize(
-      config.database,
-      config.username,
-      config.password,
-      config)
-    break
-  default:
-    sequelize = new Sequelize(process.env[config.use_env_variable])
-}
+const sequelize = process.env.NODE_ENV
+  ? new Sequelize(DBconfig.database, DBconfig.username, DBconfig.password, DBconfig)
+  : new Sequelize(process.env[config.use_env_variable])
 
 fs
   .readdirSync(__dirname)
