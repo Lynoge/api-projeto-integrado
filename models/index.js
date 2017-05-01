@@ -6,10 +6,26 @@ const basename = path.basename(module.filename)
 const env = process.env.NODE_ENV || 'development'
 const config = require(__dirname + '/../config/config.json')[env]
 let db = {}
+let sequelize = {}
 
-const sequelize = config.use_env_variable
-  ? new Sequelize(process.env[config.use_env_variable])
-  : new Sequelize(config.database, config.username, config.password, config)
+switch(process.env.NODE_ENV) {
+  case 'development':
+    sequelize = new Sequelize(
+      process.env[config.database],
+      process.env[config.username],
+      process.env[config.password],
+      config)
+    break
+  case 'test':
+    sequelize = new Sequelize(
+      config.database,
+      config.username,
+      config.password,
+      config)
+    break
+  default:
+    sequelize = new Sequelize(process.env[config.use_env_variable])
+}
 
 fs
   .readdirSync(__dirname)

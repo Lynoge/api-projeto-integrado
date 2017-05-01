@@ -1,17 +1,18 @@
 {
   "development": {
-    "username": "username",
-    "password": "password",
-    "database": "database",
+    "username": "USERNAME",
+    "password": "PASSWORD",
+    "database": "DATABASE",
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
-    "username": "username",
-    "password": "password",
-    "database": "database",
+    "username": "rentservice",
+    "password": "",
+    "database": "",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "storage": "rentservice",
+    "dialect": "sqlite"
   },
   "production": {
     "use_env_variable": "DATABASE_URL"
