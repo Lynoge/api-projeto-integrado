@@ -23,17 +23,17 @@ module.exports = function (app) {
       if (name && password) {
         repository.findByCredentials(name, password)
           .then((result) => {
-            if (result.professionalId > 0) {
+            if (result && result.professionalId > 0) {
               var user = {}
               user.token = sha1(name + (new Date()).toString())
               user.logged = true
               user.name = name
+              user.hashChat = sha1(result.professionalId)
               res.send(JSON.stringify(user))
             } else {
               res.send(JSON.stringify({ error: 'Invalid credentials' }))
             }
           }).catch((ex) => {
-            console.log(ex)
             res.send(JSON.stringify({ error: 'Invalid credentials' }))
           });
       } else {
@@ -42,7 +42,6 @@ module.exports = function (app) {
     },
 
     userToken: function (req, res) {
-      console.log(req.body)
       res.end()
     }
   }
