@@ -9,7 +9,7 @@ let db = {}
 
 const sequelize = process.env.NODE_ENV === 'development'
   ? new Sequelize(DBconfig.database, DBconfig.username, DBconfig.password, DBconfig)
-  : new Sequelize(process.env[config.use_env_variable])
+  : new Sequelize(process.env[DBconfig.use_env_variable])
 
 fs
   .readdirSync(__dirname)
