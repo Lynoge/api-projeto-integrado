@@ -7,7 +7,7 @@ const basename = path.basename(module.filename)
 const DBconfig = config[process.env.NODE_ENV]
 let db = {}
 
-const sequelize = process.env.NODE_ENV
+const sequelize = process.env.NODE_ENV === 'development'
   ? new Sequelize(DBconfig.database, DBconfig.username, DBconfig.password, DBconfig)
   : new Sequelize(process.env[config.use_env_variable])
 
