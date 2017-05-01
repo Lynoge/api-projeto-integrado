@@ -1,42 +1,50 @@
+import HttpStatus from 'http-status'
+
+import {
+  defaultResponse,
+  errorResponse
+} from '../helpers/http'
+
 import Repository from '../repository/professional'
+import { Professional } from '../models'
 
 module.exports = function (app) {
   const repository = new Repository()
 
   const ProfessionalController = {
     getAll (req, res) {
-      const name = req.query.name
-      const profission = req.query.profission
+      const { query: {
+        name,
+        profission
+      }} = req
 
       if (name || profission) {
-        repository.findByNameAndProfission(name, profission).then(users => {
-          res.setHeader('Content-Type', 'application/json')
-          res.send(JSON.stringify(users))
-        })
+        return repository.findByNameAndProfission(name, profission).then(users => users)
       } else {
-        repository.getAll().then(users => {
-          res.setHeader('Content-Type', 'application/json')
-          res.send(JSON.stringify(users))
-        })
+        return repository.getAll().then(users => users)
       }
     },
-    getById (req, res) {
-      const id = req.params.id
+    findById (params) {
+      if (!params) { return null }
 
-      if (id) {
-        repository.findById(id)
-          .then(users => {
-            res.setHeader('Content-Type', 'application/json')
-            res.send(JSON.stringify(users))
-          })
-          .catch(() => {
-            res.setHeader('Content-Type', 'application/json')
-            res.send(JSON.stringify({ error: 'User not found' }))
-          })
-      } else {
-        res.setHeader('Content-Type', 'application/json')
-        res.send(JSON.stringify({ error: 'User not found' }))
-      }
+      return repository.findById(params)
+        .then(users => users)
+        .catch((e) => e)
+    },
+    create (data) {
+      return Professional.create(data)
+        .then(result => defaultResponse(result, HttpStatus.CREATED))
+        .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+    },
+    update (data, params) {
+      return Professional.update(data, {where: params})
+        .then(result => defaultResponse(result))
+        .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+    },
+    delete (params) {
+      return Professional.destroy({where: params})
+        .then(result => defaultResponse(result, HttpStatus.NO_CONTENT))
+        .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
     }
   }
 

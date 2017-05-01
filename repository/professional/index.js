@@ -1,3 +1,10 @@
+import toDomain from './domain'
+
+import {
+  defaultResponse,
+  errorResponse
+} from '../../helpers/http'
+
 import {
   Professional,
   Profission
@@ -5,88 +12,48 @@ import {
 
 export default class professionalRepository {
   getAll () {
-    const that = this
-
-    return new Promise((resolve, reject) => {
-      Professional.findAll({ include: [Profission] }).then(result => resolve(that.toDomain(result)))
-    })
+    return Professional.findAll({include: [Profission]})
+      .then(result => defaultResponse(toDomain(result)))
+      .catch(error => errorResponse(error.message))
   }
 
   findByNameAndProfission (name, profission) {
-    const that = this
     name = name || ''
     profission = profission || ''
 
-    return new Promise((resolve, reject) => {
-      Professional.findAll({
-        where: { name: { $iLike: '%' + name + '%' } },
-        include: [{ model: Profission, where: { name: { $iLike: '%' + profission + '%' } } }]
-      }).then(result => resolve(that.toDomain(result)))
+    return Professional.findAll({
+      where: { name: { $iLike: '%' + name + '%' } },
+      include: [{ model: Profission, where: { name: { $iLike: '%' + profission + '%' } } }]
     })
+      .then(result => defaultResponse(toDomain(result)))
+      .catch(error => errorResponse(error.message))
   }
 
   findByProfission () {
-    const that = this
-
-    return new Promise((resolve, reject) => {
-      Professional.findAll({ where: { name: { $iLike: '%' + name + '%' } } }).then(result => {
-        let users = []
-
-        for (let i = 0; i < result.length; i++) {
-          users.push(that.toDomain(result[i]))
-        }
-
-        resolve(users)
-      })
+    return Professional.findAll({where: {name: { $iLike: '%' + name + '%'}}})
+    .then(result => {
+      let users = []
+      for (let i = 0; i < result.length; i++) { users.push(toDomain(result[i])) }
+      defaultResponse(users)
     })
+    .catch(error => errorResponse(error.message))
   }
 
-  findById (id) {
-    const that = this
-
-    return new Promise((resolve, reject) => {
-      Professional.findById(id).then(result => resolve(that.toDomain(result)))
-    })
+  findById (params) {
+    return Professional.findOne({where: params})
+      .then(result => defaultResponse(toDomain(result)))
+      .catch(error => errorResponse(error.message))
   }
 
   findByCredentials (name, password) {
-    const that = this
-
     return new Promise((resolve, reject) => {
       Professional.findOne({ where: { name: name, password: password } })
         .then(result => {
-          resolve(that.toDomain(result))
+          resolve(toDomain(result))
         },
         result => {
           throw result
         })
     })
-  }
-
-  toDomain (entity) {
-    if (!entity) { return null }
-    if (Array.isArray(entity)) {
-      let users = []
-      for (let i = 0; i < entity.length; i++) {
-        users.push({
-          professionalId: entity[i].professionalId,
-          name: entity[i].name,
-          email: entity[i].email,
-          profission: entity[i].Profission,
-          description: entity[i].description,
-          image: '/public/images/professional/' + entity[i].professionalId.toString() + '.jpg'
-        })
-      }
-      return users
-    } else {
-      return {
-        professionalId: entity.professionalId,
-        name: entity.name,
-        email: entity.email,
-        profission: entity.Profission,
-        description: entity.description,
-        image: '/public/images/professional/' + entity.professionalId.toString() + '.jpg'
-      }
-    }
   }
 }
