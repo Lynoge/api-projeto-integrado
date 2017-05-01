@@ -18,6 +18,11 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    description: {
+      type: DataTypes.TEXT,
+      length: 'long',
+      allowNull: true
+    },
     profissionId: {
       type: DataTypes.INTEGER
     }

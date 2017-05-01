@@ -12,7 +12,7 @@ import authentication from './middleware/authentication'
 
 const app = express()
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 })
 
 app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')))
+app.use('/public/images/professional/', express.static(path.join(__dirname, '/public/images/professional/')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))

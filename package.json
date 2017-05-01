@@ -7,8 +7,8 @@
     "sequelize": "node_modules/.bin/sequelize",
     "migrate": "sequelize db:migrate --options-path=dao/config/options.json",
     "test": "jest",
-    "lint": "eslint -c .eslintrc . ",
-    "lint:fix": "eslint -c .eslintrc . --fix"
+    "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",
+    "lint:fix": "eslint -c .eslintrc . --ignore-path .eslintignore --fix"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",

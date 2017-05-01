@@ -4,7 +4,7 @@ module.exports = function (app) {
   const repository = new Repository()
 
   const ProfessionalController = {
-    getAll(req, res) {
+    getAll (req, res) {
       const name = req.query.name
       const profission = req.query.profission
 
@@ -20,7 +20,7 @@ module.exports = function (app) {
         })
       }
     },
-    getById(req, res) {
+    getById (req, res) {
       const id = req.params.id
 
       if (id) {
@@ -37,7 +37,7 @@ module.exports = function (app) {
         res.setHeader('Content-Type', 'application/json')
         res.send(JSON.stringify({ error: 'User not found' }))
       }
-    },
+    }
   }
 
   return ProfessionalController
