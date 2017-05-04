@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "babel-node ./bin/www --presets es2015",
+    "devstart": "nodemon --watch . --exec babel-node ./bin/www --presets es2015",
     "sequelize": "node_modules/.bin/sequelize --config=config/index.js --options-path=config/options.json",
     "migrate": "sequelize db:migrate --config=config/index.js --options-path=config/options.json",
     "test": "NODE_ENV=test jest",
@@ -56,6 +57,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^19.0.2",
+    "nodemon": "^1.11.0",
     "nyc": "^10.2.0",
     "sqlite3": "^3.1.8"
   }
