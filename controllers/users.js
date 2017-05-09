@@ -7,7 +7,7 @@ module.exports = function (app) {
         username: req.body.username
       }).then(function () {
         res.redirect('/')
-      }).catch((error) => {
+      }).catch(() => {
         res.end()
       })
     },

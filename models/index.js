@@ -7,17 +7,16 @@ const basename = path.basename(module.filename)
 const DBconfig = config[process.env.NODE_ENV]
 let db = {}
 
+const connectionConfig = {
+  logging: false,
+  dialectOptions: {
+    ssl: true
+  }
+}
+
 const sequelize = process.env.NODE_ENV === 'development'
-  ? new Sequelize(DBconfig.database, DBconfig.username, DBconfig.password, DBconfig, {
-    dialectOptions: {
-      ssl: true
-    }
-  })
-  : new Sequelize(process.env[DBconfig.use_env_variable], {
-    dialectOptions: {
-      ssl: true
-    }
-  })
+  ? new Sequelize(DBconfig.database, DBconfig.username, DBconfig.password, DBconfig, connectionConfig)
+  : new Sequelize(process.env[DBconfig.use_env_variable], connectionConfig)
 
 fs
   .readdirSync(__dirname)
