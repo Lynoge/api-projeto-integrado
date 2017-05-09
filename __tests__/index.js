@@ -1,3 +1,21 @@
+var app = require('../app'),
+    mocha = require('should'),
+    request = require('supertest')(app)
+
+describe('Professional', function () {
+    it('Get some professionals', function (done) {
+        request.get('/professionals')
+            .end(function (err, res) {
+                console.log(res.body.length);
+                //res.body.number.should.eql(5)
+                res.body.length.should.be.above(0);
+                done();
+            })
+    })
+})
+
+/*
+
 // Teste Síncrono
 describe('Models: Index', () => {
   it('First test', () => {
@@ -36,3 +54,4 @@ test('the data is peanut butter', () => {
     expect(result).toBe(87)
   })
 })
+*/
