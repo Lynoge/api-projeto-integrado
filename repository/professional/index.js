@@ -12,7 +12,7 @@ import {
 
 export default class professionalRepository {
   getAll () {
-    return Professional.findAll({include: [Profission]})
+    return Professional.findAll({ include: [Profission] })
       .then(result => defaultResponse(toDomain(result)))
       .catch(error => errorResponse(error.message))
   }
@@ -29,18 +29,18 @@ export default class professionalRepository {
       .catch(error => errorResponse(error.message))
   }
 
-  findByProfission () {
-    return Professional.findAll({where: {name: { $iLike: '%' + name + '%'}}})
-    .then(result => {
-      let users = []
-      for (let i = 0; i < result.length; i++) { users.push(toDomain(result[i])) }
-      defaultResponse(users)
-    })
-    .catch(error => errorResponse(error.message))
+  findByProfission (name) {
+    return Professional.findAll({ where: { name: { $iLike: '%' + name + '%' } } })
+      .then(result => {
+        let users = []
+        for (let i = 0; i < result.length; i++) { users.push(toDomain(result[i])) }
+        defaultResponse(users)
+      })
+      .catch(error => errorResponse(error.message))
   }
 
   findById (params) {
-    return Professional.findOne({where: params})
+    return Professional.findOne({ where: params })
       .then(result => defaultResponse(toDomain(result)))
       .catch(error => errorResponse(error.message))
   }

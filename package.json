@@ -5,11 +5,12 @@
   "scripts": {
     "start": "babel-node ./bin/www --presets es2015",
     "devstart": "nodemon --watch . --exec babel-node ./bin/www --presets es2015",
-    "sequelize": "node_modules/.bin/sequelize --config=config/index.js --options-path=config/options.json",
-    "migrate": "sequelize db:migrate --config=config/index.js --options-path=config/options.json",
-    "test": "NODE_ENV=test jest",
+    "sequelize": "node_modules/.bin/sequelize --config=config/index.js",
+    "migrate": "sequelize db:migrate --config=config/index.js",
+    "jest-test": "NODE_ENV=test jest",
     "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",
-    "lint:fix": "eslint -c .eslintrc . --ignore-path .eslintignore --fix"
+    "lint:fix": "eslint -c .eslintrc . --ignore-path .eslintignore --fix",
+    "test": "node_modules/.bin/mocha --compilers js:babel-core/register __tests__ --timeout 5000"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
@@ -24,14 +25,16 @@
     "express": "~4.15.2",
     "express-load": "1.1.15",
     "http-status": "^1.0.1",
+    "mocha": "^3.3.0",
     "morgan": "^1.8.1",
     "pg": "^6.1.5",
     "sequelize": "^3.30.4",
     "sequelize-cli": "^2.7.0",
     "serve-favicon": "^2.4.2",
     "sha1": "^1.1.1",
-    "socket-io": "^1.0.0",
-    "socket.io": "^1.7.3"
+    "should": "^11.2.1",
+    "socket.io": "^1.7.3",
+    "supertest": "^3.0.0"
   },
   "engines": {
     "npm": "3.10.0",
@@ -58,7 +61,6 @@
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^19.0.2",
     "nodemon": "^1.11.0",
-    "nyc": "^10.2.0",
-    "sqlite3": "^3.1.8"
+    "nyc": "^10.2.0"
   }
 }
