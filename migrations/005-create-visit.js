@@ -28,7 +28,7 @@ module.exports = {
       requesterId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users', key: 'id' }
+        references: { model: 'Requester', key: 'id' }
       },
       canceled: {
         type: Sequelize.BOOLEAN,
