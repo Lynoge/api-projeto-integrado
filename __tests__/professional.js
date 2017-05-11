@@ -7,8 +7,7 @@ describe('Professional', function () {
   it('Get all professionals', function (done) {
     request.get('/professionals')
       .end(function (err, res) {
-        console.log(err)
-        res.body.length.should.be.above(0)
+        res.body.statusCode.should.be.eql(200, res.body.data.error)
         done()
       })
   })

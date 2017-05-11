@@ -2,7 +2,13 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    queryInterface.renameColumn('Professional', 'professionalId', 'id')
+    return queryInterface.bulkInsert('Profission', [
+      {
+        name: 'Mecânico'
+      },
+      {
+        name: 'Eletricista'
+      }], {})
   },
 
   down: function (queryInterface, Sequelize) {
@@ -11,7 +17,7 @@ module.exports = {
       Return a promise to correctly handle asynchronicity.
 
       Example:
-      return queryInterface.dropTable('users');
+      return queryInterface.bulkDelete('Person', null, {});
     */
   }
 }

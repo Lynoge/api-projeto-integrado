@@ -1,25 +1,23 @@
 export default (sequelize, DataTypes) => {
-  const Profission = sequelize.define('Profission', {
+  var Requester = sequelize.define('Requester', {
     id: {
-      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
   }, {
     classMethods: {
       associate: function (models) {
+        Requester.belongsTo(models.User, {
+          foreignKey: 'id'
+        })
       }
     },
-    tableName: 'Profission',
+    tableName: 'Requester',
     undercored: false,
     updatedAt: false,
     createdAt: false
   })
 
-  return Profission
+  return Requester
 }

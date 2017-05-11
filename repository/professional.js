@@ -1,26 +1,55 @@
-import toDomain from './domain'
-
 import {
   defaultResponse,
   errorResponse
-} from '../../helpers/http'
+} from '../helpers/http'
 
 import {
   Professional,
-  Profission
-} from '../../models'
+  Profission,
+  User
+} from '../models'
+
+const toDomain = (entities) => {
+  const parse = (entity) => {
+    return {
+      id: entity.id,
+      name: entity.User.name,
+      username: entity.User.username,
+      email: entity.User.email,
+      phone: entity.User.phone,
+      active: entity.User.active,
+      createAt: entity.User.createAt,
+      updateAt: entity.User.updateAt,
+      type: entity.User.type,
+      profission: entity.Profission,
+      description: entity.description,
+      image: entity.User.image
+    }
+  }
+
+  if (!entities) { return null }
+  if (Array.isArray(entities)) {
+    return entities
+      .map(entity => (parse(entity)))
+  } else {
+    return parse(entities)
+  }
+}
 
 export default class professionalRepository {
   getAll () {
-    return Professional.findAll({ include: [Profission] })
-      .then(result => defaultResponse(toDomain(result)))
-      .catch(error => errorResponse(error.message))
+    return Professional.findAll({ include: [User, Profission] })
+      .then(result => {
+        return defaultResponse(toDomain(result))
+      })
+      .catch(error => {
+        errorResponse(error.message)
+      })
   }
 
   findByNameAndProfission (name, profission) {
     name = name || ''
     profission = profission || ''
-
     return Professional.findAll({
       where: { name: { $iLike: '%' + name + '%' } },
       include: [{ model: Profission, where: { name: { $iLike: '%' + profission + '%' } } }]
