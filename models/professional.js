@@ -6,18 +6,6 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     description: {
       type: DataTypes.TEXT,
       length: 'long',
@@ -31,6 +19,9 @@ export default (sequelize, DataTypes) => {
       associate: function (models) {
         Professional.belongsTo(models.Profission, {
           foreignKey: 'profissionId'
+        })
+        Professional.belongsTo(models.User, {
+          foreignKey: 'id'
         })
       }
     },

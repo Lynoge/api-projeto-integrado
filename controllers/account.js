@@ -5,7 +5,6 @@ module.exports = function (app) {
   var repository = new Repository()
   var accountController = {
     login: function (req, res) {
-      console.log(req.params)
       res.end()
     },
 

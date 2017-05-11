@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      creditCardId: { 
+      creditCardId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'CreditCard', key: 'id' }

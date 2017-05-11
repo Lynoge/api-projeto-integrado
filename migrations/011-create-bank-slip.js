@@ -7,11 +7,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      numbering: { 
+      numbering: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      dueDate: { 
+      dueDate: {
         type: Sequelize.DATE,
         allowNull: false
       },

@@ -6,20 +6,20 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },      
-      numbering: { 
-        type: Sequelize.INTEGER,
-				allowNull: false
       },
-      accountNumber: { 
+      numbering: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      accountNumber: {
         type: Sequelize.INTEGER
       },
-			agencyNumber: {
-				type: Sequelize.INTEGER
-			},
+      agencyNumber: {
+        type: Sequelize.INTEGER
+      },
       userId: {
         type: Sequelize.INTEGER,
-				allowNull: false,
+        allowNull: false,
         references: { model: 'User', key: 'id' }
       }
     })

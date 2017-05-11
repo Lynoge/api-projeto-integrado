@@ -16,7 +16,8 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       password: {
         type: Sequelize.STRING,
@@ -25,7 +26,7 @@ module.exports = {
       phone: {
         type: Sequelize.INTEGER
       },
-      photoUrl: {
+      image: {
         type: Sequelize.STRING
       },
       active: {
@@ -36,11 +37,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
-      updateAt: { 
+      updateAt: {
         type: Sequelize.DATE
       },
       type: {
-          type: Sequelize.CHAR(1)
+        type: Sequelize.CHAR(1)
       }
     })
   },

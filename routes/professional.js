@@ -1,3 +1,8 @@
+import {
+  defaultResponse,
+  errorResponse
+} from '../helpers/http'
+
 module.exports = function (app) {
   const professionalController = app.controllers.professional
 
@@ -5,8 +10,9 @@ module.exports = function (app) {
     .get((req, res) => {
       professionalController.getAll(req, res)
       .then(response => {
-        res.status(response.statusCode)
-        res.json(response.data)
+        res.json(defaultResponse(response))
+      }).catch(err => {
+        res.json(errorResponse(err))
       })
     })
 

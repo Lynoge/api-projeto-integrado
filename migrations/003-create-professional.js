@@ -6,11 +6,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
         references: { model: 'User', key: 'id' }
-      },      
-      rating: { 
+      },
+      rating: {
         type: Sequelize.INTEGER
       },
-      description: { 
+      description: {
         type: Sequelize.TEXT,
         leight: 'long'
       },
