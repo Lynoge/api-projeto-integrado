@@ -31,7 +31,6 @@ module.exports = function (app) {
 			const user = req.body
 			repository.add(user)
 				.then(id => {
-					console.log(id)
 					res.json(defaultResponse(id))
 				})
 				.catch(err => {
