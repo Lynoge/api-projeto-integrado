@@ -1,50 +1,54 @@
 import HttpStatus from 'http-status'
-
 import {
   defaultResponse,
   errorResponse
 } from '../helpers/http'
 
 import Repository from '../repository/professional'
-import { Professional } from '../models'
 
 module.exports = function (app) {
   const repository = new Repository()
 
   const ProfessionalController = {
-    getAll (req, res) {
+    getAll(req, res) {
       const { query: {
         name,
         profission
-      }} = req
+      } } = req
 
       if (name || profission) {
-        return repository.findByNameAndProfission(name, profission).then(users => users)
+        repository.findByNameAndProfission(name, profission)
+          .then(users => res.json(defaultResponse(users)))
+          .catch(err => res.json(errorResponse(err)))
       } else {
-        return repository.getAll().then(users => users)
+        repository.getAll()
+          .then(users => res.json(defaultResponse(users)))
+          .catch(err => res.json(errorResponse(err)))
       }
     },
-    findById (params) {
-      if (!params) { return null }
+    getById(req, res) {
+      const { id } = req.params
 
-      return repository.findById(params)
-        .then(users => users)
-        .catch((e) => e)
+      repository.getById(id)
+        .then(user => res.json(defaultResponse(user)))
+        .catch(err => res.json(errorResponse(err)))
     },
-    create (data) {
-      return Professional.create(data)
-        .then(result => defaultResponse(result, HttpStatus.CREATED))
-        .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+    create(req, res) {
+      repository.create(req.body)
+        .then(result => res.json(defaultResponse(result, HttpStatus.CREATED)))
+        .catch(error => res.json(errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY)))
     },
-    update (data, params) {
-      return Professional.update(data, {where: params})
-        .then(result => defaultResponse(result))
-        .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+    update(req, res) {
+      repository.update(req.body)
+        .then(result => res.json(defaultResponse(result)))
+        .catch(error => res.json(errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY)))
     },
-    delete (params) {
-      return Professional.destroy({where: params})
-        .then(result => defaultResponse(result, HttpStatus.NO_CONTENT))
-        .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+    delete(req, res) {
+      const { id } = req.params
+      console.log(id)
+      repository.delete(id)
+        .then(result => res.json(defaultResponse(result, HttpStatus.NO_CONTENT)))
+        .catch(error => res.json(errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY)))
     }
   }
 
