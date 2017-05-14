@@ -19,7 +19,7 @@ module.exports = function (app) {
 		},
 		getById(req, res) {
 			const { id } = req.params
-			repository.findById(id)
+			repository.getById(id)
 				.then(requester => {
 					res.json(defaultResponse(requester))
 				})
@@ -38,11 +38,12 @@ module.exports = function (app) {
 				})
 		},
 		update(req, res) {
-
+			const user = req.body
+			repository. update(user)
 		},
-		remove(req, res) {
+		delete(req, res) {
 			const { id } = req.params
-			repository.remove(id).then(() => {
+			repository.delete(id).then(() => {
 				res.json(defaultResponse(id))
 			}).catch(err => {
 				res.json(errorResponse(err.message))

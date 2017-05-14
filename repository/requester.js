@@ -42,7 +42,7 @@ export default class RequesterRepository extends UserRepository {
       })
   }
 
-  findById(id) {
+  getById(id) {
     return Requester.findAll({
       where: { id: id }, include: [User]
     })
@@ -66,13 +66,24 @@ export default class RequesterRepository extends UserRepository {
       })
   }
 
-  remove(id) {
+  delete(id) {
     return Requester.destroy({ where: { id: id } })
       .then(() => {
-        return super.remove(id)
+        return super.delete(id)
       })
       .catch(err => {
-        err.message = 'RequesterRepository.remove() => ' + err.message
+        err.message = 'RequesterRepository.delete() => ' + err.message
+        throw err
+      })
+  }
+
+  update(requester) {
+    return Requester.update(requester, { where: { id: requester.id } })
+      .then(() => {
+        return super.update(requester)
+      })
+      .catch(err => {
+        err.message = 'RequesterRepository.update() => ' + err.message
         throw err
       })
   }

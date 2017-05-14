@@ -1,7 +1,7 @@
 try {
   const dotenv = require('dotenv')
   dotenv.load()
-} catch (e) {}
+} catch (e) { }
 
 module.exports = {
   'development': {
@@ -12,14 +12,11 @@ module.exports = {
     'dialect': 'postgres'
   },
   'test': {
-    'username': 'rentservice',
-    'password': '',
-    'database': '',
-    'host': '127.0.0.1',
-    'storage': 'rentservice',
-    'dialect': 'sqlite'
+    'use_env_variable': 'DATABASE_URL_TEST',
+    dialectOptions: { ssl: true }
   },
   'production': {
-    'use_env_variable': 'DATABASE_URL'
+    'use_env_variable': 'DATABASE_URL',
+    dialectOptions: { ssl: true }
   }
 }

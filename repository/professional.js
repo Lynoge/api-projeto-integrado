@@ -1,8 +1,4 @@
-import {
-  defaultResponse,
-  errorResponse
-} from '../helpers/http'
-
+import UserRepository from './user'
 import {
   Professional,
   Profission,
@@ -36,53 +32,90 @@ const toDomain = (entities) => {
   }
 }
 
-export default class professionalRepository {
-  getAll () {
+export default class professionalRepository extends UserRepository {
+  getAll() {
     return Professional.findAll({ include: [User, Profission] })
       .then(result => {
-        return defaultResponse(toDomain(result))
+        return toDomain(result)
       })
-      .catch(error => {
-        errorResponse(error.message)
+      .catch(err => {
+        err.message = 'ProfessionalRepository.getAll() => ' + err.message
+        throw err
       })
   }
 
-  findByNameAndProfission (name, profission) {
+  findByNameAndProfission(name, profission) {
     name = name || ''
     profission = profission || ''
     return Professional.findAll({
       where: { name: { $iLike: '%' + name + '%' } },
       include: [{ model: Profission, where: { name: { $iLike: '%' + profission + '%' } } }]
     })
-      .then(result => defaultResponse(toDomain(result)))
-      .catch(error => errorResponse(error.message))
-  }
-
-  findByProfission (name) {
-    return Professional.findAll({ where: { name: { $iLike: '%' + name + '%' } } })
-      .then(result => {
-        let users = []
-        for (let i = 0; i < result.length; i++) { users.push(toDomain(result[i])) }
-        defaultResponse(users)
+      .then(result => toDomain(result))
+      .catch(err => {
+        err.message = 'ProfessionalRepository.findNameAndProfission() => ' + err.message
+        throw err
       })
-      .catch(error => errorResponse(error.message))
   }
 
-  findById (params) {
-    return Professional.findOne({ where: params })
-      .then(result => defaultResponse(toDomain(result)))
-      .catch(error => errorResponse(error.message))
+  findByProfission(name) {
+    return Professional.findAll({ where: { name: { $iLike: '%' + name + '%' } } })
+      .then(result => toDomain(result))
+      .catch(err => {
+        err.message = 'ProfessionalRepository.findByProfission() => ' + err.message
+        throw err
+      })
   }
 
-  findByCredentials (name, password) {
+  findByCredentials(name, password) {
     return new Promise((resolve, reject) => {
       Professional.findOne({ where: { name: name, password: password } })
-        .then(result => {
-          resolve(toDomain(result))
-        },
-        result => {
-          throw result
+        .then(result => toDomain(result))
+        .catch(err => {
+          err.message = 'ProfessionalRepository.findByCredentials() => ' + err.message
+          throw err
         })
     })
+  }
+
+  getById(id) {
+    return Professional.findOne({ where: { id: id } })
+      .then(result => toDomain(result))
+      .catch(err => {
+        err.message = 'ProfessionalRepository.getById() => ' + err.message
+        throw err
+      })
+  }
+
+  create(user) {
+    return super.create(user)
+      .then(id => { return Professional.create({ id: id }) })
+      .then(professional => professional.id)
+      .catch(err => {
+        err.message = 'ProfessionalRepository.create() => ' + err.message
+        throw err
+      })
+  }
+
+  delete(id) {
+    return Professional.destroy({ where: { id: id } })
+      .then(() => {
+        return super.delete(id)
+      })
+      .catch(err => {
+        err.message = 'ProfessionalRepository.delete() => ' + err.message
+        throw err
+      })
+  }
+
+  update(professional) {
+    return Professional.update(professional, { where: { id: professional.id } })
+      .then(() => {
+        return super.update(professional)
+      })
+      .catch(err => {
+        err.message = 'ProfessionalRepository.update() => ' + err.message
+        throw err
+      })
   }
 }
