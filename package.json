@@ -7,10 +7,13 @@
     "devstart": "nodemon --watch . --exec babel-node ./bin/www --presets es2015",
     "sequelize": "node_modules/.bin/sequelize --config=config/index.js",
     "migrate": "sequelize db:migrate --config=config/index.js",
+    "migrate-undo": "sequelize db:migrate:undo:all --config=config/index.js",
+    "seeders": "sequelize db:seed:all --config=config/index.js",
     "jest-test": "NODE_ENV=test jest",
     "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",
     "lint:fix": "eslint -c .eslintrc . --ignore-path .eslintignore --fix",
-    "test": "node_modules/.bin/mocha --compilers js:babel-core/register __tests__/index.js --timeout 10000"
+    "only-test": "node_modules/.bin/mocha --compilers js:babel-core/register __tests__/index.js --timeout 10000",
+    "test": "sequelize db:migrate:undo:all --config=config/index.js && sequelize db:migrate --config=config/index.js && sequelize db:seed:all --config=config/index.js && node_modules/.bin/mocha --compilers js:babel-core/register __tests__/index.js --timeout 10000"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",

@@ -44,12 +44,14 @@ export default class professionalRepository extends UserRepository {
       })
   }
 
-  findByNameAndProfission(name, profission) {
+  findByNameAndProfission(name, profissionId) {
     name = name || ''
-    profission = profission || ''
+    profissionId = isNaN(profissionId) ? 0 : profissionId
     return Professional.findAll({
-      where: { name: { $iLike: '%' + name + '%' } },
-      include: [{ model: Profission, where: { name: { $iLike: '%' + profission + '%' } } }]
+      include: [
+        { model: Profission, where: { id: profissionId } },
+        { model: User, where: { name: { $iLike: '%' + name + '%' } } }
+      ]
     })
       .then(result => toDomain(result))
       .catch(err => {
@@ -67,20 +69,11 @@ export default class professionalRepository extends UserRepository {
       })
   }
 
-  findByCredentials(name, password) {
-    return new Promise((resolve, reject) => {
-      Professional.findOne({ where: { name: name, password: password } })
-        .then(result => toDomain(result))
-        .catch(err => {
-          err.message = 'ProfessionalRepository.findByCredentials() => ' + err.message
-          throw err
-        })
-    })
-  }
-
   getById(id) {
-    return Professional.findOne({ where: { id: id } })
-      .then(result => toDomain(result))
+    return Professional.findOne({ where: { id: id }, include: [User, Profission] })
+      .then(result => {
+        return toDomain(result)
+      })
       .catch(err => {
         err.message = 'ProfessionalRepository.getById() => ' + err.message
         throw err
@@ -88,6 +81,7 @@ export default class professionalRepository extends UserRepository {
   }
 
   create(user) {
+    user.type = 'P'
     return super.create(user)
       .then(id => { return Professional.create({ id: id }) })
       .then(professional => professional.id)

@@ -1,6 +1,6 @@
 module.exports = function (io) {
-  var hashs = {}
-  var sockets = io.sockets.sockets
+  let hashs = {}
+  let sockets = io.sockets.sockets
   io.sockets.on('connection', function (client) {
     client.on('updateHash', function (hash) {
       hashs[hash] = client.id

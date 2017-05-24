@@ -43,7 +43,7 @@ export default class RequesterRepository extends UserRepository {
   }
 
   getById(id) {
-    return Requester.findAll({
+    return Requester.findOne({
       where: { id: id }, include: [User]
     })
       .then(result => toDomain(result))
@@ -56,12 +56,12 @@ export default class RequesterRepository extends UserRepository {
       .catch(error => error)
   }
 
-  add(user) {
-    return super.add(user)
+  create(user) {    
+    return super.create(user)
       .then(id => { return Requester.create({ id: id }) })
       .then(requester => requester.id)
       .catch(err => {
-        err.message = 'RequesterRepository.add() => ' + err.message
+        err.message = 'RequesterRepository.create() => ' + err.message
         throw err
       })
   }
