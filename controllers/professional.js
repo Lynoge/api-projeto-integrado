@@ -1,9 +1,4 @@
 import HttpStatus from 'http-status'
-import {
-  defaultResponse,
-  errorResponse
-} from '../helpers/http'
-
 import Repository from '../repository/professional'
 
 module.exports = function (app) {
@@ -11,44 +6,79 @@ module.exports = function (app) {
 
   const ProfessionalController = {
     getAll(req, res) {
-      const { query: {
-        name,
-        profission
-      } } = req
-
-      if (name || profission) {
-        repository.findByNameAndProfission(name, profission)
-          .then(users => res.json(defaultResponse(users)))
-          .catch(err => res.json(errorResponse(err)))
-      } else {
-        repository.getAll()
-          .then(users => res.json(defaultResponse(users)))
-          .catch(err => res.json(errorResponse(err)))
-      }
+      repository.getAll()
+        .then(users => {
+          if (users.length == 0)
+            res.status(HttpStatus.NO_CONTENT)
+          res.json(users)
+        })
+        .catch(err => {
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          res.json(err.message)
+        })
     },
+
+    getByNameAndProfission(req, res) {
+      const { name, profissionId } = req.params
+      repository.findByNameAndProfission(name, profissionId)
+        .then(users => {
+          if (users.length == 0)
+            res.status(HttpStatus.NO_CONTENT)
+          res.json(users)
+        })
+        .catch(err => {
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          res.json(err.message)
+        })
+    },
+
     getById(req, res) {
       const { id } = req.params
-
       repository.getById(id)
-        .then(user => res.json(defaultResponse(user)))
-        .catch(err => res.json(errorResponse(err)))
+        .then(user => {
+          if (!user)
+            res.status(HttpStatus.NOT_FOUND)
+          res.json(user)
+        })
+        .catch(err => {
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          res.json(err.message)
+        })
     },
+
     create(req, res) {
       repository.create(req.body)
-        .then(result => res.json(defaultResponse(result, HttpStatus.CREATED)))
-        .catch(error => res.json(errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY)))
+        .then(result => {
+          res.status(HttpStatus.CREATED)
+          res.json(result)
+        })
+        .catch(err => {
+          console.log(err.message)
+          res.status(HttpStatus.UNPROCESSABLE_ENTITY)
+          res.json(err.message)
+        })
     },
+
     update(req, res) {
       repository.update(req.body)
-        .then(result => res.json(defaultResponse(result)))
-        .catch(error => res.json(errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY)))
+        .then(result => res.json(result))
+        .catch(error => {
+          res.status(HttpStatus.UNPROCESSABLE_ENTITY)
+          res.json(error.message)
+        })
     },
+
     delete(req, res) {
       const { id } = req.params
-      console.log(id)
       repository.delete(id)
-        .then(result => res.json(defaultResponse(result, HttpStatus.NO_CONTENT)))
-        .catch(error => res.json(errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY)))
+        .then(result => {
+          res.status(HttpStatus.NO_CONTENT)
+          res.json(result)
+        })
+        .catch(error => {
+          res.status(HttpStatus.UNPROCESSABLE_ENTITY)
+          res.json(error.message)
+        })
     }
   }
 

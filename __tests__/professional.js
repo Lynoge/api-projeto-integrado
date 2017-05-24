@@ -1,26 +1,61 @@
+import HttpStatus from 'http-status'
 import app from '../app'
 import mocha from 'should'
 import supertest from 'supertest'
 const request = supertest(app)
 
 const Professional = {
-  runTest: function () {
+  runTest: () => {
 
-    describe('Professional', function () {
-      it('Get all professionals', function (done) {
+    describe('Professional', () => {
+      it('Get All', (done) => {
         request.get('/professional')
-          .end(function (err, res) {
-            console.log(res.body)
-            res.body.statusCode.should.be.eql(200, res.body.data.error)
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.OK)
+            res.body.length.should.be.above(0)
             done()
           })
       })
 
-      it('Get all professionals', function (done) {
-        request.get('/professional/45')
-          .end(function (err, res) {
-            const message = res.body.data ? res.body.data.error : "error not handled"
-            res.body.statusCode.should.be.eql(200, message)
+      it('Get by Id', (done) => {
+        request.get('/professional/4')
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.OK)
+            res.body.id.should.be.eql(4)
+            done()
+          })
+      })
+
+      it('Get by Id not found', (done) => {
+        request.get('/professional/5')
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.NOT_FOUND)
+            done()
+          })
+      })
+
+      it('CREATE', (done) => {
+        const professional = {
+          username: 'professional',
+          name: 'professional',
+          email: 'professional@mail.com',
+          password: '123qwe',
+          phone: 539087657,
+          image: 'public/user_id',
+          profissionId: 2
+        }
+        request.post('/professional')
+          .send(professional)
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.CREATED)
+            done()
+          })
+      })
+
+      it('Delete', (done) => {
+        request.delete('/professional/5')
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.NO_CONTENT)
             done()
           })
       })

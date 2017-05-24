@@ -6,30 +6,32 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
+    rating: {
+      type: DataTypes.INTEGER
+    },
     description: {
       type: DataTypes.TEXT,
-      length: 'long',
-      allowNull: true
+      length: 'long'
     },
     profissionId: {
       type: DataTypes.INTEGER
     }
   }, {
-    classMethods: {
-      associate: function (models) {
-        Professional.belongsTo(models.Profission, {
-          foreignKey: 'profissionId'
-        })
-        Professional.belongsTo(models.User, {
-          foreignKey: 'id'
-        })
-      }
-    },
-    tableName: 'Professional',
-    undercored: false,
-    updatedAt: false,
-    createdAt: false
-  })
+      classMethods: {
+        associate: function (models) {
+          Professional.belongsTo(models.Profission, {
+            foreignKey: 'profissionId'
+          })
+          Professional.belongsTo(models.User, {
+            foreignKey: 'id'
+          })
+        }
+      },
+      tableName: 'Professional',
+      undercored: false,
+      updatedAt: false,
+      createdAt: false
+    })
 
   return Professional
 }

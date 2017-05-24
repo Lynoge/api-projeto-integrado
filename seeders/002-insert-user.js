@@ -23,6 +23,28 @@ module.exports = {
       image: 'public/user_id',
       active: true,
       createAt: new Date(),
+      type: 'R'
+    },
+    {
+      username: 'joao',
+      name: 'joão carlos',
+      email: 'joao_carlos@mail.com',
+      password: '123qwe',
+      phone: 539087657,
+      image: 'public/user_id',
+      active: true,
+      createAt: new Date(),
+      type: 'P'
+    },
+    {
+      username: 'jose',
+      name: 'josé aldo',
+      email: 'jose_aldo@mail.com',
+      password: '123qwe',
+      phone: 539087657,
+      image: 'public/user_id',
+      active: true,
+      createAt: new Date(),
       type: 'P'
     }], {})
   },
