@@ -1,5 +1,8 @@
+import professionalController from '../controllers/professional'
+
+const controller = new professionalController()
+
 module.exports = function (app) {
-  const controller = app.controllers.professional
   app.get('/professional', controller.getAll)
   app.get('/professional/:id', controller.getById)
   app.get('/professional/:name/:profissionId', controller.getByNameAndProfission)

@@ -1,5 +1,4 @@
 import express from 'express'
-import load from 'express-load'
 import path from 'path'
 import favicon from 'serve-favicon'
 import logger from 'morgan'
@@ -9,6 +8,7 @@ import socketIo from 'socket.io'
 import http from 'http'
 
 import authentication from './middleware/authentication'
+import router from './router'
 
 const app = express()
 
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')))
+app.use(favicon(path.join(__dirname, '../public/images/favicon.ico')))
 app.use('/public/images/professional/', express.static(path.join(__dirname, '/public/images/professional/')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
@@ -30,15 +30,9 @@ app.use(cookieParser())
 
 app.use(authentication)
 
-load('models')
-  .then('controllers')
-  .then('routes')
-  .into(app)
-
 const server = http.createServer(app)
 const io = socketIo.listen(server)
 
-load('sockets')
-  .into(io)
+router(app)
 
 module.exports = server

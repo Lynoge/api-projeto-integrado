@@ -1,5 +1,5 @@
 import HttpStatus from 'http-status'
-import app from '../app'
+import app from '../src/server'
 import mocha from 'should'
 import supertest from 'supertest'
 const request = supertest(app)
