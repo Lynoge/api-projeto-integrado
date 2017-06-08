@@ -1,4 +1,3 @@
-import db from './db'
 import requester from './requester'
 import professional from './professional'
 
