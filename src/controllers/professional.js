@@ -29,6 +29,17 @@ export default class Controller extends BaseController {
       .catch(err => { handlerError(res, err) })
   }
 
+  getByProfission(req, res) {
+    const { profissionId } = req.params
+    repository.findByProfission(profissionId)
+      .then(users => {
+        if (users.length == 0)
+          res.status(HttpStatus.NO_CONTENT)
+        res.json(users)
+      })
+      .catch(err => { handlerError(res, err) })
+  }
+
   getById(req, res) {
     const { id } = req.params
     repository.getById(id)
