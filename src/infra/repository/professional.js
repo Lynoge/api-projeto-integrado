@@ -60,9 +60,15 @@ export default class professionalRepository extends UserRepository {
       })
   }
 
-  findByProfission(name) {
-    return Professional.findAll({ where: { name: { $iLike: '%' + name + '%' } } })
-      .then(result => toDomain(result))
+  findByProfission(profissionId) {
+    profissionId = isNaN(profissionId) ? 0 : profissionId
+    return Professional.findAll({
+      include: [
+        { model: Profission, where: { id: profissionId } },
+        { model: User }
+      ]
+    })
+      .then(result => { return toDomain(result) })
       .catch(err => {
         err.message = 'ProfessionalRepository.findByProfission() => ' + err.message
         throw err
