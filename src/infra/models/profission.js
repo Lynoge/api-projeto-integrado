@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
     }
   }, {
     classMethods: {
-      associate: function (models) {
+      associate: (models) => {
       }
     },
     tableName: 'Profission',

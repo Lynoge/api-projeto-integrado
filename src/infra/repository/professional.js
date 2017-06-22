@@ -10,7 +10,7 @@ const toDomain = (entities) => {
     return {
       id: entity.id,
       name: entity.User.name,
-      username: entity.User.username,
+      nickname: entity.User.nickname,
       email: entity.User.email,
       phone: entity.User.phone,
       active: entity.User.active,
@@ -19,7 +19,8 @@ const toDomain = (entities) => {
       type: entity.User.type,
       profission: entity.Profission,
       description: entity.description,
-      image: entity.User.image
+      image: entity.User.image,
+      chatId: entity.User.chatId
     }
   }
 
@@ -87,25 +88,10 @@ export default class professionalRepository extends UserRepository {
   }
 
   create(user) {
-    user.type = 'P'
     return super.create(user)
       .then(id => { return Professional.create({ id: id }) })
       .then(professional => professional.id)
-      .catch(err => {
-        err.message = 'ProfessionalRepository.create() => ' + err.message
-        throw err
-      })
-  }
-
-  delete(id) {
-    return Professional.destroy({ where: { id: id } })
-      .then(() => {
-        return super.delete(id)
-      })
-      .catch(err => {
-        err.message = 'ProfessionalRepository.delete() => ' + err.message
-        throw err
-      })
+      .catch(err => { throw err })
   }
 
   update(professional) {

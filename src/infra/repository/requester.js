@@ -66,17 +66,6 @@ export default class RequesterRepository extends UserRepository {
       })
   }
 
-  delete(id) {
-    return Requester.destroy({ where: { id: id } })
-      .then(() => {
-        return super.delete(id)
-      })
-      .catch(err => {
-        err.message = 'RequesterRepository.delete() => ' + err.message
-        throw err
-      })
-  }
-
   update(requester) {
     return Requester.update(requester, { where: { id: requester.id } })
       .then(() => {

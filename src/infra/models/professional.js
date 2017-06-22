@@ -18,7 +18,7 @@ export default (sequelize, DataTypes) => {
     }
   }, {
       classMethods: {
-        associate: function (models) {
+        associate: (models) => {
           Professional.belongsTo(models.Profission, {
             foreignKey: 'profissionId'
           })

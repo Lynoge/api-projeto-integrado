@@ -83,27 +83,7 @@ module.exports = function (app) {
   * @apiUse InternalServerError
   */
   app.get('/requester/:id', controller.getById)
-
-  /**
-  * @api {post} /requester Cadastrar
-  * @apiGroup Requester
-  * 
-  * @apiParam {String} nickname Nickname do requester
-  * @apiParam {String} name Nome de usuário do sistema
-  * @apiParam {String} email Email do requester
-  * @apiParam {String} password Senha do requester
-  * @apiParam {String} phone Telefone do requester
-  * 
-  * @apiSuccessExample
-  *   HTTP/1.1 201 Created
-  *   {
-  *      "item": object
-  *   }
-  *
-  * @apiUse ValidationError
-  * @apiUse InternalServerError
-  **/
-  app.post('/requester', controller.create)
+  
   /**
    * @api {put} /requester Alterar cadastro
    * @apiGroup Requester
@@ -139,6 +119,4 @@ module.exports = function (app) {
    **/
 
   app.put('/requester', controller.update)
-
-  app.delete('/requester/:id', controller.delete)
 }

@@ -43,11 +43,11 @@ import professionalController from '../controllers/professional'
 
 const controller = new professionalController()
 
-module.exports = function (app) {
+module.exports = (app) => {
 
   /**
    * @api {get} /professional Obter lista
-   * @apiGroup Professional
+   * @apiGroup Profissional
    * 
    * @apiSuccessExample 200
    *    HTTP/1.1 200 Ok
@@ -68,7 +68,7 @@ module.exports = function (app) {
 
   /**
   * @api {get} /professional/:id Obter por id
-  * @apiGroup Professional
+  * @apiGroup Profissional
   * 
   * @apiParam {Number} id Id único do professional
   * 
@@ -86,7 +86,7 @@ module.exports = function (app) {
 
   /**
   * @api {get} /professional/profission/:id Obter por profissão
-  * @apiGroup Professional
+  * @apiGroup Profissional
   * 
   * @apiParam {Number} id Identificador único da profissão
   * 
@@ -108,23 +108,8 @@ module.exports = function (app) {
   app.get('/professional/profission/:profissionId', controller.getByProfission)
 
   /**
-  * @api {post} /professional Registrar
-  * @apiGroup Professional
-  * 
-  * @apiSuccessExample 200
-  *    HTTP/1.1 200 Ok
-  *   {
-  *     "item": object
-  *   }
-  *
-  * @apiUse InternalServerError
-  * @apiUse ValidationError
-  */
-  app.post('/professional', controller.create)
-
-  /**
   * @api {put} /professional Atualizar
-  * @apiGroup Professional
+  * @apiGroup Profissional
   * 
   * @apiSuccessExample 200
   *    HTTP/1.1 200 Ok
@@ -138,5 +123,4 @@ module.exports = function (app) {
   * @apiUse ValidationError
   */
   app.put('/professional', controller.update)
-  app.delete('/professional/:id', controller.delete)
 }
