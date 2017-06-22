@@ -5,12 +5,13 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    username: {
+    nickname: {
       type: DataTypes.STRING,
       allowNull: false
     },
     name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -39,6 +40,12 @@ export default (sequelize, DataTypes) => {
     },
     type: {
       type: DataTypes.CHAR(1)
+    },
+    chatId: {
+      type: DataTypes.STRING
+    },
+    token: {
+      type: DataTypes.STRING
     }
   }, {
     classMethods: { },

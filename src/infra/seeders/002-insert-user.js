@@ -4,8 +4,8 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
 
     return queryInterface.bulkInsert('User', [{
-      username: 'john lennon',
       name: 'lennon',
+      nickname: 'Lennon',
       email: 'john_lennon@mail.com',
       password: '123qwe',
       phone: 539087657,
@@ -15,8 +15,8 @@ module.exports = {
       type: 'R'
     },
     {
-      username: 'curl johnson',
       name: 'johnson',
+      nickname: 'Johnson',
       email: 'curl_johnson@mail.com',
       password: '123qwe',
       phone: 539087657,
@@ -26,8 +26,8 @@ module.exports = {
       type: 'R'
     },
     {
-      username: 'joao',
-      name: 'joão carlos',
+      name: 'joao',
+      nickname: 'João',
       email: 'joao_carlos@mail.com',
       password: '123qwe',
       phone: 539087657,
@@ -37,8 +37,8 @@ module.exports = {
       type: 'P'
     },
     {
-      username: 'jose',
-      name: 'josé aldo',
+      name: 'jose',
+      nickname: 'José',
       email: 'jose_aldo@mail.com',
       password: '123qwe',
       phone: 539087657,

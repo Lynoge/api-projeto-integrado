@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      nickname: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -42,6 +42,12 @@ module.exports = {
       },
       type: {
         type: Sequelize.CHAR(1)
+      },
+      chatId: {
+        type: Sequelize.STRING
+      },
+      token: {
+        type: Sequelize.STRING
       }
     })
   },

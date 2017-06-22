@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  var Requester = sequelize.define('Requester', {
+  const Requester = sequelize.define('Requester', {
     id: {
       autoIncrement: true,
       primaryKey: true,
@@ -7,7 +7,7 @@ export default (sequelize, DataTypes) => {
     }
   }, {
     classMethods: {
-      associate: function (models) {
+      associate: (models) => {
         Requester.belongsTo(models.User, {
           foreignKey: 'id'
         })
