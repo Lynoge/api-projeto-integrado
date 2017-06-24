@@ -16,7 +16,8 @@ const toDomain = (entities) => {
       createAt: entity.User.createAt,
       updateAt: entity.User.updateAt,
       type: entity.User.type,
-      image: entity.User.image
+      image: entity.User.image,
+      rating: entity.User.rating
     }
   }
 

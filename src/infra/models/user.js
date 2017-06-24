@@ -27,6 +27,9 @@ export default (sequelize, DataTypes) => {
     image: {
       type: DataTypes.STRING
     },
+    rating: {
+      type: DataTypes.DECIMAL(3, 2)
+    },
     active: {
       type: DataTypes.BOOLEAN,
       allowNull: false
@@ -48,12 +51,12 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   }, {
-    classMethods: { },
-    tableName: 'User',
-    undercored: false,
-    updatedAt: false,
-    createdAt: false
-  })
+      classMethods: {},
+      tableName: 'User',
+      undercored: false,
+      updatedAt: false,
+      createdAt: false
+    })
 
   return User
 }

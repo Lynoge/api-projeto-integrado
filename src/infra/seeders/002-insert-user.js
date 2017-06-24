@@ -10,6 +10,7 @@ module.exports = {
       password: '123qwe',
       phone: 539087657,
       image: 'public/user_id',
+      rating: 3.89,
       active: true,
       createAt: new Date(),
       type: 'R'
@@ -21,6 +22,7 @@ module.exports = {
       password: '123qwe',
       phone: 539087657,
       image: 'public/user_id',
+      rating: 4.75,
       active: true,
       createAt: new Date(),
       type: 'R'
@@ -32,6 +34,7 @@ module.exports = {
       password: '123qwe',
       phone: 539087657,
       image: 'public/user_id',
+      rating: 3.5,
       active: true,
       createAt: new Date(),
       type: 'P'
@@ -43,6 +46,7 @@ module.exports = {
       password: '123qwe',
       phone: 539087657,
       image: 'public/user_id',
+      rating: 2.78,
       active: true,
       createAt: new Date(),
       type: 'P'
