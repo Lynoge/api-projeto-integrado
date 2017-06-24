@@ -25,8 +25,4 @@ export default class UserRepository {
 				throw err
 			})
 	}
-
-	emailExists(email) {
-
-	}
 }
