@@ -29,6 +29,9 @@ module.exports = {
       image: {
         type: Sequelize.STRING
       },
+      rating: {
+        type: Sequelize.DECIMAL(3,2)
+      },
       active: {
         type: Sequelize.BOOLEAN,
         allowNull: false

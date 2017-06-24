@@ -7,9 +7,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'User', key: 'id' }
       },
-      rating: {
-        type: Sequelize.INTEGER
-      },
       description: {
         type: Sequelize.TEXT,
         leight: 'long'
