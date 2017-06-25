@@ -97,7 +97,6 @@ const Account = {
           .send(account)
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.CREATED)
-            console.log(JSON.stringify(res.body))
             const user = res.body.user
             user.token.should.be.type('string')
             user.token.length.should.be.above(10)
