@@ -20,7 +20,8 @@ const toDomain = (entities) => {
       profission: entity.Profission,
       description: entity.description,
       image: entity.User.image,
-      chatId: entity.User.chatId
+      chatId: entity.User.chatId,
+      rating: entity.User.rating
     }
   }
 

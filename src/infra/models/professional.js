@@ -6,9 +6,6 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    rating: {
-      type: DataTypes.INTEGER
-    },
     description: {
       type: DataTypes.TEXT,
       length: 'long'
