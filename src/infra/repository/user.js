@@ -1,11 +1,13 @@
 import { User } from '../models'
 import exception from '../../helpers/exception'
+import sha1 from 'sha1'
 
 export default class UserRepository {
 
 	create(user) {
 		user.createAt = new Date()
 		user.active = true
+		user.chatId = sha1(user.createAt)
 		return User.findOne({ where: { email: user.email } })
 			.then((result) => {
 				if (result)
@@ -20,9 +22,6 @@ export default class UserRepository {
 		user.updateAt = new Date()
 		return User.update(user, { where: { id: user.id } })
 			.then(result => result)
-			.catch(err => {
-				err.message = 'userRepository.update() => ' + err.message
-				throw err
-			})
+			.catch(err => { throw err })
 	}
 }

@@ -5,8 +5,10 @@ import ProfessionalRepository from '../infra/repository/professional'
 import RequesterRepository from '../infra/repository/requester'
 import accountValidation from '../helpers/accountValidation'
 import exception from '../helpers/exception'
-const secret = 'tokenSecret'
 
+const professionalRepository = new ProfessionalRepository()
+const requesterRepository = new RequesterRepository()
+const secret = 'tokenSecret'
 const generateToken = (id) => {
   return jwt.encode({
     iss: id,
@@ -20,18 +22,16 @@ export default class Controller {
     const account = req.body
     try {
       accountValidation(account)
-      const token = sha1(Date())
-      account.token = token
       let repository
       if (account.type === 'P')
-        repository = new ProfessionalRepository()
+        repository = professionalRepository
       else
-        repository = new RequesterRepository()
+        repository = requesterRepository
       repository.create(account)
         .then(id => {
-
+          account.token = generateToken(id)
           res.status(HttpStatus.CREATED)
-          res.json({ token: token })
+          res.json({ user: account })
         })
         .catch(err => {
           exception.httpHandler(res, err)
@@ -44,18 +44,12 @@ export default class Controller {
   token(req, res) {
     const email = req.body.email
     const password = req.body.password
-
+    const repository = new UserRepository()
     repository.findByCredentials(email, password)
       .then((result) => {
-        if (!result || !result.professionalId)
+        if (!result)
           throw 'Credenciais inválidas'
-
-        let user = {}
-        user.token = sha1(name + (new Date()).toString())
-        user.logged = true
-        user.name = name
-        user.hashChat = sha1(result.professionalId)
-        res.send(JSON.stringify(user))
+        res.send({ user: result })
       }).catch(ex => { exception.httpHandler(res, err) })
   }
 }

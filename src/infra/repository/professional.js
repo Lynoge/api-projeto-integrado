@@ -71,6 +71,12 @@ export default class professionalRepository extends UserRepository {
       .catch(err => { throw err })
   }
 
+  findByCredentials(email, password) {
+		return Professional.findOne({ where: { email: email } })
+			.then(result => { return result && result.password === password ? toDomain(result) : null })
+			.catch(err => { throw err })
+	}
+
   create(user) {
     return super.create(user)
       .then(id => { return Professional.create({ id: id }) })
