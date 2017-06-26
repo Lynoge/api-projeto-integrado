@@ -37,10 +37,7 @@ export default class RequesterRepository extends UserRepository {
   getAll() {
     return Requester.findAll({ include: [User] })
       .then(result => toDomain(result))
-      .catch(error => {
-        error.message = 'requesterRepository.getAll() => ' + error.message
-        throw error
-      })
+      .catch(error => { throw error })
   }
 
   getById(id) {
@@ -51,30 +48,22 @@ export default class RequesterRepository extends UserRepository {
       .catch(error => error.message)
   }
 
-  findByCredentials(name, password) {
-    return Requester.findOne({ where: { name: name, password: password } })
-      .then(result => toDomain(result))
-      .catch(error => error)
-  }
+  findByCredentials(email, password) {
+		return Professional.findOne({ where: { email: email } })
+			.then(result => { return result && result.password === password ? toDomain(result) : null })
+			.catch(err => { throw err })
+	}
 
   create(user) {    
     return super.create(user)
       .then(id => { return Requester.create({ id: id }) })
       .then(requester => requester.id)
-      .catch(err => {
-        err.message = 'RequesterRepository.create() => ' + err.message
-        throw err
-      })
+      .catch(err => { throw err })
   }
 
   update(requester) {
     return Requester.update(requester, { where: { id: requester.id } })
-      .then(() => {
-        return super.update(requester)
-      })
-      .catch(err => {
-        err.message = 'RequesterRepository.update() => ' + err.message
-        throw err
-      })
+      .then(() => { return super.update(requester) })
+      .catch(err => { throw err })
   }
 }

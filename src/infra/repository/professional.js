@@ -37,13 +37,8 @@ const toDomain = (entities) => {
 export default class professionalRepository extends UserRepository {
   getAll() {
     return Professional.findAll({ include: [User, Profission] })
-      .then(result => {
-        return toDomain(result)
-      })
-      .catch(err => {
-        err.message = 'ProfessionalRepository.getAll() => ' + err.message
-        throw err
-      })
+      .then(result => { return toDomain(result) })
+      .catch(err => { throw err })
   }
 
   findByNameAndProfission(name, profissionId) {
@@ -56,10 +51,7 @@ export default class professionalRepository extends UserRepository {
       ]
     })
       .then(result => toDomain(result))
-      .catch(err => {
-        err.message = 'ProfessionalRepository.findNameAndProfission() => ' + err.message
-        throw err
-      })
+      .catch(err => { throw err })
   }
 
   findByProfission(profissionId) {
@@ -71,22 +63,20 @@ export default class professionalRepository extends UserRepository {
       ]
     })
       .then(result => { return toDomain(result) })
-      .catch(err => {
-        err.message = 'ProfessionalRepository.findByProfission() => ' + err.message
-        throw err
-      })
+      .catch(err => { throw err })
   }
 
   getById(id) {
     return Professional.findOne({ where: { id: id }, include: [User, Profission] })
-      .then(result => {
-        return toDomain(result)
-      })
-      .catch(err => {
-        err.message = 'ProfessionalRepository.getById() => ' + err.message
-        throw err
-      })
+      .then(result => { return toDomain(result) })
+      .catch(err => { throw err })
   }
+
+  findByCredentials(email, password) {
+		return Professional.findOne({ where: { email: email } })
+			.then(result => { return result && result.password === password ? toDomain(result) : null })
+			.catch(err => { throw err })
+	}
 
   create(user) {
     return super.create(user)
@@ -97,12 +87,7 @@ export default class professionalRepository extends UserRepository {
 
   update(professional) {
     return Professional.update(professional, { where: { id: professional.id } })
-      .then(() => {
-        return super.update(professional)
-      })
-      .catch(err => {
-        err.message = 'ProfessionalRepository.update() => ' + err.message
-        throw err
-      })
+      .then(() => { return super.update(professional) })
+      .catch(err => { throw err })
   }
 }
