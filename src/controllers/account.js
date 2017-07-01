@@ -1,21 +1,19 @@
 import HttpStatus from 'http-status'
-// import jwt from 'jwt-simple'
-// import moment from 'moment'
+import jwt from 'jwt-simple'
+import moment from 'moment'
 import ProfessionalRepository from '../infra/repository/professional'
 import RequesterRepository from '../infra/repository/requester'
 import accountValidation from '../helpers/accountValidation'
 import exception from '../helpers/exception'
-import sha1 from 'sha1'
 
 const professionalRepository = new ProfessionalRepository()
 const requesterRepository = new RequesterRepository()
 const secret = 'tokenSecret'
 const generateToken = (id) => {
-  return sha1(id)
-  // return jwt.encode({
-  //   iss: id,
-  //   exp: moment().add(7, 'days').valueOf()
-  // }, secret)
+  return jwt.encode({
+    iss: id,
+    exp: moment().add(7, 'days').valueOf()
+  }, secret)
 }
 
 export default class Controller {
