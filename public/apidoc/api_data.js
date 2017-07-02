@@ -11,6 +11,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
+            "field": "nickname",
+            "description": "<p>Apelido do usuário</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
             "field": "name",
             "description": "<p>Nome de usuário</p>"
           },
@@ -32,13 +39,6 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "nickname",
-            "description": "<p>Nickname do requester</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
             "field": "phone",
             "description": "<p>Telefone do usuário</p>"
           },
@@ -54,7 +54,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemple",
-          "content": "{\n   nickname: \"fulaninho\",\n   name: \"fulano\",\n   email: \"fulano@mail.com\",\n   password: \"123Abc#\",\n   phone: 999999999\n}",
+          "content": "{\n   nickname: \"fulaninho\",\n   name: \"fulano\",\n   email: \"fulano@mail.com\",\n   password: \"123Abc#\",\n   phone: 999999999,\n   type: 'R'\n}",
           "type": "object"
         }
       ]
@@ -62,8 +62,8 @@ define({ "api": [
     "success": {
       "examples": [
         {
-          "title": "200",
-          "content": " HTTP/1.1 200 Ok\n{\n  \"token\": \"if8srjlks7ekjlw09\"\n}",
+          "title": "201",
+          "content": " HTTP/1.1 201 Ok\n{\n  \"user\": object\n}",
           "type": "json"
         }
       ]
@@ -116,7 +116,7 @@ define({ "api": [
       "examples": [
         {
           "title": "200",
-          "content": " HTTP/1.1 200 Ok\n{\n  \"token\": \"if8srjlks7ekjlw09\"\n}",
+          "content": " HTTP/1.1 200 Ok\n{\n  \"user\": object\n}",
           "type": "json"
         }
       ]
@@ -144,7 +144,7 @@ define({ "api": [
     "type": "delete",
     "url": "/profission",
     "title": "Remover",
-    "group": "Profission",
+    "group": "Profiss_o",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -169,7 +169,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/profission.js",
-    "groupTitle": "Profission",
+    "groupTitle": "Profiss_o",
     "name": "DeleteProfission",
     "error": {
       "examples": [
@@ -195,7 +195,7 @@ define({ "api": [
     "type": "get",
     "url": "/profission",
     "title": "Obter lista",
-    "group": "Profission",
+    "group": "Profiss_o",
     "success": {
       "examples": [
         {
@@ -212,7 +212,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/profission.js",
-    "groupTitle": "Profission",
+    "groupTitle": "Profiss_o",
     "name": "GetProfission",
     "error": {
       "examples": [
@@ -233,7 +233,7 @@ define({ "api": [
     "type": "post",
     "url": "/profission",
     "title": "Cadastrar",
-    "group": "Profission",
+    "group": "Profiss_o",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -258,7 +258,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/profission.js",
-    "groupTitle": "Profission",
+    "groupTitle": "Profiss_o",
     "name": "PostProfission",
     "error": {
       "examples": [
@@ -279,7 +279,7 @@ define({ "api": [
     "type": "put",
     "url": "/profission",
     "title": "Atualizar",
-    "group": "Profission",
+    "group": "Profiss_o",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -304,7 +304,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/profission.js",
-    "groupTitle": "Profission",
+    "groupTitle": "Profiss_o",
     "name": "PutProfission",
     "error": {
       "examples": [
@@ -593,80 +593,6 @@ define({ "api": [
         {
           "title": "404",
           "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Requester não encontrado\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "500",
-          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
-    "type": "post",
-    "url": "/requester",
-    "title": "Cadastrar",
-    "group": "Requester",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>Nickname do requester</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>Nome de usuário do sistema</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>Email do requester</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>Senha do requester</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "phone",
-            "description": "<p>Telefone do requester</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "HTTP/1.1 201 Created",
-          "content": "HTTP/1.1 201 Created\n{\n   \"item\": object\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/routes/requester.js",
-    "groupTitle": "Requester",
-    "name": "PostRequester",
-    "error": {
-      "examples": [
-        {
-          "title": "422",
-          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Email já cadastrado\"\n}",
           "type": "json"
         },
         {

@@ -1,9 +1,10 @@
 import HttpStatus from 'http-status'
+import sha1 from 'sha1'
+
 import ProfessionalRepository from '../infra/repository/professional'
 import RequesterRepository from '../infra/repository/requester'
 import accountValidation from '../helpers/accountValidation'
 import exception from '../helpers/exception'
-import sha1 from 'sha1'
 
 const professionalRepository = new ProfessionalRepository()
 const requesterRepository = new RequesterRepository()

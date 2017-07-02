@@ -11,7 +11,7 @@ const Professional = {
       it('Get All', (done) => {
         request.get('/professional')
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.OK)
+            res.statusCode.should.be.eql(HttpStatus.OK, JSON.stringify(res.body))
             res.body.length.should.be.above(0)
             done()
           })
@@ -20,7 +20,7 @@ const Professional = {
       it('Get by Id', (done) => {
         request.get('/professional/4')
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.OK)
+            res.statusCode.should.be.eql(HttpStatus.OK, JSON.stringify(res.body))
             res.body.id.should.be.eql(4)
             done()
           })
@@ -29,7 +29,7 @@ const Professional = {
       it('Get by Id not found', (done) => {
         request.get('/professional/5')
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.NOT_FOUND)
+            res.statusCode.should.be.eql(HttpStatus.NOT_FOUND, JSON.stringify(res.body))
             done()
           })
       })
