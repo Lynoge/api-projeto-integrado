@@ -57,7 +57,7 @@ module.exports = (app) => {
    * @apiSuccessExample 201
    *   HTTP/1.1 201 Ok
    *  {
-   *    "token": "if8srjlks7ekjlw09ldsa89reir4432"
+   *    "user": object
    *  }
    * 
    * @apiUse ValidationError
@@ -75,7 +75,7 @@ module.exports = (app) => {
   * @apiSuccessExample 200
   *    HTTP/1.1 200 Ok
   *   {
-  *     "token": "if8srjlks7ekjlw09"
+  *     "user": object
   *   }
   *
   * @apiUse NotFoundError
