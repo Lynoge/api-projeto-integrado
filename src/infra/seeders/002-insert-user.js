@@ -13,7 +13,9 @@ module.exports = {
       rating: 3.89,
       active: true,
       createAt: new Date(),
-      type: 'R'
+      type: 'R',
+      token: 'token_lennon',
+      chatId: 'chat_id_lennon'
     },
     {
       name: 'johnson',
@@ -25,7 +27,9 @@ module.exports = {
       rating: 4.75,
       active: true,
       createAt: new Date(),
-      type: 'R'
+      type: 'R',
+      token: 'token_johnson',
+      chatId: 'chat_id_johnson'
     },
     {
       name: 'joao',
@@ -37,7 +41,9 @@ module.exports = {
       rating: 3.5,
       active: true,
       createAt: new Date(),
-      type: 'P'
+      type: 'P',
+      token: 'token_joao',
+      chatId: 'chat_id_joao'
     },
     {
       name: 'jose',
@@ -49,7 +55,9 @@ module.exports = {
       rating: 2.78,
       active: true,
       createAt: new Date(),
-      type: 'P'
+      type: 'P',
+      token: 'token_jose',
+      chatId: 'chat_id_jose'
     }], {})
   },
 

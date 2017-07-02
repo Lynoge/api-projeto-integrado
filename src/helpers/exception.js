@@ -16,7 +16,7 @@ module.exports = {
 			}
 		} else {
 			res.status(HttpStatus.INTERNAL_SERVER_ERROR)
-			res.json({ error: err });
+			res.json({ error: err.message });
 		}
 	}
 }

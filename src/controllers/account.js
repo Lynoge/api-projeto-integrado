@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status'
-import jwt from 'jwt-simple'
-import moment from 'moment'
+import sha1 from 'sha1'
+
 import ProfessionalRepository from '../infra/repository/professional'
 import RequesterRepository from '../infra/repository/requester'
 import accountValidation from '../helpers/accountValidation'
@@ -9,11 +9,8 @@ import exception from '../helpers/exception'
 const professionalRepository = new ProfessionalRepository()
 const requesterRepository = new RequesterRepository()
 const secret = 'tokenSecret'
-const generateToken = (id) => {
-  return jwt.encode({
-    iss: id,
-    exp: moment().add(7, 'days').valueOf()
-  }, secret)
+const generateToken = () => {
+  return sha1(new Date() + Math.random().toFixed(3))
 }
 
 export default class Controller {
@@ -22,6 +19,7 @@ export default class Controller {
     const account = req.body
     try {
       accountValidation(account)
+      account.token = generateToken()
       let repository
       if (account.type === 'P')
         repository = professionalRepository
@@ -29,7 +27,6 @@ export default class Controller {
         repository = requesterRepository
       repository.create(account)
         .then(id => {
-          account.token = generateToken(id)
           res.status(HttpStatus.CREATED)
           res.json({ user: account })
         })

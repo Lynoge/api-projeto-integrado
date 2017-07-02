@@ -26,7 +26,7 @@ const Account = {
         request.post('/signup')
           .send(cloned)
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY)
+            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
             res.body.error.should.be.eql('Nome inválido')
             done()
           })
@@ -38,7 +38,7 @@ const Account = {
         request.post('/signup')
           .send(cloned)
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY)
+            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
             res.body.error.should.be.eql('Email inválido')
             done()
           })
@@ -50,7 +50,7 @@ const Account = {
         request.post('/signup')
           .send(cloned)
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY)
+            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
             res.body.error.should.be.eql('Senha inválida')
             done()
           })
@@ -62,7 +62,7 @@ const Account = {
         request.post('/signup')
           .send(cloned)
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY)
+            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
             res.body.error.should.be.eql('Nickname inválido')
             done()
           })
@@ -74,7 +74,7 @@ const Account = {
         request.post('/signup')
           .send(cloned)
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY)
+            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
             res.body.error.should.be.eql('Tipo inválido')
             done()
           })
@@ -86,7 +86,7 @@ const Account = {
         request.post('/signup')
           .send(cloned)
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY)
+            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
             res.body.error.should.be.eql('Email já cadastrado.')
             done()
           })
@@ -96,7 +96,7 @@ const Account = {
         request.post('/signup')
           .send(account)
           .end((err, res) => {
-            res.statusCode.should.be.eql(HttpStatus.CREATED)
+            res.statusCode.should.be.eql(HttpStatus.CREATED, JSON.stringify(res.body))
             const user = res.body.user
             user.token.should.be.type('string')
             user.token.length.should.be.above(10)
