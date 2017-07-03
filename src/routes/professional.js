@@ -85,10 +85,10 @@ module.exports = (app) => {
   app.get('/professional/:id', controller.getById)
 
   /**
-  * @api {get} /professional/profission/:id Obter por profissão
+  * @api {get} /professional/profission/:profission Obter por profissão
   * @apiGroup Profissional
   * 
-  * @apiParam {Number} id Identificador único da profissão
+  * @apiParam {String} profission Identificador único ou nome da profissão
   * 
   * @apiSuccessExample 200
   *    HTTP/1.1 200 Ok
@@ -105,7 +105,7 @@ module.exports = (app) => {
   * @apiUse ProfessionalNotFoundError
   * @apiUse InternalServerError
   */
-  app.get('/professional/profission/:profissionId', controller.getByProfission)
+  app.get('/professional/profission/:profission', controller.getByProfission)
 
   /**
   * @api {put} /professional Atualizar
@@ -118,7 +118,6 @@ module.exports = (app) => {
   *   }
   *
   * @apiUse NotAuthorized
-  * @apiUse ProfessionalNotFoundError
   * @apiUse InternalServerError
   * @apiUse ValidationError
   */

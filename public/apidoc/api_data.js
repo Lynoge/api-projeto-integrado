@@ -144,7 +144,7 @@ define({ "api": [
     "type": "delete",
     "url": "/profission",
     "title": "Remover",
-    "group": "Profiss_o",
+    "group": "Profissao",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -169,7 +169,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/profission.js",
-    "groupTitle": "Profiss_o",
+    "groupTitle": "Profissao",
     "name": "DeleteProfission",
     "error": {
       "examples": [
@@ -195,7 +195,7 @@ define({ "api": [
     "type": "get",
     "url": "/profission",
     "title": "Obter lista",
-    "group": "Profiss_o",
+    "group": "Profissao",
     "success": {
       "examples": [
         {
@@ -212,7 +212,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/profission.js",
-    "groupTitle": "Profiss_o",
+    "groupTitle": "Profissao",
     "name": "GetProfission",
     "error": {
       "examples": [
@@ -233,7 +233,7 @@ define({ "api": [
     "type": "post",
     "url": "/profission",
     "title": "Cadastrar",
-    "group": "Profiss_o",
+    "group": "Profissao",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -258,7 +258,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/profission.js",
-    "groupTitle": "Profiss_o",
+    "groupTitle": "Profissao",
     "name": "PostProfission",
     "error": {
       "examples": [
@@ -279,7 +279,7 @@ define({ "api": [
     "type": "put",
     "url": "/profission",
     "title": "Atualizar",
-    "group": "Profiss_o",
+    "group": "Profissao",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -304,7 +304,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/profission.js",
-    "groupTitle": "Profiss_o",
+    "groupTitle": "Profissao",
     "name": "PutProfission",
     "error": {
       "examples": [
@@ -417,7 +417,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/professional/profission/:id",
+    "url": "/professional/profission/:profission",
     "title": "Obter por profissão",
     "group": "Profissional",
     "parameter": {
@@ -425,10 +425,10 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>Identificador único da profissão</p>"
+            "field": "profission",
+            "description": "<p>Identificador único ou nome da profissão</p>"
           }
         ]
       }
@@ -450,7 +450,7 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "src/routes/professional.js",
     "groupTitle": "Profissional",
-    "name": "GetProfessionalProfissionId",
+    "name": "GetProfessionalProfissionProfission",
     "error": {
       "examples": [
         {
@@ -494,11 +494,6 @@ define({ "api": [
         {
           "title": "401",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "404",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Professional não encontrado\"\n}",
           "type": "json"
         },
         {
