@@ -41,24 +41,11 @@ export default class professionalRepository extends UserRepository {
       .catch(err => { throw err })
   }
 
-  findByNameAndProfission(name, profissionId) {
-    name = name || ''
-    profissionId = isNaN(profissionId) ? 0 : profissionId
+  findByProfission(profission) {
+    const where = isNaN(profission) ? { name: { $iLike: '%' + profission + '%' } } : { id: profission }
     return Professional.findAll({
       include: [
-        { model: Profission, where: { id: profissionId } },
-        { model: User, where: { name: { $iLike: '%' + name + '%' } } }
-      ]
-    })
-      .then(result => toDomain(result))
-      .catch(err => { throw err })
-  }
-
-  findByProfission(profissionId) {
-    profissionId = isNaN(profissionId) ? 0 : profissionId
-    return Professional.findAll({
-      include: [
-        { model: Profission, where: { id: profissionId } },
+        { model: Profission, where: where },
         { model: User }
       ]
     })
@@ -73,10 +60,10 @@ export default class professionalRepository extends UserRepository {
   }
 
   findByCredentials(email, password) {
-		return Professional.findOne({ where: { email: email } })
-			.then(result => { return result && result.password === password ? toDomain(result) : null })
-			.catch(err => { throw err })
-	}
+    return Professional.findOne({ where: { email: email } })
+      .then(result => { return result && result.password === password ? toDomain(result) : null })
+      .catch(err => { throw err })
+  }
 
   create(user) {
     return super.create(user)

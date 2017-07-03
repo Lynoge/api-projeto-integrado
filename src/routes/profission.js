@@ -47,7 +47,7 @@ module.exports = (app) => {
 
   /**
    * @api {get} /profission Obter lista
-   * @apiGroup Profissão
+   * @apiGroup Profissao
    * 
    * @apiSuccessExample 200
    *    HTTP/1.1 200 Ok
@@ -68,7 +68,7 @@ module.exports = (app) => {
 
   /**
   * @api {post} /profission Cadastrar
-  * @apiGroup Profissão
+  * @apiGroup Profissao
   * 
   * @apiParam {String} name Nome da nova profissão
   * 
@@ -85,7 +85,7 @@ module.exports = (app) => {
 
   /**
   * @api {put} /profission Atualizar
-  * @apiGroup Profissão
+  * @apiGroup Profissao
   * 
   * @apiParam {String} name Novo nome da profissão
   * 
@@ -103,7 +103,7 @@ module.exports = (app) => {
 
   /**
   * @api {delete} /profission Remover
-  * @apiGroup Profissão
+  * @apiGroup Profissao
   * 
   * @apiParam {Integer} id Identificador da profissão a ser removida
   * 

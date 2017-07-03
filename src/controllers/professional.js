@@ -17,20 +17,9 @@ export default class Controller {
       .catch(err => { exception.httpHandler(res, err) })
   }
 
-  getByNameAndProfission(req, res) {
-    const { name, profissionId } = req.params
-    repository.findByNameAndProfission(name, profissionId)
-      .then(users => {
-        if (users.length == 0)
-          res.status(HttpStatus.NO_CONTENT)
-        res.json(users)
-      })
-      .catch(err => { exception.httpHandler(res, err) })
-  }
-
   getByProfission(req, res) {
-    const { profissionId } = req.params
-    repository.findByProfission(profissionId)
+    const { profission } = req.params
+    repository.findByProfission(profission)
       .then(users => {
         if (users.length == 0)
           res.status(HttpStatus.NO_CONTENT)
