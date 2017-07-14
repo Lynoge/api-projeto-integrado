@@ -3,7 +3,7 @@ import sha1 from 'sha1'
 
 import ProfessionalRepository from '../infra/repository/professional'
 import RequesterRepository from '../infra/repository/requester'
-import accountValidation from '../helpers/accountValidation'
+import accountValidation from '../helpers/validation/account'
 import exception from '../helpers/exception'
 
 const professionalRepository = new ProfessionalRepository()

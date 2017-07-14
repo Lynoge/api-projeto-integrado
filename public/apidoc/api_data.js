@@ -76,7 +76,7 @@ define({ "api": [
       "examples": [
         {
           "title": "422",
-          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Email já cadastrado\"\n}",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Profissional não encontrado\"\n}",
           "type": "json"
         },
         {
@@ -129,7 +129,7 @@ define({ "api": [
       "examples": [
         {
           "title": "404",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Não encontrado\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
           "type": "json"
         },
         {
@@ -180,7 +180,7 @@ define({ "api": [
         },
         {
           "title": "404",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Não encontrado\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
           "type": "json"
         },
         {
@@ -264,7 +264,7 @@ define({ "api": [
       "examples": [
         {
           "title": "404",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Não encontrado\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
           "type": "json"
         },
         {
@@ -315,7 +315,7 @@ define({ "api": [
         },
         {
           "title": "404",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Não encontrado\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
           "type": "json"
         },
         {
@@ -503,7 +503,7 @@ define({ "api": [
         },
         {
           "title": "422",
-          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Email já cadastrado\"\n}",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Profissional não encontrado\"\n}",
           "type": "json"
         }
       ]
@@ -685,7 +685,161 @@ define({ "api": [
         },
         {
           "title": "422",
-          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Email já cadastrado\"\n}",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Profissional não encontrado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/visit",
+    "title": "Obter lista de visitas do usuário logado",
+    "group": "Visitas",
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": "HTTP/1.1 200 Ok\n{\n  \"items\": [object,object...]\n}",
+          "type": "json"
+        },
+        {
+          "title": "204",
+          "content": "HTTP/1.1 204 No Content\n{\n  \"items\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/visit.js",
+    "groupTitle": "Visitas",
+    "name": "GetVisit",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/visit/:id",
+    "title": "Obter por id",
+    "group": "Visitas",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Identificador da visita</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": "HTTP/1.1 200 Ok\n{\n  \"item\": object\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/visit.js",
+    "groupTitle": "Visitas",
+    "name": "GetVisitId",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/visit",
+    "title": "Cadastrar uma nova visita",
+    "group": "Visitas",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "professionalId",
+            "description": "<p>Identificador do profissional</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "date",
+            "description": "<p>DataHora em que será realizada a visita</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Exemple",
+          "content": "{\n    professionalId: 3,\n    date: 'Thu Jul 13 2017 19:16:23 GMT-0300 (BRT)'\n}",
+          "type": "object"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": "HTTP/1.1 200 Ok\n{\n   \"item\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/visit.js",
+    "groupTitle": "Visitas",
+    "name": "PostVisit",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "422",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Profissional não encontrado\"\n}",
           "type": "json"
         },
         {

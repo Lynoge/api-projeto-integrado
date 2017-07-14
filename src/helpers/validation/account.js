@@ -1,4 +1,4 @@
-import exception from '../helpers/exception'
+import exception from '../../helpers/exception'
 module.exports = (account) => {
 	let err = { type: exception.PROPERTY_NOT_SATISFIED }
 	if (!account.name) {

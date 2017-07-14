@@ -13,7 +13,7 @@
     "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",
     "lint:fix": "eslint -c .eslintrc . --ignore-path .eslintignore --fix",
     "only-test": "node_modules/.bin/mocha --compilers js:babel-core/register __tests__/index.js --timeout 10000",
-    "test": "sequelize db:migrate:undo:all --config=./src/infra/config.js --options-path=./src/infra/options.json && sequelize db:migrate --config=./src/infra/config.js --options-path=./src/infra/options.json && sequelize db:seed:all --config=./src/infra/config.js --options-path=./src/infra/options.json && node_modules/.bin/mocha --compilers js:babel-core/register __tests__/index.js --timeout 10000"
+    "test": "sequelize db:migrate:undo:all --config=./src/infra/config.js --options-path=./src/infra/options.json && sequelize db:migrate --config=./src/infra/config.js --options-path=./src/infra/options.json && sequelize db:seed:all --config=./src/infra/config.js --options-path=./src/infra/options.json && mocha --compilers js:babel-core/register __tests__/index.js --timeout 10000"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
