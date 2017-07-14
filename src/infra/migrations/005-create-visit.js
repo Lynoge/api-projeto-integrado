@@ -10,7 +10,7 @@ module.exports = {
       },
       rating: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       date: {
         type: Sequelize.DATE,
@@ -33,6 +33,10 @@ module.exports = {
       canceled: {
         type: Sequelize.BOOLEAN,
         allowNull: true
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false
       }
     })
   },
