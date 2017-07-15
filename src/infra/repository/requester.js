@@ -17,7 +17,8 @@ const toDomain = (entities) => {
       updateAt: entity.User.updateAt,
       type: entity.User.type,
       image: entity.User.image,
-      rating: entity.User.rating
+      rating: entity.User.rating,
+      token: entity.User.token
     }
   }
 
@@ -52,7 +53,9 @@ export default class RequesterRepository extends UserRepository {
         { model: User, where: { email: email } }
       ]
     })
-      .then(result => { return result && result.password === password ? toDomain(result) : null })
+      .then(result => {
+        return result && result.User.password === password ? toDomain(result) : null
+      })
       .catch(err => { throw err })
   }
 

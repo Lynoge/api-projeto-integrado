@@ -46,7 +46,7 @@ export default class Controller {
     repository.findByCredentials(email, password)
       .then((result) => {
         if (!result)
-          throw 'Credenciais inválidas.'
+          throw { message: 'Credenciais inválidas.', type: exception.NOT_FOUND }
         res.send({ user: result })
       }).catch(err => { exception.httpHandler(res, err) })
   }
