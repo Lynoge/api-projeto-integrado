@@ -8,8 +8,7 @@ module.exports = {
         references: { model: 'User', key: 'id' }
       },
       description: {
-        type: Sequelize.TEXT,
-        leight: 'long'
+        type: Sequelize.TEXT
       },
       profissionId: {
         type: Sequelize.INTEGER,

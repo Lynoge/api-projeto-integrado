@@ -12,18 +12,18 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
-      type: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       paid: {
         type: Sequelize.BOOLEAN,
         allowNull: true
       },
-      visitId: {
+      dueDate: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      professionalId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Visit', key: 'id' }
+        references: { model: 'Professional', key: 'id' }
       }
     })
   },
