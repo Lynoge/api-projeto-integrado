@@ -81,5 +81,5 @@ module.exports = (app) => {
   * @apiUse NotFoundError
   * @apiUse InternalServerError
   */
-  app.post('token', controller.token)
+  app.post('/token', controller.token)
 }
