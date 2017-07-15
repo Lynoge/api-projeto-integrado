@@ -3,6 +3,7 @@ import sha1 from 'sha1'
 
 import ProfessionalRepository from '../infra/repository/professional'
 import RequesterRepository from '../infra/repository/requester'
+import UserRepository from '../infra/repository/user'
 import accountValidation from '../helpers/validation/account'
 import exception from '../helpers/exception'
 
@@ -41,12 +42,12 @@ export default class Controller {
   token(req, res) {
     const email = req.body.email
     const password = req.body.password
-    const repository = new UserRepository()
+    const repository = new RequesterRepository()
     repository.findByCredentials(email, password)
       .then((result) => {
         if (!result)
-          throw 'Credenciais inválidas'
+          throw 'Credenciais inválidas.'
         res.send({ user: result })
-      }).catch(ex => { exception.httpHandler(res, err) })
+      }).catch(err => { exception.httpHandler(res, err) })
   }
 }

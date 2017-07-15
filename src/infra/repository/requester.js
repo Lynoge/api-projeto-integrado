@@ -31,9 +31,7 @@ const toDomain = (entities) => {
 }
 
 export default class RequesterRepository extends UserRepository {
-  /**
-   * @param obj resposta
-   */
+
   getAll() {
     return Requester.findAll({ include: [User] })
       .then(result => toDomain(result))
@@ -49,12 +47,16 @@ export default class RequesterRepository extends UserRepository {
   }
 
   findByCredentials(email, password) {
-		return Professional.findOne({ where: { email: email } })
-			.then(result => { return result && result.password === password ? toDomain(result) : null })
-			.catch(err => { throw err })
-	}
+    return Requester.findOne({
+      include: [
+        { model: User, where: { email: email } }
+      ]
+    })
+      .then(result => { return result && result.password === password ? toDomain(result) : null })
+      .catch(err => { throw err })
+  }
 
-  create(user) {    
+  create(user) {
     return super.create(user)
       .then(id => { return Requester.create({ id: id }) })
       .then(requester => requester.id)
