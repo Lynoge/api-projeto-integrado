@@ -106,25 +106,26 @@ const Account = {
 
       // it('Obter token usuário inválido', (done) => {
       //   request.post('/token')
-      //     .send({email: 'jose_aldo@mail.com', password: '123qw'})
+      //     .send({ email: 'jose_aldo@mail.com', password: '123qw' })
       //     .end((err, res) => {
-      //       res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
+      //       res.statusCode.should.be.eql(HttpStatus.NOT_FOUND, JSON.stringify(res.body))
       //       res.body.error.should.be.eql('Credenciais inválidas.')
       //       done()
       //     })
       // })
 
-      // it('Obter token OK', (done) => {
-      //   request.post('/token')
-      //     .send({email: 'jose_aldo@mail.com', password: '123qwe'})
-      //     .end((err, res) => {
-      //       res.statusCode.should.be.eql(HttpStatus.CREATED, JSON.stringify(res.body))
-      //       const user = res.body.user
-      //       user.token.should.be.type('string')
-      //       user.token.length.should.be.above(10)
-      //       done()
-      //     })
-      // })
+      it('Obter token OK', (done) => {
+        request.post('/token')
+          .send({ email: 'john_lennon@mail.com', password: '123qwe' })
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.OK, JSON.stringify(res.body))
+            const user = res.body.user
+            console.log(user)
+            user.token.should.be.type('string')
+            user.token.length.should.be.above(10)
+            done()
+          })
+      })
     })
   }
 }
