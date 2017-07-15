@@ -8,7 +8,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       description: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.STRING,
         allowNull: false
       },
       createAt: {
@@ -20,7 +20,8 @@ module.exports = {
         allowNull: true
       },
       updateAt: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: true
       },
       active: {
         type: Sequelize.BOOLEAN
