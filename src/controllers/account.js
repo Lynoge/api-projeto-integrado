@@ -9,7 +9,6 @@ import exception from '../helpers/exception'
 
 const professionalRepository = new ProfessionalRepository()
 const requesterRepository = new RequesterRepository()
-const secret = 'tokenSecret'
 const generateToken = () => {
   return sha1(new Date() + Math.random().toFixed(3))
 }
