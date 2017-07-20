@@ -45,9 +45,16 @@ export default class Controller {
 		const visit = req.body
 		try {
 			validate(visit)
+			if (req.user.type !== 'R')
+				throw { message: 'Requester inválido.', type: exception.UNAUTHORIZED }
+			visit.requesterId = req.user.id
 			repository.create(visit)
 				.then(result => res.json(result))
-				.catch(err => { exception.httpHandler(res, err) })
+				.catch(err => {
+					if (err.message.indexOf('Visit_professionalId_fkey') != -1)
+						err = { message: 'Profissional inválido.', type: exception.PROPERTY_NOT_SATISFIED }
+					exception.httpHandler(res, err)
+				})
 		} catch (err) { exception.httpHandler(res, err) }
 	}
 }

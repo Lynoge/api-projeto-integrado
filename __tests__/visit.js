@@ -5,14 +5,14 @@ import HttpStatus from 'http-status'
 import app from '../src/server'
 import clone from '../src/helpers/clone'
 
-const token = 'token_joao'
+const professionalToken = 'token_joao'
+const requesterToken = 'token_johnson'
 
 const request = supertest(app)
 
 const visit = {
   date: Date(),
   professionalId: 3,
-  requesterId: 2,
   status: 'PENDENTE'
 }
 
@@ -26,7 +26,7 @@ const Visit = {
         cloned.date = ''
         request.post('/visit')
           .send(cloned)
-          .set({ 'token': token })
+          .set({ 'token': requesterToken })
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
             res.body.error.should.be.eql('Data invalida')
@@ -34,22 +34,35 @@ const Visit = {
           })
       })
 
-      it('Profissional inválido', (done) => {
+      it('Profissional inválido.', (done) => {
         let cloned = clone(visit)
         cloned.professionalId = ''
         request.post('/visit')
-          .set({ 'token': token })
+          .set({ 'token': requesterToken })
           .send(cloned)
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
-            res.body.error.should.be.eql('Profissional inválido')
+            res.body.error.should.be.eql('Profissional inválido.')
+            done()
+          })
+      })
+
+      it('Profissional inválido.', (done) => {
+        let cloned = clone(visit)
+        cloned.professionalId = 9999
+        request.post('/visit')
+          .set({ 'token': requesterToken })
+          .send(cloned)
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
+            res.body.error.should.be.eql('Profissional inválido.')
             done()
           })
       })
 
       it('Visita Salva', (done) => {
         request.post('/visit')
-          .set({ 'token': token })
+          .set({ 'token': requesterToken })
           .send(visit)
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.OK, JSON.stringify(res.body))
