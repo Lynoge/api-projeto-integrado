@@ -5,6 +5,8 @@ import HttpStatus from 'http-status'
 import app from '../src/server'
 import clone from '../src/helpers/clone'
 
+const token = 'token_joao'
+
 const request = supertest(app)
 
 const visit = {
@@ -24,6 +26,7 @@ const Visit = {
         cloned.date = ''
         request.post('/visit')
           .send(cloned)
+          .set({ 'token': token })
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
             res.body.error.should.be.eql('Data invalida')
@@ -31,10 +34,11 @@ const Visit = {
           })
       })
 
-      it('Email inválido', (done) => {
+      it('Profissional inválido', (done) => {
         let cloned = clone(visit)
         cloned.professionalId = ''
         request.post('/visit')
+          .set({ 'token': token })
           .send(cloned)
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))
@@ -45,6 +49,7 @@ const Visit = {
 
       it('Visita Salva', (done) => {
         request.post('/visit')
+          .set({ 'token': token })
           .send(visit)
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.OK, JSON.stringify(res.body))

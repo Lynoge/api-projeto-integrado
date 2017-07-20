@@ -1,6 +1,7 @@
+import sha1 from 'sha1'
 import { User } from '../models'
 import exception from '../../helpers/exception'
-import sha1 from 'sha1'
+import parseUser from '../../helpers/parseUser'
 
 export default class UserRepository {
 
@@ -8,6 +9,7 @@ export default class UserRepository {
 		user.createAt = new Date()
 		user.active = true
 		user.chatId = sha1(user.createAt)
+		user.password = sha1(user.password)
 		return User.findOne({ where: { email: user.email } })
 			.then((result) => {
 				if (result)
@@ -23,5 +25,14 @@ export default class UserRepository {
 		return User.update(user, { where: { id: user.id } })
 			.then(result => result)
 			.catch(err => { throw err })
+	}
+
+	findByToken(token) {
+		return User.findOne({ where: { token: token } })
+			.then(result => result ? parseUser(result) : null)
+			.catch(err => {
+				err.message = 'VisitRepository.findById() => ' + err.message
+				throw err
+			})
 	}
 }

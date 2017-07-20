@@ -1,4 +1,5 @@
 import UserRepository from './user'
+import parseUser from '../../helpers/parseUser'
 import {
   Professional,
   Profission,
@@ -7,22 +8,10 @@ import {
 
 const toDomain = (entities) => {
   const parse = (entity) => {
-    return {
-      id: entity.id,
-      name: entity.User.name,
-      nickname: entity.User.nickname,
-      email: entity.User.email,
-      phone: entity.User.phone,
-      active: entity.User.active,
-      createAt: entity.User.createAt,
-      updateAt: entity.User.updateAt,
-      type: entity.User.type,
-      profission: entity.Profission,
-      description: entity.description,
-      image: entity.User.image,
-      chatId: entity.User.chatId,
-      rating: entity.User.rating
-    }
+    let professional = parseUser(entity.User)
+    professional.profission = entity.Profission
+    professional.description = entity.description
+    return professional
   }
 
   if (!entities) { return null }
@@ -61,7 +50,7 @@ export default class professionalRepository extends UserRepository {
 
   findByCredentials(email, password) {
     return Professional.findOne({ where: { email: email } })
-      .then(result => { return result && result.password === password ? toDomain(result) : null })
+      .then(result => { return result && result.password === sha1(password) ? toDomain(result) : null })
       .catch(err => { throw err })
   }
 
