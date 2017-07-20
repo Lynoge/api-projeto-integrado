@@ -13,7 +13,7 @@ export default class Controller {
 			.then(visits => {
 				if (visits.length == 0)
 					res.status(HttpStatus.NO_CONTENT)
-				res.json(requesters)
+				res.json(visits)
 			})
 			.catch(err => { exception.httpHandler(res, err) })
 	}

@@ -4,7 +4,13 @@ const toDomain = (entities) => {
   const parse = (entity) => {
     return {
       id: entity.id,
-      name: entity.name,
+      rating: entity.rating,
+      date: entity.date,
+      endDate: entity.endDate,
+      professionalId: entity.professionalId,
+      requesterId: entity.requesterId,
+      canceled: entity.canceled,
+      status: entity.status
     }
   }
 
@@ -33,6 +39,15 @@ export default class VisitRepository {
       .then(result => toDomain(result))
       .catch(err => {
         err.message = 'VisitRepository.findById() => ' + err.message
+        throw err
+      })
+  }
+
+  findByRequester(id){
+    return Visit.findAll({ where: { requesterId: id } })
+      .then(result => toDomain(result))
+      .catch(err => {
+        err.message = 'VisitRepository.findByRequester() => ' + err.message
         throw err
       })
   }
