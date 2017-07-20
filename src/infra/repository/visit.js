@@ -43,8 +43,8 @@ export default class VisitRepository {
       })
   }
 
-  findByRequester(id){
-    return Visit.findAll({ where: { requesterId: id } })
+  findSome(where) {
+    return Visit.findAll({ where: where })
       .then(result => toDomain(result))
       .catch(err => {
         err.message = 'VisitRepository.findByRequester() => ' + err.message

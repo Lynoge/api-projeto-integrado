@@ -9,7 +9,7 @@ const request = supertest(app)
 
 const account = {
   name: 'fulano',
-  email: 'fulano@mail.com',
+  email: 'fulano' + parseInt(Math.random(2.3) * 1000) +'@mail.com',
   password: '123456das',
   nickname: 'fulaninho',
   type: 'P'
@@ -92,27 +92,27 @@ const Account = {
           })
       })
 
-      // it('Conta criada', (done) => {
-      //   request.post('/signup')
-      //     .send(account)
-      //     .end((err, res) => {
-      //       res.statusCode.should.be.eql(HttpStatus.CREATED, JSON.stringify(res.body))
-      //       const user = res.body.user
-      //       user.token.should.be.type('string')
-      //       user.token.length.should.be.above(10)
-      //       done()
-      //     })
-      // })
+      it('Conta criada', (done) => {
+        request.post('/signup')
+          .send(account)
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.CREATED, JSON.stringify(res.body))
+            const user = res.body.user
+            user.token.should.be.type('string')
+            user.token.length.should.be.above(10)
+            done()
+          })
+      })
 
-      // it('Obter token usuário inválido', (done) => {
-      //   request.post('/token')
-      //     .send({ email: 'jose_aldo@mail.com', password: '123qw' })
-      //     .end((err, res) => {
-      //       res.statusCode.should.be.eql(HttpStatus.NOT_FOUND, JSON.stringify(res.body))
-      //       res.body.error.should.be.eql('Credenciais inválidas.')
-      //       done()
-      //     })
-      // })
+      it('Obter token usuário inválido', (done) => {
+        request.post('/token')
+          .send({ email: 'jose_aldo@mail.com', password: '123qw' })
+          .end((err, res) => {
+            res.statusCode.should.be.eql(HttpStatus.NOT_FOUND, JSON.stringify(res.body))
+            res.body.error.should.be.eql('Credenciais inválidas.')
+            done()
+          })
+      })
 
       it('Obter token OK', (done) => {
         request.post('/token')
@@ -120,7 +120,6 @@ const Account = {
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.OK, JSON.stringify(res.body))
             const user = res.body.user
-            console.log(user)
             user.token.should.be.type('string')
             user.token.length.should.be.above(10)
             done()

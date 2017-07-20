@@ -9,7 +9,12 @@ const repository = new Repository();
 export default class Controller {
 
 	getAll(req, res) {
-		repository.getAll()
+		let where = {}
+		if (req.user.type == 'P')
+			where = { professionalId: req.user.id }
+		else
+			where = { requesterId: req.user.id }
+		repository.findSome(where)
 			.then(visits => {
 				if (visits.length == 0)
 					res.status(HttpStatus.NO_CONTENT)

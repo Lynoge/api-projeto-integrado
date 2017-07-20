@@ -27,6 +27,8 @@ export default class Controller {
         repository = requesterRepository
       repository.create(account)
         .then(id => {
+          account.id = id
+          delete account.password
           res.status(HttpStatus.CREATED)
           res.json({ user: account })
         })

@@ -1,4 +1,6 @@
+import sha1 from 'sha1'
 import UserRepository from '../repository/user'
+import parseUser from '../../helpers/parseUser'
 import {
   Requester,
   User
@@ -6,20 +8,9 @@ import {
 
 const toDomain = (entities) => {
   const parse = (entity) => {
-    return {
-      id: entity.id,
-      name: entity.User.name,
-      username: entity.User.username,
-      email: entity.User.email,
-      phone: entity.User.phone,
-      active: entity.User.active,
-      createAt: entity.User.createAt,
-      updateAt: entity.User.updateAt,
-      type: entity.User.type,
-      image: entity.User.image,
-      rating: entity.User.rating,
-      token: entity.User.token
-    }
+    let requester = parseUser(entity.User)
+    requester.id = entity.id
+    return requester
   }
 
   if (!entities) { return null }
@@ -54,7 +45,7 @@ export default class RequesterRepository extends UserRepository {
       ]
     })
       .then(result => {
-        return result && result.User.password === password ? toDomain(result) : null
+        return result && result.User.password === sha1(password) ? toDomain(result) : null
       })
       .catch(err => { throw err })
   }
