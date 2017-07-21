@@ -327,6 +327,55 @@ define({ "api": [
     }
   },
   {
+    "type": "delete",
+    "url": "/professional/profission/:id",
+    "title": "Remover profissão do profissional",
+    "group": "Profissional",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Identificador único da profissão</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "200",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/professional.js",
+    "groupTitle": "Profissional",
+    "name": "DeleteProfessionalProfissionId",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "/professional",
     "title": "Obter lista",
@@ -461,6 +510,55 @@ define({ "api": [
         {
           "title": "404",
           "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Professional não encontrado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/professional/profission/:id",
+    "title": "Adicionar profissão ao profissional",
+    "group": "Profissional",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Identificador único da profissão</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "200",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/professional.js",
+    "groupTitle": "Profissional",
+    "name": "PostProfessionalProfissionId",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
           "type": "json"
         },
         {

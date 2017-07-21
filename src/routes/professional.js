@@ -122,4 +122,30 @@ module.exports = (app) => {
   * @apiUse ValidationError
   */
   app.put('/professional', controller.update)
+
+  /**
+  * @api {post} /professional/profission/:id Adicionar profissão ao profissional
+  * @apiGroup Profissional
+  * 
+  * @apiParam {Number} id Identificador único da profissão
+  *
+  * @apiSuccess 200
+  *
+  * @apiUse NotAuthorized
+  * @apiUse InternalServerError
+  */
+  app.post('/professional/profission/:id', controller.addProfission)
+
+  /**
+  * @api {delete} /professional/profission/:id Remover profissão do profissional
+  * @apiGroup Profissional
+  * 
+  * @apiParam {Number} id Identificador único da profissão
+  *
+  * @apiSuccess 200
+  *
+  * @apiUse NotAuthorized
+  * @apiUse InternalServerError
+  */
+  app.delete('/professional/profission/:id', controller.removeProfission)
 }
