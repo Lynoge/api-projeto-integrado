@@ -8,6 +8,7 @@
     "sequelize": "node_modules/.bin/sequelize --config=./src/infra/config.js --options-path=./src/infra/options.json",
     "migrate": "sequelize db:migrate --config=./src/infra/config.js --options-path=./src/infra/options.json",
     "migrate-undo": "sequelize db:migrate:undo:all --config=./src/infra/config.js --options-path=./src/infra/options.json",
+    "migrate-seed": "sequelize db:migrate:undo:all --config=./src/infra/config.js --options-path=./src/infra/options.json && sequelize db:migrate --config=./src/infra/config.js --options-path=./src/infra/options.json && sequelize db:seed:all --config=./src/infra/config.js --options-path=./src/infra/options.json",
     "seeders": "sequelize db:seed:all --config=./src/infra/config.js --options-path=./src/infra/options.json",
     "jest-test": "NODE_ENV=test jest",
     "lint": "eslint -c .eslintrc . --ignore-path .eslintignore",

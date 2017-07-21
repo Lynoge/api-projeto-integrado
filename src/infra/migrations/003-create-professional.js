@@ -9,10 +9,6 @@ module.exports = {
       },
       description: {
         type: Sequelize.TEXT
-      },
-      profissionId: {
-        type: Sequelize.INTEGER,
-        references: { model: 'Profission', key: 'id' }
       }
     })
   },

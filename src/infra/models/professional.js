@@ -9,19 +9,13 @@ export default (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT,
       length: 'long'
-    },
-    profissionId: {
-      type: DataTypes.INTEGER
     }
   }, {
       classMethods: {
         associate: (models) => {
-          Professional.belongsTo(models.Profission, {
-            foreignKey: 'profissionId'
-          })
-          Professional.belongsTo(models.User, {
-            foreignKey: 'id'
-          })
+          Professional.belongsToMany(models.Profission, { through: 'ProfessionalProfission', foreignKey: 'professionalId' })
+          models.Profission.belongsToMany(models.Professional, { through: 'ProfessionalProfission', foreignKey: 'profissionId' })
+          Professional.belongsTo(models.User, { foreignKey: 'id' })
         }
       },
       tableName: 'Professional',

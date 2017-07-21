@@ -3,13 +3,14 @@ import parseUser from '../../helpers/parseUser'
 import {
   Professional,
   Profission,
-  User
+  User,
+  ProfessionalProfission
 } from '../models'
 
 const toDomain = (entities) => {
   const parse = (entity) => {
     let professional = parseUser(entity.User)
-    professional.profission = entity.Profission
+    professional.profissions = entity.Profissions.map((p) => { return { name: p.id, id: p.name } })
     professional.description = entity.description
     return professional
   }
@@ -25,7 +26,9 @@ const toDomain = (entities) => {
 
 export default class professionalRepository extends UserRepository {
   getAll() {
-    return Professional.findAll({ include: [User, Profission] })
+    return Professional.findAll({
+      include: [User, Profission]
+    })
       .then(result => { return toDomain(result) })
       .catch(err => { throw err })
   }
@@ -64,6 +67,19 @@ export default class professionalRepository extends UserRepository {
   update(professional) {
     return Professional.update(professional, { where: { id: professional.id } })
       .then(() => { return super.update(professional) })
+      .catch(err => { throw err })
+  }
+  addProfission(professionalId, profissionId) {
+    return ProfessionalProfission
+      .create({ professionalId: professionalId, profissionId: profissionId })
+      .then(result => result)
+      .catch(err => { throw err })
+  }
+
+  removeProfission(professionalId, profissionId) {
+    return ProfessionalProfission
+      .destroy({ where: { professionalId: professionalId, profissionId: profissionId } })
+      .then(result => result)
       .catch(err => { throw err })
   }
 }

@@ -44,4 +44,31 @@ export default class Controller {
       .then(result => res.json(result))
       .catch(err => { exception.httpHandler(res, err) })
   }
+
+  addProfission(req, res) {
+    const { id } = req.params
+    if (req.user.type != 'P'){
+      exception.httpHandler(res, { message: 'Deve ser profissional.', type: exception.UNAUTHORIZED })
+      return
+    }
+
+    repository.addProfission(req.user.id, id)
+      .then(result => res.json(result))
+      .catch(err => {
+        if (err.name == 'SequelizeUniqueConstraintError')
+          exception.httpHandler(res, { message: 'Já incluso na profissão.', type: exception.PROPERTY_NOT_SATISFIED })
+        else if (err.name == 'SequelizeForeignKeyConstraintError')
+          exception.httpHandler(res, { message: 'Profissão ou profissional inválido.', type: exception.PROPERTY_NOT_SATISFIED })
+        else
+          exception.httpHandler(res, err)
+      })
+  }
+
+  removeProfission(req, res) {
+    const { id } = req.params
+
+    repository.removeProfission(req.user.id, id)
+      .then(result => res.json(result))
+      .catch(err => { exception.httpHandler(res, err) })
+  }
 }
