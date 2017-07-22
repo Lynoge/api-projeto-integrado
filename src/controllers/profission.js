@@ -19,7 +19,7 @@ export default class ProfissionalController {
             .catch(err => { exception.httpHandler(res, err) })
     }
 
-    create(req, res){
+    create(req, res) {
         const { name } = req.body
         return repository.create(name)
             .then(result => {
@@ -29,10 +29,10 @@ export default class ProfissionalController {
             .catch(err => { exception.httpHandler(res, err) })
     }
 
-    delete(req, res){
+    delete(req, res) {
         const { id } = req.params
         return repository.delete(id)
             .then(result => res.json(result))
-            .catch(err => { exception.httpHandler(res, err) })       
+            .catch(err => { exception.httpHandler(res, err) })
     }
 }

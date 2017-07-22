@@ -1,3 +1,4 @@
+import exception from '../../helpers/exception'
 import { Profission } from '../models'
 
 const toDomain = (entities) => {
@@ -50,6 +51,8 @@ export default class profissionRepository {
     return Profission.destroy({ where: { id: id } })
       .then((result) => result)
       .catch(err => {
+        if (err.message && err.message.indexOf('violates foreign key constraint') != -1)
+          throw { message: 'Esta profissão possui profissionais vinculados.', type: exception.PROPERTY_NOT_SATISFIED }
         err.message = 'ProfissionRepository.delete() => ' + err.message
         throw err
       })

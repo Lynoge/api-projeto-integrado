@@ -1,4 +1,4 @@
-angular.module('rentApp').controller('chatController', function ($scope, $mdSidenav, $rootScope) {
+angular.module('rentApp').controller('chatController', function ($scope, $rootScope) {
 
     var user = $rootScope.user;
     var socket = new Socket(location.href.split('#')[0], user.name, user.id, user.type);
@@ -29,9 +29,9 @@ angular.module('rentApp').controller('chatController', function ($scope, $mdSide
         $scope.users = arr;
     });
 
-    socket.on('refreshOnlineProfessionals', function(users){
-        if(Array.isArray(users))
-        $scope.users = users;
+    socket.on('refreshOnlineProfessionals', function (users) {
+        if (Array.isArray(users))
+            $scope.users = users;
     })
 
     socket.on('loadUsers', function (userId) {
@@ -42,23 +42,9 @@ angular.module('rentApp').controller('chatController', function ($scope, $mdSide
         $scope.users = arr;
     });
 
-    $scope.toggleLeft = buildToggler('left');
-    $scope.toggleRight = buildToggler('right');
-    $scope.historico = '';
-
-    function buildToggler(componentId) {
-        return function () {
-            $mdSidenav(componentId).toggle();
-        };
-    }
-
-    $scope.changeChat = function (user) {
-        $scope.currentChat = user;
-    }
-
     $scope.send = function (event) {
         if (event.keyCode == 13 && $scope.message && $scope.currentChat) {
-            $scope.historico += '\n' + $scope.currentChat.nickname + ' - ' + $scope.message; 
+            $scope.historico += '\n' + $scope.currentChat.nickname + ' - ' + $scope.message;
             var area = document.getElementById('txtArea');
             area.scrollTop = area.scrollHeight;
             socket.sendMessage($scope.message, $scope.currentChat.id);
@@ -66,8 +52,8 @@ angular.module('rentApp').controller('chatController', function ($scope, $mdSide
         }
     }
 
-    $scope.logout = function(){ 
+    $scope.logout = function () {
         localStorage.removeItem('rentUser');
         location.reload();
-     }
+    }
 });

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "babel-node ./bin/www --presets es2015",
-    "devstart": "nodemon --watch . --exec babel-node ./bin/www --presets es2015",
+    "devstart": "nodemon --watch src/ --exec babel-node ./bin/www --presets es2015",
     "sequelize": "node_modules/.bin/sequelize --config=./src/infra/config.js --options-path=./src/infra/options.json",
     "migrate": "sequelize db:migrate --config=./src/infra/config.js --options-path=./src/infra/options.json",
     "migrate-undo": "sequelize db:migrate:undo:all --config=./src/infra/config.js --options-path=./src/infra/options.json",
