@@ -1,3 +1,4 @@
+import sha1 from 'sha1'
 import UserRepository from './user'
 import parseUser from '../../helpers/parseUser'
 import {
@@ -33,6 +34,14 @@ export default class professionalRepository extends UserRepository {
       .catch(err => { throw err })
   }
 
+  findSome(where) {
+    return Professional.findAll({
+      include: [{ model: User, where: where }, Profission]
+    })
+      .then(result => { return toDomain(result) })
+      .catch(err => { throw err })
+  }
+
   findByProfission(profission) {
     const where = isNaN(profission) ? { name: { $iLike: '%' + profission + '%' } } : { id: profission }
     return Professional.findAll({
@@ -52,8 +61,13 @@ export default class professionalRepository extends UserRepository {
   }
 
   findByCredentials(email, password) {
-    return Professional.findOne({ where: { email: email } })
-      .then(result => { return result && result.password === sha1(password) ? toDomain(result) : null })
+    return Professional.findOne({
+      include: [
+        { model: User, where: { email: email } },
+        Profission
+      ]
+    })
+      .then(result => { return result && result.User.password === sha1(password) ? toDomain(result) : null })
       .catch(err => { throw err })
   }
 

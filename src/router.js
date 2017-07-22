@@ -3,6 +3,7 @@ import professional from './routes/professional'
 import profission from './routes/profission'
 import account from './routes/account'
 import visit from './routes/visit'
+import chat from './routes/chat'
 
 module.exports = (app) => {
     app.get('/', (req, res) => res.end('Welcome!'))
@@ -12,4 +13,5 @@ module.exports = (app) => {
     profission(app)
     account(app)
     visit(app)
+    chat(app)
 }
