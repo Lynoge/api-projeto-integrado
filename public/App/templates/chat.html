@@ -1,0 +1,32 @@
+<md-button class="md-icon-button" ng-click="toggleLeft()">
+    <md-icon md-svg-icon="img/users.svg"></md-icon>
+</md-button>
+
+<md-input-container class="md-block">
+    <label>{{currentChat.nickname}}</label>
+    <textarea disabled rows="5" ng-model="historico" id="txtArea" style="max-height: 150px;overflow-y:auto"></textarea>
+</md-input-container>
+<md-input-container>
+    <label>Message</label>
+    <input type="text" ng-model="message" ng-keypress="send($event)">
+</md-input-container>
+
+<footer>
+    <small>{{loggedUser}}</small>
+    <md-button class="md-primary" ng-click="logout()">Logout</md-button>
+</footer>
+
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4">
+
+    <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Online</h1>
+    </md-toolbar>
+
+    <md-list layout-margin="" style="max-height: 300px">
+        <md-list-item ng-repeat="u in users" ng-click="changeChat(u, $event)" class="noright">
+            <img alt="{{ u.nickname }}" ng-src="{{ u.online ? 'img/user-on.svg' : 'img/user-off.svg' }}" class="md-avatar">
+            <p>{{ u.nickname }}</p>
+        </md-list-item>
+    </md-list>
+
+</md-sidenav>

@@ -9,6 +9,7 @@ import http from 'http'
 
 import authentication from './middleware/authentication'
 import router from './router'
+import chat from './sockets/chat'
 
 const app = express()
 
@@ -32,6 +33,7 @@ app.use(authentication)
 
 const server = http.createServer(app)
 const io = socketIo.listen(server)
+chat(io)
 
 router(app)
 

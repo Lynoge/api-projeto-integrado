@@ -15,7 +15,9 @@ module.exports = {
       createAt: new Date(),
       type: 'R',
       token: 'token_lennon',
-      chatId: 'chat_id_lennon'
+      chatId: 'chat_id_lennon',
+      latitude: '-36.6662062',
+      longitude: '-22.1219554'
     },
     {
       name: 'johnson',
@@ -29,7 +31,9 @@ module.exports = {
       createAt: new Date(),
       type: 'R',
       token: 'token_johnson',
-      chatId: 'chat_id_johnson'
+      chatId: 'chat_id_johnson',
+      latitude: '-29.6662062',
+      longitude: '-51.1219554'
     },
     {
       name: 'joao',
@@ -43,7 +47,9 @@ module.exports = {
       createAt: new Date(),
       type: 'P',
       token: 'token_joao',
-      chatId: 'chat_id_joao'
+      chatId: 'chat_id_joao',
+      latitude: '-45.6662062',
+      longitude: '-68.1219554'
     },
     {
       name: 'jose',
@@ -57,7 +63,9 @@ module.exports = {
       createAt: new Date(),
       type: 'P',
       token: 'token_jose',
-      chatId: 'chat_id_jose'
+      chatId: 'chat_id_jose',
+      latitude: '-32.6662062',
+      longitude: '-15.1219554'
     }], {})
   },
 

@@ -20,14 +20,19 @@ export default class ProfissionalController {
     }
 
     create(req, res){
-        
-    }
-
-    update(req, res){
-        
+        const { name } = req.body
+        return repository.create(name)
+            .then(result => {
+                res.status(HttpStatus.CREATED)
+                res.json(result)
+            })
+            .catch(err => { exception.httpHandler(res, err) })
     }
 
     delete(req, res){
-        
+        const { id } = req.params
+        return repository.delete(id)
+            .then(result => res.json(result))
+            .catch(err => { exception.httpHandler(res, err) })       
     }
 }

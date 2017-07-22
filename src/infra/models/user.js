@@ -49,7 +49,16 @@ export default (sequelize, DataTypes) => {
     },
     token: {
       type: DataTypes.STRING
-    }
+    },
+    online: {
+      type: DataTypes.BOOLEAN
+    },
+    latitude: {
+      type: DataTypes.STRING
+    },
+    longitude: {
+      type: DataTypes.STRING
+    },
   }, {
       classMethods: {},
       tableName: 'User',

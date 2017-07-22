@@ -1,5 +1,43 @@
 define({ "api": [
   {
+    "type": "get",
+    "url": "/chat",
+    "title": "Obter lista de todas conversas do usuário logado",
+    "group": "Chat",
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": "HTTP/1.1 200 Ok\n{\n  \"items\": [object,object...]\n}",
+          "type": "json"
+        },
+        {
+          "title": "204",
+          "content": "HTTP/1.1 204 No Content\n{\n  \"items\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/chat.js",
+    "groupTitle": "Chat",
+    "name": "GetChat",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "post",
     "url": "/signup",
     "title": "Criar uma nova conta",
@@ -262,57 +300,6 @@ define({ "api": [
     "name": "PostProfission",
     "error": {
       "examples": [
-        {
-          "title": "404",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "500",
-          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
-          "type": "json"
-        }
-      ]
-    }
-  },
-  {
-    "type": "put",
-    "url": "/profission",
-    "title": "Atualizar",
-    "group": "Profissao",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>Novo nome da profissão</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "200",
-          "content": "HTTP/1.1 200 Ok\n   {\n     \"item\": object\n   }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/routes/profission.js",
-    "groupTitle": "Profissao",
-    "name": "PutProfission",
-    "error": {
-      "examples": [
-        {
-          "title": "401",
-          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
-          "type": "json"
-        },
         {
           "title": "404",
           "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",

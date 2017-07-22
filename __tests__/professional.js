@@ -42,7 +42,7 @@ const Professional = {
       })
 
       it('Get by profission not records', (done) => {
-        request.get('/professional/profission/3')
+        request.get('/professional/profission/99999')
           .set({ 'token': token })
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.NO_CONTENT, JSON.stringify(res.body))

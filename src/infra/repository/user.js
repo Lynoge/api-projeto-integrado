@@ -20,9 +20,10 @@ export default class UserRepository {
 			}).catch(err => { throw err })
 	}
 
-	update(user) {
+	update(user, where) {
 		user.updateAt = new Date()
-		return User.update(user, { where: { id: user.id } })
+		where = where ? where : { id: user.id }
+		return User.update(user, { where: where })
 			.then(result => result)
 			.catch(err => { throw err })
 	}

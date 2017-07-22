@@ -2,7 +2,7 @@ module.exports = (entity) => {
   return {
     id: entity.id,
     name: entity.name,
-    username: entity.nickname,
+    nickname: entity.nickname,
     email: entity.email,
     phone: entity.phone,
     active: entity.active,
@@ -13,5 +13,8 @@ module.exports = (entity) => {
     rating: entity.rating,
     token: entity.token,
     chatId: entity.chatId,
+    online: entity.online,
+    latitude: entity.latitude,
+    longitude: entity.longitude
   }
 }

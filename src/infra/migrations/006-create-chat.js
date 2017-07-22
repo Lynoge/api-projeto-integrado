@@ -3,15 +3,20 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.createTable('Chat', {
-      professionalId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Professional', key: 'id' }
+      id: {
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
-      requesterId: {
+      origin: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Requester', key: 'id' }
+        references: { model: 'User', key: 'id' }
+      },
+      destiny: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'User', key: 'id' }
       },
       description: {
         type: Sequelize.STRING,
@@ -21,6 +26,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
+      /**
+       * P -> Photo
+       * T -> Text
+       */
       type: {
         type: Sequelize.STRING,
         allowNull: false

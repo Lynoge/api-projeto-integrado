@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       rating: {
-        type: Sequelize.DECIMAL(3,2)
+        type: Sequelize.DECIMAL(3, 2)
       },
       active: {
         type: Sequelize.BOOLEAN,
@@ -50,6 +50,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       token: {
+        type: Sequelize.STRING
+      },
+      online: {
+        type: Sequelize.BOOLEAN
+      },
+      latitude: {
+        type: Sequelize.STRING
+      },
+      longitude: {
         type: Sequelize.STRING
       }
     })

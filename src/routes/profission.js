@@ -84,24 +84,6 @@ module.exports = (app) => {
   app.post('/profission', controller.create)
 
   /**
-  * @api {put} /profission Atualizar
-  * @apiGroup Profissao
-  * 
-  * @apiParam {String} name Novo nome da profissão
-  * 
-  * @apiSuccessExample 200
-  *    HTTP/1.1 200 Ok
-      {
-        "item": object
-      }
-  *
-  * @apiUse NotAuthorized
-  * @apiUse NotFoundError
-  * @apiUse InternalServerError
-  */
-  app.put('/profission', controller.update)
-
-  /**
   * @api {delete} /profission Remover
   * @apiGroup Profissao
   * 
