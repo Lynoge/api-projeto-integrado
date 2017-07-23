@@ -41,14 +41,17 @@ module.exports = (io) => {
     socket.on('sendMessage', (message) => {
       message.origin = hashChatId[socket.id]
       const destinyId = chatIdHash[message.destiny]
+      message.date = new Date()
       chatRepository.create({
         origin: message.origin,
         destiny: message.destiny,
         description: message.description,
         type: message.type ? message.type : 'T',
-        date: new Date()
+        date: message.date
       }).catch(err => { throw err.message })
-      if (destinyId) { sockets[destinyId].emit('receiveMessage', message) }
+
+      if (destinyId && sockets[destinyId])
+        sockets[destinyId].emit('receiveMessage', message)
     })
   })
 }

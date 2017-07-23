@@ -4,11 +4,16 @@ angular.module('rentApp').controller('chatController', function ($scope, $rootSc
     var socket = new Socket(location.href.split('#')[0], user.name, user.id, user.type);
 
     $scope.users = [];
+    $scope.index = 0;
     $scope.loggedUser = $rootScope.user.email;
     socket.connect();
     socket.on('receiveMessage', function (msg) {
+        console.log(msg);
         var area = document.getElementById('txtArea');
-        area.value += '\n Outro - ' + msg.message;
+        area.value += '\n ' + msg.origin + ' - ' + msg.message;
+
+        $scope.currentChat = { id: msg.origin, nickname: msg.nickname };
+        $scope.index = 0;
     });
 
     socket.on('userConnected', function (user) {
@@ -18,7 +23,6 @@ angular.module('rentApp').controller('chatController', function ($scope, $rootSc
             if ($scope.users[i].id != user.id)
                 arr.push($scope.users[i]);
         $scope.users = arr;
-        console.log(arr);
     });
 
     socket.on('userDisconnected', function (userId) {
@@ -44,7 +48,7 @@ angular.module('rentApp').controller('chatController', function ($scope, $rootSc
 
     $scope.send = function (event) {
         if (event.keyCode == 13 && $scope.message && $scope.currentChat) {
-            $scope.historico += '\n' + $scope.currentChat.nickname + ' - ' + $scope.message;
+            $scope.historico += '\n' + user.nickname + ' - ' + $scope.message;
             var area = document.getElementById('txtArea');
             area.scrollTop = area.scrollHeight;
             socket.sendMessage($scope.message, $scope.currentChat.id);
@@ -55,5 +59,15 @@ angular.module('rentApp').controller('chatController', function ($scope, $rootSc
     $scope.logout = function () {
         localStorage.removeItem('rentUser');
         location.reload();
+    }
+
+    $scope.changeChat = function () {
+        if ($scope.users.length > 0 && $scope.index < ($scope.users.length - 1)) {
+            $scope.currentChat = $scope.users[$scope.index];
+            $scope.index++;
+        } else if ($scope.users.length > 0) {
+            $scope.currentChat = $scope.users[0];
+            $scope.index = 0;
+        }
     }
 });
