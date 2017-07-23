@@ -4,7 +4,7 @@ angular.module('rentApp').controller('mainController', function ($scope, $mdSide
 
   $scope.init = function () {
     if ($location.path() != '/login') {
-      var menu = $scope.menus[0];
+      var menu = $scope.menus[3];
       $location.path(menu.location);
       $scope.currentMenu = menu;
     }
@@ -13,7 +13,8 @@ angular.module('rentApp').controller('mainController', function ($scope, $mdSide
   $scope.menus = [
     { name: 'Profissões', location: '/profission' },
     { name: 'Profissionais', location: '/professional' },
-    { name: 'Clientes', location: '/client' }
+    { name: 'Clientes', location: '/client' },
+    { name: 'Chat', location: '/chat' }
   ];
 
   $scope.changeLocation = function (menu) {
