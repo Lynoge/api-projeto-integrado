@@ -8,11 +8,16 @@
   <script src="/socket.io/socket.io.js"></script>
 </head>
 
+
 <body ng-app="rentApp" ng-controller="mainController" ng-init="init()">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <img alt="Menu" width="20px" style="margin-right:10px;cursor:pointer" ng-src="img/menu.svg" class="md-avatar" ng-click="toggleLeft()">
       <h2 md-truncate flex>Rent Service</h2>
+      <form id="uploadForm" encType="multipart/form-data" action="/image" method="post">
+        <input type="file" name="image" />
+        <input type="submit" value="Enviar" name="submit">
+      </form>
     </div>
   </md-toolbar>
   <md-card class="principal-card">
@@ -46,7 +51,8 @@
   <script src="js/angular-animate.js"></script>
   <script src="js/angular-aria.js"></script>
 
-/  <!-- AngularJS Material Javascript using GitCDN to load directly from `bower-material/master` -->
+  /
+  <!-- AngularJS Material Javascript using GitCDN to load directly from `bower-material/master` -->
   <script src="js/angular-material.js"></script>
   <script src="js/angular-route.js"></script>
 
