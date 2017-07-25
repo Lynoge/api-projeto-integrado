@@ -28,9 +28,19 @@ angular.module('rentApp', ['ngRoute', 'ngMaterial'])
     })
     .run(function ($rootScope, $location, $http) {
         $rootScope.user = JSON.parse(localStorage.getItem('rentUser'));
-        if ($rootScope.user && $rootScope.user.token){
+        if ($rootScope.user && $rootScope.user.token) {
             $http.defaults.headers.common.token = $rootScope.user.token;
             $location.path('/chat');
+
+            if (!$rootScope.user.image) {
+                $http.get('/account').then(function (response) {
+                    var user = response.data
+                    if (user.image) {
+                        localStorage.setItem('rentUser', JSON.stringify(user))
+                        location.reload()
+                    }
+                })
+            }
         }
         else
             $location.path('/login');

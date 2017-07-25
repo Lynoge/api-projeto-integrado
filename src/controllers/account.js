@@ -40,21 +40,25 @@ export default class Controller {
     }
   }
 
-token(req, res) {
+  token(req, res) {
     const email = req.body.email
     const password = req.body.password
     requesterRepository.findByCredentials(email, password)
       .then((result) => {
-        if (!result){
+        if (!result) {
           professionalRepository.findByCredentials(email, password)
-          .then((result) => {
-            if (!result)
-          throw { message: 'Credenciais inválidas.', type: exception.NOT_FOUND }
-            res.send({ user: result })
-          }).catch(err => { exception.httpHandler(res, err) })
-        }else{
+            .then((result) => {
+              if (!result)
+                throw { message: 'Credenciais inválidas.', type: exception.NOT_FOUND }
+              res.send({ user: result })
+            }).catch(err => { exception.httpHandler(res, err) })
+        } else {
           res.send({ user: result })
         }
       }).catch(err => { exception.httpHandler(res, err) })
+  }
+
+  getUserData(req, res){
+    res.json(req.user)
   }
 }

@@ -16,9 +16,11 @@ const validateUserResquest = (user, url, method) => {
 
 module.exports = (req, res, next) => {
 
-  if (permissions.isFree(req.url, req.method))
+  if (permissions.isFree(req.url, req.method)){
     return next()
+  }
   else if (!req.headers.token) {
+    console.log(req.query)
     res.status(HttpStatus.UNAUTHORIZED)
     res.end('Token not found in header.')
   } else {

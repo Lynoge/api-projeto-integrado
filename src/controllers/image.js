@@ -5,6 +5,8 @@ import exception from '../helpers/exception'
 import fs from 'fs'
 import path from 'path'
 import config from '../infra/config'
+import UserRepository from '../infra/repository/user'
+
 const configServer = config[process.env.NODE_ENV]
 const dbx = new Dropbox({ accessToken: configServer.serverToken });
 const generateHashFile = (fileName) => {
@@ -32,19 +34,35 @@ export default class Controller {
   }
 
   create(req, res) {
+    let id = req.user ? req.user.id : 0
+    if (!id)
+      id = req.query.id
 
-    const objFile = {
-      path: '/' + generateHashFile(req.file.originalname),
-      contents: req.file.buffer
+    if (!id) {
+      res.status(401)
+      res.end()
+      return
     }
 
-    dbx.filesUpload(objFile)
+    const fileName = generateHashFile(req.file.originalname)
+
+    dbx.filesUpload({ path: '/' + fileName, contents: req.file.buffer })
       .then((response) => {
-        res.json({ 'SUCESSO': response })
+        const userRepository = new UserRepository()
+        userRepository
+          .update({ image: fileName }, { id: id })
+          .then(() => { res.redirect('/') })
+          .catch((err) => { res.end(err) })
       })
       .catch((error) => {
         console.log(error)
         res.json({ 'ERRO': error })
       });
+  }
+
+  allImageNames(req, res) {
+    dbx.filesListFolder({ path: '' })
+      .then(response => res.json(response.entries))
+      .catch(err => res.end(err));
   }
 }

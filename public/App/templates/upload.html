@@ -1,0 +1,7 @@
+<form id="uploadForm" encType="multipart/form-data" action="/image" method="post">
+  <h4 id="fileNameUpload" style="text-align:center"></h4>
+  <input class="ng-hide" name='image' id="input-file-id" onchange="angular.element(this).scope().changeFile(this.files)" type="file"
+  />
+  <label for="input-file-id" class="md-button md-primary">Alterar Foto</label>
+  <md-button class="md-primary" type="submit" value="Enviar" name="submit">Enviar</md-button>
+</form>

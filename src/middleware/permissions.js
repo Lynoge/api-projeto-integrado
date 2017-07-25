@@ -16,7 +16,7 @@ module.exports = {
   requester: requester,
   professional: professional,
   isFree: (url, method) => {
-    if (url.startsWith('/image') && method === 'GET')
+    if (url.startsWith('/image'))
       return true
     return (free[url] && free[url].indexOf(method) != -1) ? true : false
   }
