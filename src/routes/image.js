@@ -66,6 +66,17 @@ module.exports = function (app) {
    */
   app.get('/image/:name', controller.get)
 
+
+  /**
+   * @api {get} /image Obter lista de nomes das imagens já salvas
+   * @apiGroup Imagem
+   * 
+   * @apiUse NotAuthorized
+   * @apiUse InternalServerError
+   */
+  app.get('/imageall', controller.allImageNames)
+
+
   /**
    * @api {post} /image inserir nova imagem
    * @apiGroup Imagem

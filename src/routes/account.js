@@ -66,6 +66,21 @@ module.exports = (app) => {
   app.post('/signup', controller.signup)
 
   /**
+  * @api {get} /account Obter dados do usuário atual
+  * @apiGroup Conta
+  * 
+  * @apiSuccessExample 200
+  *    HTTP/1.1 200 Ok
+  *   {
+  *     "user": object
+  *   }
+  *
+  * @apiUse NotFoundError
+  * @apiUse InternalServerError
+  */
+  app.get('/account', controller.getUserData)
+
+  /**
   * @api {post} /token Gerar novo token
   * @apiGroup Conta
   * 

@@ -8,16 +8,29 @@
   <script src="/socket.io/socket.io.js"></script>
 </head>
 
-
 <body ng-app="rentApp" ng-controller="mainController" ng-init="init()">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <img alt="Menu" width="20px" style="margin-right:10px;cursor:pointer" ng-src="img/menu.svg" class="md-avatar" ng-click="toggleLeft()">
       <h2 md-truncate flex>Rent Service</h2>
-      <form id="uploadForm" encType="multipart/form-data" action="/image" method="post">
-        <input type="file" name="image" />
-        <input type="submit" value="Enviar" name="submit">
-      </form>
+      <div ng-show="email" class="md-toolbar-tools" style="width: 30%" layout-align="end center">
+        <div style="margin-right:25px">{{email}}</div>
+        <md-menu md-offset="60">
+          <img alt="Menu" width="50px" style="border-radius:50%;margin-right:10px;cursor:pointer" ng-src="{{image}}" class="md-avatar"
+            ng-click="openMenu($mdOpenMenu, $event)">
+          <md-menu-content width="2">
+            <md-menu-item>
+              <md-button class="md-primary">Mudar Senha</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button class="md-primary"  onclick="angular.element(this).scope().openUploadImage(angular.element(this).$event)">Alterar Foto</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button class="md-primary" onclick="logout()">Sair</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
     </div>
   </md-toolbar>
   <md-card class="principal-card">
@@ -46,13 +59,10 @@
 
   </md-sidenav>
 
-  <!-- AngularJS Material Dependencies -->
   <script src="js/angular.js"></script>
   <script src="js/angular-animate.js"></script>
   <script src="js/angular-aria.js"></script>
 
-  /
-  <!-- AngularJS Material Javascript using GitCDN to load directly from `bower-material/master` -->
   <script src="js/angular-material.js"></script>
   <script src="js/angular-route.js"></script>
 
@@ -66,9 +76,6 @@
   <script src="App/controllers/clientController.js"></script>
 
   <script src="js/socket.js"></script>
-  <script>
-    var socket = io('http://localhost:3000');
-  </script>
 </body>
 
 </html>

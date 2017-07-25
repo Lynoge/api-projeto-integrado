@@ -56,11 +56,6 @@ angular.module('rentApp').controller('chatController', function ($scope, $rootSc
         }
     }
 
-    $scope.logout = function () {
-        localStorage.removeItem('rentUser');
-        location.reload();
-    }
-
     $scope.changeChat = function () {
         if ($scope.users.length > 0 && $scope.index < ($scope.users.length - 1)) {
             $scope.currentChat = $scope.users[$scope.index];
