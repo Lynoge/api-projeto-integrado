@@ -74,11 +74,11 @@ module.exports = function (app) {
    * @apiUse NotAuthorized
    * @apiUse InternalServerError
    */
-  app.get('/imageall', controller.allImageNames)
+  app.get('/imageall', controller.getAllImageNames)
 
 
   /**
-   * @api {post} /image inserir nova imagem
+   * @api {post} /image Alterar imagem do perfil
    * @apiGroup Imagem
    * 
    * @apiParam {File} file Imagem a ser salva.
@@ -93,5 +93,24 @@ module.exports = function (app) {
    * @apiUse ValidationError
    * @apiUse InternalServerError
    **/
-  app.post('/image', multer.single('image'), controller.create)
+  app.post('/image', multer.single('file'), controller.createImagePerfil)
+
+
+  /**
+   * @api {post} /imagechat Enviar imagem para o chat
+   * @apiGroup Imagem
+   * 
+   * @apiParam {File} file Imagem a ser salva.
+   * 
+   * @apiSuccessExample 200
+   * HTTP/1.1 200 Ok
+   * {
+   *    "item": ""
+   * }
+   * 
+   * @apiUse NotAuthorized
+   * @apiUse ValidationError
+   * @apiUse InternalServerError
+   **/
+  app.post('/imagechat', multer.single('file'), controller.createImageChat)
 }
