@@ -27,7 +27,7 @@ app.use(favicon(path.join(__dirname, '../public/images/favicon.ico')))
 app.use('/public/images/professional/', express.static(path.join(__dirname, '/public/images/professional/')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
-//app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(authentication)
 
