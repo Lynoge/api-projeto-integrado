@@ -33,16 +33,13 @@ export default class Controller {
       }).catch(err => res.end(err))
   }
 
-  create(req, res) {
-    let id = req.user ? req.user.id : 0
-    if (!id)
-      id = req.query.id
+  getAllImageNames(req, res) {
+    dbx.filesListFolder({ path: '' })
+      .then(response => res.json(response.entries))
+      .catch(err => res.end(err));
+  }
 
-    if (!id) {
-      res.status(401)
-      res.end()
-      return
-    }
+  createImagePerfil(req, res) {
 
     const fileName = generateHashFile(req.file.originalname)
 
@@ -50,19 +47,19 @@ export default class Controller {
       .then((response) => {
         const userRepository = new UserRepository()
         userRepository
-          .update({ image: fileName }, { id: id })
-          .then(() => { res.redirect('/') })
-          .catch((err) => { res.end(err) })
+          .update({ image: fileName }, { id: req.user.id })
+          .then(() => { res.json({ fileName: fileName }) })
+          .catch((err) => res.json({ 'ERRO': err }))
       })
-      .catch((error) => {
-        console.log(error)
-        res.json({ 'ERRO': error })
-      });
+      .catch((err) => {
+        console.log(err)
+        res.json({ 'ERRO': err })
+      })
   }
+  createImageChat(req, res) {
 
-  allImageNames(req, res) {
-    dbx.filesListFolder({ path: '' })
-      .then(response => res.json(response.entries))
-      .catch(err => res.end(err));
+    const fileName = generateHashFile(req.file.originalname)
+    res.json({ fileName: fileName })
+    return
   }
 }

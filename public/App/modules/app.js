@@ -1,4 +1,4 @@
-angular.module('rentApp', ['ngRoute', 'ngMaterial'])
+angular.module('rentApp', ['ngRoute', 'ngMaterial', 'ngFileUpload'])
     .config(function ($routeProvider) {
         $routeProvider
             .when("/login", {

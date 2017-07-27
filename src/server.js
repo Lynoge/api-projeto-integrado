@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import socketIo from 'socket.io'
 import http from 'http'
+import multer from 'multer'
 
 import authentication from './middleware/authentication'
 import router from './router'
@@ -26,8 +27,7 @@ app.use(favicon(path.join(__dirname, '../public/images/favicon.ico')))
 app.use('/public/images/professional/', express.static(path.join(__dirname, '/public/images/professional/')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
+//app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(authentication)
 
