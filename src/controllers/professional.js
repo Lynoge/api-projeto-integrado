@@ -40,6 +40,11 @@ export default class Controller {
   }
 
   update(req, res) {
+    if (req.user.type != 'P') {
+      exception.httpHandler(res, { message: 'Deve ser um profissional.', type: exception.UNAUTHORIZED })
+      return
+    }
+    req.body.id = req.user.id
     repository.update(req.body)
       .then(result => res.json(result))
       .catch(err => { exception.httpHandler(res, err) })
@@ -47,8 +52,8 @@ export default class Controller {
 
   addProfission(req, res) {
     const { id } = req.params
-    if (req.user.type != 'P'){
-      exception.httpHandler(res, { message: 'Deve ser profissional.', type: exception.UNAUTHORIZED })
+    if (req.user.type != 'P') {
+      exception.httpHandler(res, { message: 'Deve ser um profissional.', type: exception.UNAUTHORIZED })
       return
     }
 

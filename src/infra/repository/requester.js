@@ -58,8 +58,19 @@ export default class RequesterRepository extends UserRepository {
   }
 
   update(requester) {
-    return Requester.update(requester, { where: { id: requester.id } })
-      .then(() => { return super.update(requester) })
-      .catch(err => { throw err })
+
+    let user = {}
+    if (requester.nickname)
+      user.nickname = requester.nickname
+    if (requester.name)
+      user.name = requester.name
+    if (requester.phone)
+      user.phone = requester.phone
+    if (requester.rating)
+      user.rating = requester.rating
+
+    const where = { where: { id: professional.id } }
+
+    return super.update(user, where)
   }
 }

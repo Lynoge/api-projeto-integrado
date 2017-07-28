@@ -8,7 +8,6 @@ const repository = new Repository();
 export default class Controller {
 
 	getAll(req, res) {
-		const { query } = req
 		repository.getAll()
 			.then(requesters => {
 				if (requesters.length == 0)
@@ -30,8 +29,12 @@ export default class Controller {
 	}
 
 	update(req, res) {
-		const user = req.body
-		repository.update(user)
+		if (req.user.type != 'R') {
+			exception.httpHandler(res, { message: 'Deve ser um cliente.', type: exception.UNAUTHORIZED })
+			return
+		}
+		req.body.id = req.user.id
+		repository.update(req.body)
 			.then(result => res.json(result))
 			.catch(err => { exception.httpHandler(res, err) })
 	}

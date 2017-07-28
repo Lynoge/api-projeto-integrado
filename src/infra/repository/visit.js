@@ -53,6 +53,7 @@ export default class VisitRepository {
   }
 
   create(visit) {
+    visit.status = "PENDENTE"
     return Visit.create(visit)
       .then(result => result)
       .catch(err => {

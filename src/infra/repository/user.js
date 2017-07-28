@@ -21,11 +21,17 @@ export default class UserRepository {
 	}
 
 	update(user, where) {
+		user = {}
 		user.updateAt = new Date()
 		where = where ? where : { id: user.id }
+
+		console.log(user)
 		return User.update(user, { where: where })
 			.then(result => result)
-			.catch(err => { throw err })
+			.catch(err => {
+				console.log(err)
+				throw err
+			})
 	}
 
 	findByToken(token) {

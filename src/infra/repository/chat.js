@@ -8,7 +8,7 @@ const toDomain = (entities) => {
       origin: entity.origin,
       destiny: entity.destiny,
       description: entity.description,
-      date: entity.origin,
+      date: entity.date,
       type: entity.type
     }
   }
