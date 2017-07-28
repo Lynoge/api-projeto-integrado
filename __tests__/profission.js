@@ -58,7 +58,7 @@ const Profission = {
           .set({ 'token': requesterToken })
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.UNAUTHORIZED, JSON.stringify(res.body))
-            res.body.error.should.be.eql('Deve ser profissional.')
+            res.body.error.should.be.eql('Deve ser um profissional.')
             done()
           })
       })
