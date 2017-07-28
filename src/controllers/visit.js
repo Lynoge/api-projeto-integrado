@@ -4,6 +4,10 @@ import Repository from '../infra/repository/visit'
 import exception from '../helpers/exception'
 import validate from '../helpers/validation/visit'
 
+const toDomain = (visit) => {
+
+}
+
 const repository = new Repository();
 
 export default class Controller {

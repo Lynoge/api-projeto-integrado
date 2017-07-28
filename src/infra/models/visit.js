@@ -36,7 +36,12 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-      classMethods: {},
+      classMethods: {
+        associate: (models) => {
+          Visit.belongsTo(models.Requester, { foreignKey: 'requesterId' })
+          Visit.belongsTo(models.Professional, { foreignKey: 'professionalId' })
+        },
+      },
       tableName: 'Visit',
       undercored: false,
       updatedAt: false,

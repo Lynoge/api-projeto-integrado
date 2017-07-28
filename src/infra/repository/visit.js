@@ -1,4 +1,21 @@
-import { Visit } from '../models'
+import {
+  Professional,
+  Visit,
+  User,
+  Requester
+} from '../models'
+
+const parseUser = entity => {
+  if (!entity || !entity.User)
+    return null
+  return {
+    image: entity.User.image,
+    name: entity.User.name,
+    rating: entity.User.rating,
+    phone: entity.User.phone,
+    online: entity.User.online
+  }
+}
 
 const toDomain = (entities) => {
   const parse = (entity) => {
@@ -10,7 +27,9 @@ const toDomain = (entities) => {
       professionalId: entity.professionalId,
       requesterId: entity.requesterId,
       canceled: entity.canceled,
-      status: entity.status
+      status: entity.status,
+      professional: parseUser(entity.Professional),
+      requester: parseUser(entity.Requester)
     }
   }
 
@@ -44,10 +63,16 @@ export default class VisitRepository {
   }
 
   findSome(where) {
-    return Visit.findAll({ where: where })
+    return Visit.findAll({
+      where: where,
+      include: [
+        { model: Requester, include: User },
+        { model: Professional, include: User }
+      ]
+    })
       .then(result => toDomain(result))
       .catch(err => {
-        err.message = 'VisitRepository.findByRequester() => ' + err.message
+        err.message = 'VisitRepository.findSome() => ' + err.message
         throw err
       })
   }
