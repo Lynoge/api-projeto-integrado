@@ -85,35 +85,18 @@ module.exports = function (app) {
   app.get('/requester/:id', controller.getById)
   
   /**
-   * @api {put} /requester Alterar cadastro
+   * @api {put} /requester Atualizar
    * @apiGroup Requester
    * 
-   * @apiParam {Integer} id Identificador do requester
-   * @apiParam {String} nickname Nickname do requester
-   * @apiParam {String} name Nome de usuário do sistema
-   * @apiParam {String} email Email do requester
-   * @apiParam {String} password Senha do requester
-   * @apiParam {String} phone Telefone do requester
+   * @apiParam {object} requester Propriedades a serem alteradas
    * 
    * @apiSuccessExample 200
    * HTTP/1.1 200 Ok
    * {
-   *    "item": object
+   *    "message": "Alterado com sucesso!"
    * }
    * 
-   * @apiParamExample {object} Exemple
-   *    {
-   *        id :3,
-   *        nickname: "fulaninho",
-   *        name: "fulano",
-   *        email: "fulano@mail.com",
-   *        password: "123Abc#",
-   *        phone: 999999999
-   *    }
-   * 
-   * 
    * @apiUse NotAuthorized
-   * @apiUse RequesterNotFoundError
    * @apiUse ValidationError
    * @apiUse InternalServerError
    **/

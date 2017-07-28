@@ -25,7 +25,7 @@ const controller = new Controller()
 module.exports = function (app) {
 
   /**
-   * @api {get} /chat Obter lista de todas conversas do usuário logado
+   * @api {get} /chat Obter lista de conversas do usuário
    * @apiGroup Chat
    * 
    * @apiSuccessExample 200

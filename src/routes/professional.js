@@ -111,10 +111,12 @@ module.exports = (app) => {
   * @api {put} /professional Atualizar
   * @apiGroup Profissional
   * 
+  * @apiParam {object} professional Propriedades a serem alteradas
+  *
   * @apiSuccessExample 200
   *    HTTP/1.1 200 Ok
   *   {
-  *     "item": object
+  *     "message": "Alterado com sucesso!"
   *   }
   *
   * @apiUse NotAuthorized

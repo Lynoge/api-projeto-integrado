@@ -69,7 +69,7 @@ export default class RequesterRepository extends UserRepository {
     if (requester.rating)
       user.rating = requester.rating
 
-    const where = { where: { id: professional.id } }
+    const where = { id: requester.id }
 
     return super.update(user, where)
   }

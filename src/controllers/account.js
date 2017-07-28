@@ -58,7 +58,24 @@ export default class Controller {
       }).catch(err => { exception.httpHandler(res, err) })
   }
 
-  getUserData(req, res){
+  getUserData(req, res) {
     res.json(req.user)
+  }
+
+  changePassword(req, res) {
+    const { older, newer } = req.body
+    if (!newer || !older) {
+      exception.httpHandler(res, { message: 'Dados inválidos.', type: exception.PROPERTY_NOT_SATISFIED })
+      return
+    }
+
+    const userRepository = new UserRepository()
+    userRepository.validatePasswordChange(req.user.token, sha1(older))
+      .then(result => {
+        if (!result)
+          throw { message: 'As senhas não coincidem.', type: exception.PROPERTY_NOT_SATISFIED }
+        userRepository.update({ password: sha1(newer) }, { id: req.user.id })
+          .then(() => res.json({ message: 'Alterado com sucesso!' }))
+      }).catch(err => { exception.httpHandler(res, err) })
   }
 }
