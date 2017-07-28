@@ -83,7 +83,7 @@ module.exports = function (app) {
   * @apiUse InternalServerError
   */
   app.get('/requester/:id', controller.getById)
-  
+
   /**
    * @api {put} /requester Atualizar
    * @apiGroup Requester
