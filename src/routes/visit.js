@@ -107,4 +107,23 @@ module.exports = function (app) {
    * @apiUse InternalServerError
    **/
   app.post('/visit', controller.create)
+
+  /**
+   * @api {post} /rating Avaliar uma nova visita
+   * @apiGroup Visitas
+   * 
+   * @apiParam {Integer} id Id da visita
+   * @apiParam {Number} rating Valor da avaliação de 0 à 5
+   * 
+   * @apiSuccessExample 200
+   * HTTP/1.1 200 Ok
+   * {
+   *    "message": "Avaliado com sucesso!"
+   * }
+   * 
+   * @apiUse NotAuthorized
+   * @apiUse ValidationError
+   * @apiUse InternalServerError
+   **/
+  app.post('/rating', controller.rate)
 }

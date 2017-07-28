@@ -1,5 +1,5 @@
 import sha1 from 'sha1'
-import { User } from '../models'
+import { User, Visit } from '../models'
 import exception from '../../helpers/exception'
 import parseUser from '../../helpers/parseUser'
 
@@ -40,11 +40,36 @@ export default class UserRepository {
 			})
 	}
 
-	validatePasswordChange(token, password){
+	validatePasswordChange(token, password) {
 		return User.findOne({ where: { token: token } })
 			.then(result => password == result.password)
 			.catch(err => {
 				err.message = 'UserRepository.validatePasswordChange() => ' + err.message
+				throw err
+			})
+	}
+
+	updateRating(userId, isProfessional) {
+		const where = isProfessional ? { professionalId: userId } : { requesterId: userId }
+		return Visit.findAll({ where: where })
+			.then(visits => {
+				let count = 0
+				let sum = 0
+				for (let i = 0; i < visits.length; i++) {
+					const rating = isProfessional ? visits[i].ratingProfessional : visits[i].ratingRequester
+					if (rating) {
+						sum += rating
+						count++
+					}
+				}
+				if (sum > 0) {
+					User.update({ rating: sum / count }, { where: { id: userId } })
+					return true
+				}
+				return false
+			})
+			.catch(err => {
+				err.message = 'UserRepository.updateRating() => ' + err.message
 				throw err
 			})
 	}
