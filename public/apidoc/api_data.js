@@ -2,7 +2,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/chat",
-    "title": "Obter lista de todas conversas do usuário logado",
+    "title": "Obter lista de conversas do usuário",
     "group": "Chat",
     "success": {
       "examples": [
@@ -27,6 +27,92 @@ define({ "api": [
         {
           "title": "401",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/account",
+    "title": "Obter dados do usuário atual",
+    "group": "Conta",
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": " HTTP/1.1 200 Ok\n{\n  \"user\": object\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/account.js",
+    "groupTitle": "Conta",
+    "name": "GetAccount",
+    "error": {
+      "examples": [
+        {
+          "title": "404",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/password",
+    "title": "Alterar senha",
+    "group": "Conta",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "older",
+            "description": "<p>Senha velha</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "newer",
+            "description": "<p>Senha nova</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": " HTTP/1.1 200 Ok\n{\n  \"message\": \"Alterado com sucesso!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/account.js",
+    "groupTitle": "Conta",
+    "name": "PostPassword",
+    "error": {
+      "examples": [
+        {
+          "title": "404",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
           "type": "json"
         },
         {
@@ -168,6 +254,169 @@ define({ "api": [
         {
           "title": "404",
           "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Registro não encontrado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/image",
+    "title": "Obter imagem",
+    "group": "Imagem",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome/Path completo da imagem.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/image.js",
+    "groupTitle": "Imagem",
+    "name": "GetImage",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/image",
+    "title": "Obter lista de nomes das imagens já salvas",
+    "group": "Imagem",
+    "version": "0.0.0",
+    "filename": "src/routes/image.js",
+    "groupTitle": "Imagem",
+    "name": "GetImage",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/image",
+    "title": "Alterar imagem do perfil",
+    "group": "Imagem",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "file",
+            "description": "<p>Imagem a ser salva.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": "HTTP/1.1 200 Ok\n{\n   \"item\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/image.js",
+    "groupTitle": "Imagem",
+    "name": "PostImage",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "422",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Profissional não encontrado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/imagechat",
+    "title": "Enviar imagem para o chat",
+    "group": "Imagem",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "file",
+            "description": "<p>Imagem a ser salva.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": "HTTP/1.1 200 Ok\n{\n   \"item\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/image.js",
+    "groupTitle": "Imagem",
+    "name": "PostImagechat",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "422",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Profissional não encontrado\"\n}",
           "type": "json"
         },
         {
@@ -561,11 +810,24 @@ define({ "api": [
     "url": "/professional",
     "title": "Atualizar",
     "group": "Profissional",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "object",
+            "optional": false,
+            "field": "professional",
+            "description": "<p>Propriedades a serem alteradas</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "examples": [
         {
           "title": "200",
-          "content": " HTTP/1.1 200 Ok\n{\n  \"item\": object\n}",
+          "content": " HTTP/1.1 200 Ok\n{\n  \"message\": \"Alterado com sucesso!\"\n}",
           "type": "json"
         }
       ]
@@ -686,68 +948,26 @@ define({ "api": [
   {
     "type": "put",
     "url": "/requester",
-    "title": "Alterar cadastro",
+    "title": "Atualizar",
     "group": "Requester",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Integer",
+            "type": "object",
             "optional": false,
-            "field": "id",
-            "description": "<p>Identificador do requester</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>Nickname do requester</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>Nome de usuário do sistema</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "email",
-            "description": "<p>Email do requester</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>Senha do requester</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "phone",
-            "description": "<p>Telefone do requester</p>"
+            "field": "requester",
+            "description": "<p>Propriedades a serem alteradas</p>"
           }
         ]
-      },
-      "examples": [
-        {
-          "title": "Exemple",
-          "content": "{\n    id :3,\n    nickname: \"fulaninho\",\n    name: \"fulano\",\n    email: \"fulano@mail.com\",\n    password: \"123Abc#\",\n    phone: 999999999\n}",
-          "type": "object"
-        }
-      ]
+      }
     },
     "success": {
       "examples": [
         {
           "title": "200",
-          "content": "HTTP/1.1 200 Ok\n{\n   \"item\": object\n}",
+          "content": "HTTP/1.1 200 Ok\n{\n   \"message\": \"Alterado com sucesso!\"\n}",
           "type": "json"
         }
       ]
@@ -761,11 +981,6 @@ define({ "api": [
         {
           "title": "401",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "404",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Requester não encontrado\"\n}",
           "type": "json"
         },
         {

@@ -7,8 +7,6 @@ import chat from './routes/chat'
 import image from './routes/image'
 
 module.exports = (app) => {
-    app.get('/', (req, res) => res.end('Welcome!'))
-
     requester(app)
     professional(app)
     profission(app)

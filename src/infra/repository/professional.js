@@ -79,44 +79,27 @@ export default class professionalRepository extends UserRepository {
   }
 
   update(professional) {
-    // let user = {}
-    // if (professional.nickname)
-    //   user.nickname = professional.nickname
-    // if (professional.name)
-    //   user.name = professional.name
-    // if (professional.phone)
-    //   user.phone = professional.phone
-    // if (professional.rating)
-    //   user.rating = professional.rating
+    let user = {}
+    if (professional.nickname)
+      user.nickname = professional.nickname
+    if (professional.name)
+      user.name = professional.name
+    if (professional.phone)
+      user.phone = professional.phone
+    if (professional.rating)
+      user.rating = professional.rating
 
-    // return Professional.findOne({ where: { id: id }, include: [User, Profission] })
-    //   .then(result => {
-    //     return toDomain(result)
-    //   })
-    //   .catch(err => { throw err })
+    const where = { id: professional.id }
 
-    // const where = { where: { id: professional.id } }
-
-    // return getById(id)
-
-
-
-    // return Professional.update({ description: professional.description }, where)
-    //   .then(() => { return super.update(user, where) })
-    //   .catch(err => { throw err })
-
-
-    // if (professional.description) {
-    //   console.log('Updade 2')
-    //   return Professional.update({ description: professional.description }, where)
-    //     .then(() => { return super.update(user, where) })
-    //     .catch(err => { throw err })
-    // } else {
-    //   console.log('Updade 2')
-    //   return super.update(user, where)
-    //     .then(result => result)
-    //     .catch(err => { throw err })
-    // }
+    if (professional.description) {
+      return Professional.update({ description: professional.description }, { where: where })
+        .then(() => { return super.update(user, where) })
+        .catch(err => { throw err })
+    } else {
+      return super.update(user, where)
+        .then(result => result)
+        .catch(err => { throw err })
+    }
   }
   addProfission(professionalId, profissionId) {
     return ProfessionalProfission

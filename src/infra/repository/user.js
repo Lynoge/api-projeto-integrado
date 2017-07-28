@@ -21,11 +21,8 @@ export default class UserRepository {
 	}
 
 	update(user, where) {
-		user = {}
 		user.updateAt = new Date()
 		where = where ? where : { id: user.id }
-
-		console.log(user)
 		return User.update(user, { where: where })
 			.then(result => result)
 			.catch(err => {
@@ -38,7 +35,16 @@ export default class UserRepository {
 		return User.findOne({ where: { token: token } })
 			.then(result => result ? parseUser(result) : null)
 			.catch(err => {
-				err.message = 'VisitRepository.findById() => ' + err.message
+				err.message = 'UserRepository.findByToken() => ' + err.message
+				throw err
+			})
+	}
+
+	validatePasswordChange(token, password){
+		return User.findOne({ where: { token: token } })
+			.then(result => password == result.password)
+			.catch(err => {
+				err.message = 'UserRepository.validatePasswordChange() => ' + err.message
 				throw err
 			})
 	}

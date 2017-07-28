@@ -97,4 +97,22 @@ module.exports = (app) => {
   * @apiUse InternalServerError
   */
   app.post('/token', controller.token)
+
+  /**
+  * @api {post} /password Alterar senha
+  * @apiGroup Conta
+  * 
+  * @apiParam {String} older Senha velha
+  * @apiParam {String} newer Senha nova
+  *
+  * @apiSuccessExample 200
+  *    HTTP/1.1 200 Ok
+  *   {
+  *     "message": "Alterado com sucesso!"
+  *   }
+  *
+  * @apiUse NotFoundError
+  * @apiUse InternalServerError
+  */
+  app.post('/password', controller.changePassword)
 }

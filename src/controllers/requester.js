@@ -34,6 +34,7 @@ export default class Controller {
 			return
 		}
 		req.body.id = req.user.id
+		delete req.body.rating
 		repository.update(req.body)
 			.then(result => res.json(result))
 			.catch(err => { exception.httpHandler(res, err) })

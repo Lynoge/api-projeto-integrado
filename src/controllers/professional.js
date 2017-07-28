@@ -44,6 +44,7 @@ export default class Controller {
       exception.httpHandler(res, { message: 'Deve ser um profissional.', type: exception.UNAUTHORIZED })
       return
     }
+    delete req.body.rating
     req.body.id = req.user.id
     repository.update(req.body)
       .then(result => res.json(result))
