@@ -53,8 +53,14 @@ export default class VisitRepository {
       })
   }
 
-  findById(id) {
-    return Visit.findOne({ where: { id: id } })
+  getById(id) {
+    return Visit.findOne({
+      where: { id: id },
+      include: [
+        { model: Requester, include: User },
+        { model: Professional, include: User }
+      ]
+    })
       .then(result => toDomain(result))
       .catch(err => {
         err.message = 'VisitRepository.findById() => ' + err.message
@@ -83,6 +89,15 @@ export default class VisitRepository {
       .then(result => result)
       .catch(err => {
         err.message = 'VisitRepository.create() => ' + err.message
+        throw err
+      })
+  }
+
+  update(visit, where) {
+    return Visit.update(visit, { where: where })
+      .then(result => result)
+      .catch(err => {
+        err.message = 'VisitRepository.update() => ' + err.message
         throw err
       })
   }

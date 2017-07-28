@@ -5,8 +5,12 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    rating: {
-      type: DataTypes.STRING,
+    ratingProfessional: {
+      type: DataTypes.DECIMAL(3, 2),
+      allowNull: true
+    },
+    ratingRequester: {
+      type: DataTypes.DECIMAL(3, 2),
       allowNull: true
     },
     date: {

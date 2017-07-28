@@ -1087,6 +1087,64 @@
   },
   {
     "type": "post",
+    "url": "/rating",
+    "title": "Avaliar uma nova visita",
+    "group": "Visitas",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id da visita</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "rating",
+            "description": "<p>Valor da avaliação de 0 à 5</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "200",
+          "content": "HTTP/1.1 200 Ok\n{\n   \"message\": \"Avaliado com sucesso!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/visit.js",
+    "groupTitle": "Visitas",
+    "name": "PostRating",
+    "error": {
+      "examples": [
+        {
+          "title": "401",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"error\": \"Não autorizado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "422",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"error\": \"Profissional não encontrado\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"error\": \"Erro interno\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
     "url": "/visit",
     "title": "Cadastrar uma nova visita",
     "group": "Visitas",

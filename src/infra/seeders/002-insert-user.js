@@ -1,5 +1,4 @@
 'use strict'
-import sha1 from 'sha1'
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -10,7 +9,7 @@ module.exports = {
       nickname: 'Lennon',
       email: 'john_lennon@mail.com',
       password: '05fe7461c607c33229772d402505601016a7d0ea',
-      phone: 53991887657,
+      phone: '53991887657',
       image: 'public/user_id',
       rating: 3.89,
       active: true,
@@ -27,7 +26,7 @@ module.exports = {
       nickname: 'Johnson',
       email: 'curl_johnson@mail.com',
       password: '05fe7461c607c33229772d402505601016a7d0ea',
-      phone: 53996789087,
+      phone: '53996789087',
       image: 'public/user_id',
       rating: 4.75,
       active: true,
@@ -44,7 +43,7 @@ module.exports = {
       nickname: 'Raí',
       email: 'raimundo_leao@mail.com',
       password: '05fe7461c607c33229772d402505601016a7d0ea',
-      phone: 51989856698,
+      phone: '51989856698',
       image: 'public/user_id',
       rating: 4.8,
       active: true,
@@ -61,7 +60,7 @@ module.exports = {
       nickname: 'José',
       email: 'jose_aldo@mail.com',
       password: '05fe7461c607c33229772d402505601016a7d0ea',
-      phone: 54987876507,
+      phone: '54987876507',
       image: 'public/user_id',
       rating: 1.24,
       active: true,
@@ -78,7 +77,7 @@ module.exports = {
       nickname: 'Paulo',
       email: 'paulofilomeno@mail.com',
       password: '16151edda26b77063e5ddd268e19ab3f058df3ba',//001554
-      phone: 51992456738,
+      phone: '51992456738',
       image: 'public/user_id',
       rating: 4.54,
       active: true,
@@ -95,7 +94,7 @@ module.exports = {
       nickname: 'Moises',
       email: 'moises_de_assis@mail.com',
       password: 'f48ff158fb68e693699cc80594a9b14fbbab7680',//553366
-      phone: 54984045647,
+      phone: '54984045647',
       image: 'public/user_id',
       rating: 2.68,
       active: true,
@@ -112,7 +111,7 @@ module.exports = {
       nickname: 'Linda',
       email: 'armelinda.jacinto@mail.com',
       password: '8e331d7c833a7759eac756423e30077651a35302',//896347
-      phone: 51987043456,
+      phone: '51987043456',
       image: 'public/user_id',
       rating: 3.92,
       active: true,
@@ -129,7 +128,7 @@ module.exports = {
       nickname: 'Jacks',
       email: 'jacks_garcia@mail.com',
       password: '41b7e189e41bd2cb4a3995b383730bfb7bfb5399',//142356
-      phone: 51993564839,
+      phone: '51993564839',
       image: 'public/user_id',
       rating: 4.36,
       active: true,
@@ -146,7 +145,7 @@ module.exports = {
       nickname: 'Fortunato',
       email: 'fortuna_maia@mail.com',
       password: '6a43a2d97e4b13506ee0f8c3f49abdf67c34d555',//908769
-      phone: 54983245567,
+      phone: '54983245567',
       image: 'public/user_id',
       rating: 1.98,
       active: true,
@@ -163,7 +162,7 @@ module.exports = {
       nickname: 'Rachel',
       email: 'rchl_hayala@mail.com',
       password: '59437bc91a5a80071c7900b7b5f4c61f32ff1edb',//453891
-      phone: 51978345278,
+      phone: '51978345278',
       image: 'public/user_id',
       rating: 3.28,
       active: true,
@@ -180,7 +179,7 @@ module.exports = {
       nickname: 'Rose',
       email: 'roselinda.mariatti@mail.com',
       password: 'a5289c32213d0822d28010ecb0c9eb606adba38c',//384525
-      phone: 51995374628,
+      phone: '51995374628',
       image: 'public/user_id',
       rating: 3.67,
       active: true,
@@ -197,7 +196,7 @@ module.exports = {
       nickname: 'Mauro',
       email: 'mauro.andrade@mail.com',
       password: '462ad6771af41dbeafd35411f581d5588b32b553',//080675
-      phone: 51991787657,
+      phone: '51991787657',
       image: 'public/user_id',
       rating: 4.08,
       active: true,
@@ -214,7 +213,7 @@ module.exports = {
       nickname: 'Aldo',
       email: 'adro_bastos@mail.com',
       password: '0a12b87b4d048562175263824475e1242025a2de',//783195
-      phone: 54979465749,
+      phone: '54979465749',
       image: 'public/user_id',
       rating: 1.5,
       active: true,
@@ -231,7 +230,7 @@ module.exports = {
       nickname: 'Beto',
       email: 'beto_barbosa@mail.com',
       password: 'fc8e1491881d5a6a9c929d6333f0dc22fbfcd2ed',//112255
-      phone: 55992786957,
+      phone: '55992786957',
       image: 'public/user_id',
       rating: 3.95,
       active: true,
@@ -248,7 +247,7 @@ module.exports = {
       nickname: 'Gabi',
       email: 'gpanani@mail.com',
       password: '8af3be2d6c01bec662b6285a26218bfbd6c62c1c',//785964
-      phone: 51991597657,
+      phone: '51991597657',
       image: 'public/user_id',
       rating: 4.2,
       active: true,
@@ -265,7 +264,7 @@ module.exports = {
       nickname: 'Josnel',
       email: 'josnel.figueiredo@mail.com',
       password: 'fb52189e3355adb58915643006be7c59e51bdff6',//334215
-      phone: 54998087657,
+      phone: '54998087657',
       image: 'public/user_id',
       rating: 2.9,
       active: true,
