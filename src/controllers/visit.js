@@ -1,14 +1,24 @@
 import HttpStatus from 'http-status'
 
-import Repository from '../infra/repository/visit'
+import VisitRepository from '../infra/repository/visit'
 import exception from '../helpers/exception'
 import validate from '../helpers/validation/visit'
+import UserRepository from '../infra/repository/user'
 
-const toDomain = (visit) => {
-
+const media = (array) => {
+	if (!Array.isArray(array))
+		return 0
+	let sum = 0
+	let count = 0
+	for (let i = 0; i < array.length; i++)
+		if (!isNaN(array[i])) {
+			sum += array[i]
+			count++
+		}
+	return sum / count
 }
 
-const repository = new Repository();
+const repository = new VisitRepository();
 
 export default class Controller {
 
@@ -60,5 +70,34 @@ export default class Controller {
 					exception.httpHandler(res, err)
 				})
 		} catch (err) { exception.httpHandler(res, err) }
+	}
+
+	rate(req, res) {
+		const { id, rating } = req.body
+		if (!rating || (rating < 0 || rating > 5)) {
+			exception.httpHandler(res, { message: 'A avaliação deve ser de 0 à 5.', type: exception.PROPERTY_NOT_SATISFIED })
+			return
+		}
+		const isProfessional = req.user.type == 'P'
+
+		repository.getById(id).then(result => {
+			if (!result)
+				throw { message: "Visita não encontrada!", type: exception.NOT_FOUND }
+
+			if ((isProfessional && result.professionalId != req.user.id)
+				|| (!isProfessional && result.requesterId != req.user.id))
+				throw { message: "Não pode avaliar esta visita!", type: exception.UNAUTHORIZED }
+
+			return repository.update(
+				isProfessional ? { ratingRequester: rating } : { ratingProfessional: rating },
+				{ id: id }
+			).then(() => {
+				const userRepository = new UserRepository()
+				return userRepository.updateRating(
+					isProfessional ? result.requesterId : result.professionalId,
+					!isProfessional
+				).then(re => res.json({ message: 'Avaliado com sucesso!' }))
+			})
+		}).catch(err => exception.httpHandler(res, err))
 	}
 }

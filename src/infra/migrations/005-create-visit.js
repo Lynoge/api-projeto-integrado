@@ -1,4 +1,3 @@
-
 'use strict'
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -8,8 +7,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      rating: {
-        type: Sequelize.STRING,
+      ratingRequester: {
+        type: Sequelize.DECIMAL(3, 2),
+        allowNull: true
+      },
+      ratingProfessional: {
+        type: Sequelize.DECIMAL(3, 2),
         allowNull: true
       },
       date: {
