@@ -49,7 +49,7 @@ module.exports = {
       active: true,
       createAt: new Date(),
       type: 'P',
-      token: 'token_raimundo',
+      token: 'token_joao',
       chatId: 'chat_id_raimundo',
       latitude: '-31.0002776',
       longitude: '-54.1219554'
