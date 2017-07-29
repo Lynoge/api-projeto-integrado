@@ -27,7 +27,11 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-      classMethods: {},
+      classMethods: {
+        associate: (models) => {
+          Chat.belongsTo(models.User, { foreignKey: 'destiny' })
+        },
+      },
       tableName: 'Chat',
       undercored: false,
       updatedAt: false,

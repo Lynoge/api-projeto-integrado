@@ -1,6 +1,8 @@
 import {
-  Chat
+  Chat,
+  User
 } from '../models'
+import parseUser from '../../helpers/parseUser'
 
 const toDomain = (entities) => {
   const parse = (entity) => {
@@ -9,6 +11,7 @@ const toDomain = (entities) => {
       destiny: entity.destiny,
       description: entity.description,
       date: entity.date,
+      userDestiny: entity.User ? parseUser(entity.User) : null,
       type: entity.type
     }
   }
@@ -25,9 +28,10 @@ const toDomain = (entities) => {
 export default class ChatRepository {
 
   findByUser(id) {
-    return Chat.findAll(
-      { where: { $or: [{ origin: id }, { destiny: id }] } }
-    )
+    return Chat.findAll({
+      where: { $or: [{ origin: id }, { destiny: id }] },
+      include: User
+    })
       .then(result => { return toDomain(result) })
       .catch(err => { throw err })
   }
