@@ -13,6 +13,30 @@ const generateHashFile = (fileName) => {
   return sha1(new Date()).substring(0, 8) + fileName.toLowerCase()
 }
 
+let dropboxFileNames = () => {
+  return dbx.filesListFolder({ path: '' })
+    .then(response => {
+      let names = []
+      for (let i = 0; i < response.entries.length; i++) {
+        names.push(response.entries[i].name)
+      }
+      return names
+    })
+    .catch(err => { throw err })
+}
+
+const existsInDropBox = (name) => {
+  return dropboxFileNames()
+    .then(names => {
+      let exists = false
+      for (let i = 0; i < names.length && !exists; i++)
+        if (names[i] == name)
+          exists = true
+      return exists
+    })
+    .catch(err => { throw err })
+}
+
 export default class Controller {
 
   get(req, res) {
@@ -21,18 +45,25 @@ export default class Controller {
     const filePath = path.join(__dirname, '../../temp', name)
     fs.stat(filePath, (err) => {
       if (err) {
-        dbx.filesDownload({ path: '/' + name })
-          .then(file => {
-            console.log('encontrou arquivo dropbox')
-            fs.writeFile(filePath, file.fileBinary, 'binary', (err) => {
-              if (err) {
-                console.log(err)
-                res.end('Erro ao salvar arquivo!')
-              } else {
-                res.sendFile(filePath, { root: '/' })
-              }
-            })
-          }).catch(err => res.end(err))
+        existsInDropBox(name)
+          .then(exists => {
+            if (exists) {
+              dbx.filesDownload({ path: '/' + name })
+                .then(file => {
+                  fs.writeFile(filePath, file.fileBinary, 'binary', (err) => {
+                    if (err) {
+                      console.log(err)
+                      res.end('Erro ao salvar arquivo!')
+                    } else {
+                      res.sendFile(filePath, { root: '/' })
+                    }
+                  })
+                }).catch(err => res.end(err))
+            } else {
+              res.status(HttpStatus.NOT_FOUND)
+              res.end('File not found.')
+            }
+          })
       } else {
         res.sendFile(filePath, { root: '/' })
       }
@@ -40,8 +71,8 @@ export default class Controller {
   }
 
   getAllImageNames(req, res) {
-    dbx.filesListFolder({ path: '' })
-      .then(response => res.json(response.entries))
+    dropboxFileNames()
+      .then(names => res.json(names))
       .catch(err => res.end(err));
   }
 
