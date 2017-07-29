@@ -100,4 +100,18 @@ export default class Controller {
 			})
 		}).catch(err => exception.httpHandler(res, err))
 	}
+
+	status(req, res) {
+		const { id, status } = req.body
+		console.log(req.body)
+		if (status != "PENDENTE" && status != "EM ANDAMENTO" && status != "CONCLUIDO")
+			exception.httpHandler(res, { message: 'Status inválido', type: exception.PROPERTY_NOT_SATISFIED })
+
+		repository.getById(id).then(result => {
+			if (!result)
+				throw { message: "Visita não encontrada!", type: exception.NOT_FOUND }
+			repository.update({ status: status }, { id: id })
+				.then(res.json({ message: 'Avaliado com sucesso!' }))
+		}).catch(err => exception.httpHandler(res, err))
+	}
 }

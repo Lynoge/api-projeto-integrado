@@ -126,4 +126,23 @@ module.exports = function (app) {
    * @apiUse InternalServerError
    **/
   app.post('/rating', controller.rate)
+
+  /**
+   * @api {post} /status Alterar o status da visita
+   * @apiGroup Visitas
+   * 
+   * @apiParam {Integer} id Id da visita
+   * @apiParam {String} status Valor deve ser 'Em Andamento', 'PENDENTE' ou 'CONCLUIDO'
+   * 
+   * @apiSuccessExample 200
+   * HTTP/1.1 200 Ok
+   * {
+   *    "message": "Alterado com sucesso!"
+   * }
+   * 
+   * @apiUse NotAuthorized
+   * @apiUse ValidationError
+   * @apiUse InternalServerError
+   **/
+  app.post('/status', controller.status)
 }
