@@ -1,8 +1,8 @@
 angular.module('rentApp').controller('professionalController', function ($scope, $rootScope, $http) {
-  $scope.professionais = [];
+  $scope.professionals = [];
   $scope.refresh = function () {
     $http.get('/professional').then(function (response) {
-      console.log(response.data);
+      $scope.professionals = response.data;
     })
   }
 

@@ -3,6 +3,10 @@
   margin:50px;
   border-radius:7px;
   overflow: hidden;
-  /*padding:10px;*/
+}
 
+.photo{
+  border-radius:50%;
+  margin-right:10px;
+  cursor:pointer;
 }
