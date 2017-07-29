@@ -10,7 +10,7 @@ angular.module('rentApp').controller('chatController', function ($scope, $rootSc
     socket.on('receiveMessage', function (msg) {
         console.log(msg);
         var area = document.getElementById('txtArea');
-        area.value += '\n ' + msg.origin + ' - ' + msg.message;
+        area.value += '\n Cliente: ' + msg.message;
 
         $scope.currentChat = { id: msg.origin, nickname: msg.nickname };
         $scope.index = 0;
@@ -48,7 +48,7 @@ angular.module('rentApp').controller('chatController', function ($scope, $rootSc
 
     $scope.send = function (event) {
         if (event.keyCode == 13 && $scope.message && $scope.currentChat) {
-            $scope.historico += '\n' + user.nickname + ' - ' + $scope.message;
+            $scope.historico += '\n' + user.nickname + ': ' + $scope.message;
             var area = document.getElementById('txtArea');
             area.scrollTop = area.scrollHeight;
             socket.sendMessage($scope.message, $scope.currentChat.id);
