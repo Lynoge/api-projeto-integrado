@@ -13,9 +13,9 @@ angular.module('rentApp', ['ngRoute', 'ngMaterial', 'ngFileUpload'])
                 templateUrl: "App/templates/professional.html",
                 controller: 'professionalController'
             })
-            .when("/client", {
-                templateUrl: "App/templates/client.html",
-                controller: 'clientController'
+            .when("/requester", {
+                templateUrl: "App/templates/requester.html",
+                controller: 'requesterController'
             })
             .when("/chat", {
                 templateUrl: "App/templates/chat.html",

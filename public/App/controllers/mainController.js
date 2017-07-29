@@ -8,7 +8,7 @@ angular.module('rentApp').controller('mainController',
 
     $scope.init = function () {
       if ($location.path() != '/login') {
-        var menu = $scope.menus[3];
+        var menu = $scope.menus[1];
         $location.path(menu.location);
         $scope.currentMenu = menu;
       }
@@ -45,24 +45,6 @@ angular.module('rentApp').controller('mainController',
     $scope.openUploadImage = function (ev) {
 
       $mdDialog.show({
-        controller: function ($scope) {
-          $scope.changeFile = function (files) {
-
-            var user = JSON.parse(localStorage.getItem('rentUser'))
-            var elem = document.getElementById('fileNameUpload')
-            if (elem)
-              elem.textContent = files[0].name
-            elem = document.getElementById('uploadForm')
-            if (elem)
-              elem.action += "?id=" + user.id
-
-            user.image = null
-            localStorage.setItem('rentUser', JSON.stringify(user))
-
-
-
-          }
-        },
         templateUrl: '/App/templates/upload.html',
         parent: angular.element(document.body),
         targetEvent: ev,

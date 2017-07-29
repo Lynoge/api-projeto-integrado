@@ -17,20 +17,26 @@ export default class Controller {
 
   get(req, res) {
     const { name } = req.params
-    dbx.filesDownload({ path: '/' + name })
-      .then(file => {
-        const fileName = 'temp/' + generateHashFile(file.name)
-        fs.writeFile(fileName, file.fileBinary, 'binary', (err) => {
-          if (err) {
-            console.log(err)
-            res.end('Erro ao salvar arquivo!');
-          } else {
-            const filePath = path.join(__dirname, '../..', fileName)
-            res.sendFile(filePath, { root: '/' })
-            setTimeout(() => { fs.unlinkSync(fileName) }, 5000)
-          }
-        })
-      }).catch(err => res.end(err))
+
+    const filePath = path.join(__dirname, '../../temp', name)
+    fs.stat(filePath, (err) => {
+      if (err) {
+        dbx.filesDownload({ path: '/' + name })
+          .then(file => {
+            console.log('encontrou arquivo dropbox')
+            fs.writeFile(filePath, file.fileBinary, 'binary', (err) => {
+              if (err) {
+                console.log(err)
+                res.end('Erro ao salvar arquivo!')
+              } else {
+                res.sendFile(filePath, { root: '/' })
+              }
+            })
+          }).catch(err => res.end(err))
+      } else {
+        res.sendFile(filePath, { root: '/' })
+      }
+    });
   }
 
   getAllImageNames(req, res) {
