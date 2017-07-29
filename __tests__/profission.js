@@ -44,7 +44,7 @@ const Profission = {
       })
 
       it('Profissão já incluso', (done) => {
-        request.post('/professional/profission/1')
+        request.post('/professional/profission/17')
           .set({ 'token': professionalToken })
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.UNPROCESSABLE_ENTITY, JSON.stringify(res.body))

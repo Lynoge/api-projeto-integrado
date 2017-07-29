@@ -34,7 +34,7 @@ const Requeser = {
       })
 
       it('Get by Id not found', (done) => {
-        request.get('/requester/5')
+        request.get('/requester/99999')
           .set({ 'token': token })
           .end((err, res) => {
             res.statusCode.should.be.eql(HttpStatus.NOT_FOUND, JSON.stringify(res.body))
