@@ -11,22 +11,21 @@
 <body ng-app="rentApp" ng-controller="mainController" ng-init="init()">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <img alt="Menu" width="20px" style="margin-right:10px;cursor:pointer" ng-src="img/menu.svg" class="md-avatar" ng-click="toggleLeft()">
+      <img ng-show="user" alt="Menu" width="20px" style="margin-right:10px;cursor:pointer" ng-src="img/menu.svg" class="md-avatar" ng-click="toggleLeft()">
       <h2 md-truncate flex>Rent Service</h2>
       <div ng-show="email" class="md-toolbar-tools" style="width: 30%" layout-align="end center">
         <div style="margin-right:25px">{{email}}</div>
         <md-menu md-offset="60">
-          <img alt="Menu" width="50px" style="border-radius:50%;margin-right:10px;cursor:pointer" ng-src="{{image}}" class="md-avatar"
-            ng-click="openMenu($mdOpenMenu, $event)">
+          <img alt="Menu" width="50px" ng-src="{{image}}" class="md-avatar photo" ng-click="openMenu($mdOpenMenu, $event)">
           <md-menu-content width="2">
             <md-menu-item>
               <md-button class="md-primary">Mudar Senha</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button class="md-primary"  onclick="angular.element(this).scope().openUploadImage(angular.element(this).$event)">Alterar Foto</md-button>
+              <md-button class="md-primary" onclick="angular.element(this).scope().openUploadImage(angular.element(this).$event)">Alterar Foto</md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button class="md-primary" onclick="logout()">Sair</md-button>
+              <md-button class="md-primary" onclick="angular.element(this).scope().logout()">Sair</md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -67,7 +66,7 @@
   <script src="js/angular-route.js"></script>
 
   <script type="text/javascript" src="js/ng-file-upload.min.js"></script>
-	<script type="text/javascript" src="js/ng-file-upload-shim.min.js"></script>
+  <script type="text/javascript" src="js/ng-file-upload-shim.min.js"></script>
 
 
   <script src="App/modules/app.js"></script>
@@ -77,7 +76,7 @@
   <script src="App/controllers/mainController.js"></script>
   <script src="App/controllers/profissionController.js"></script>
   <script src="App/controllers/professionalController.js"></script>
-  <script src="App/controllers/clientController.js"></script>
+  <script src="App/controllers/requesterController.js"></script>
   <script src="App/controllers/uploadController.js"></script>
 
   <script src="js/socket.js"></script>
