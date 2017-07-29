@@ -1,3 +1,5 @@
-<div class="md-toolbar-tools">
-  <h2 md-truncate flex>Profissionais</h2>  
-</div>
+<md-list>
+  <md-list-item ng-repeat="p in professionals" class="noright">
+    {{ p.id + ' - ' + p.nickname }}
+  </md-list-item>
+</md-list>
